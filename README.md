@@ -8,3 +8,20 @@ Inspired by [Anton Arhipov](https://twitter.com/antonarhipov) [Top 5 Server-Side
 4. [Ktor](https://ktor.io/docs/welcome.html)
 5. [http4k](https://www.http4k.org/)
 
+WIP
+
+Features to compare:
+* Configuration
+* Profiles
+* Dependency Injection
+* Testing
+* Packaging
+* Build
+* Integration with third-party libraries
+* Performance?
+
+Sample:
+
+API ==> Database
+
+
