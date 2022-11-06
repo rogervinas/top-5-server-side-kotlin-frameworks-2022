@@ -13,7 +13,7 @@ Inspired by [Anton Arhipov](https://twitter.com/antonarhipov) [Top 5 Server-Side
 WIP
 
 Features to compare:
-* Configuration
+* Configuration + Secrets
 * Profiles
 * Dependency Injection
 * Testing
