@@ -1,5 +1,7 @@
 # Top 5 Server-Side Frameworks for Kotlin in 2022
 
+WORK IN PROGRESS!
+
 Inspired by [Anton Arhipov](https://twitter.com/antonarhipov) [Top 5 Server-Side Frameworks for Kotlin in 2022 @ Kotlin by JetBrains](https://www.youtube.com/watch?v=pYK5KkuZ3aU)
 
 1. [Spring Boot](https://spring.io/projects/spring-boot)
@@ -24,4 +26,15 @@ Sample:
 
 API ==> Database
 
+## Quarkus
 
+* Quick start https://quarkus.io/get-started/ 
+* First app https://quarkus.io/guides/getting-started
+* We can use quarkus commands or gradle
+* Packaging https://quarkus.io/guides/building-native-image + https://quarkus.io/guides/building-native-image#testing-the-native-executable
+* Built-in Quarkus features available only in IntelliJ IDEA Ultimate https://quarkus.io/guides/ide-tooling 
+
+```shell
+sdk install quarkus
+quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --extension='kotlin,resteasy-reactive-jackson'
+```
