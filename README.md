@@ -38,3 +38,8 @@ API ==> Database
 sdk install quarkus
 quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --extension='kotlin,resteasy-reactive-jackson'
 ```
+
+Configuration:
+```shell
+quarkus extension add 'quarkus-config-yaml'
+```
