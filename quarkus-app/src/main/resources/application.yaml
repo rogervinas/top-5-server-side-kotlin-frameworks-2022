@@ -1,2 +1,11 @@
 greeting:
   message: "Hellouuuu!"
+
+quarkus:
+  datasource:
+    db-kind: "postgresql"
+    username: "myuser"
+    password: "mypassword"
+    reactive:
+      url: "postgresql://localhost:5432/mydb"
+      max-size: 20

@@ -41,5 +41,8 @@ quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --extension='k
 
 Configuration:
 ```shell
-quarkus extension add 'quarkus-config-yaml'
+quarkus extension add quarkus-config-yaml
+quarkus extension add quarkus-reactive-pg-client
 ```
+
+afegir flyway https://quarkus.io/guides/flyway
