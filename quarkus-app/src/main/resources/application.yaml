@@ -1,11 +1,16 @@
 greeting:
-  message: "Hellouuuu!"
+  name: "Bitelchus"
 
 quarkus:
   datasource:
     db-kind: "postgresql"
     username: "myuser"
     password: "mypassword"
+    jdbc:
+      url: "jdbc:postgresql://localhost:5432/mydb"
+      max-size: 20
     reactive:
       url: "postgresql://localhost:5432/mydb"
       max-size: 20
+  flyway:
+    migrate-at-start: true

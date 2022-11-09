@@ -13,10 +13,10 @@ class GreetingResource {
     @Inject
     private lateinit var repository: GreetingRepository
 
-    @ConfigProperty(name = "greeting.message")
-    private lateinit var message: String
+    @ConfigProperty(name = "greeting.name")
+    private lateinit var name: String
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    fun hello() = "$message ${repository.getVersion()}"
+    fun hello() = "${repository.getGreeting()} $name"
 }

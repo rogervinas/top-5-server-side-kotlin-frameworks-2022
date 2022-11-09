@@ -45,4 +45,10 @@ quarkus extension add quarkus-config-yaml
 quarkus extension add quarkus-reactive-pg-client
 ```
 
+quarkus extension add agroal
+quarkus extension add jdbc-postgresql
+
+Add the agroal extension plus one of jdbc-db2, jdbc-derby, jdbc-h2, jdbc-mariadb, jdbc-mssql, jdbc-mysql, jdbc-oracle or jdbc-postgresql.
+
+
 afegir flyway https://quarkus.io/guides/flyway

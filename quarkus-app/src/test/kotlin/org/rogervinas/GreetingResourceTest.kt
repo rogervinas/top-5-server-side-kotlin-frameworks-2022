@@ -5,7 +5,6 @@ import io.quarkus.test.junit.mockito.InjectMock
 import io.restassured.RestAssured.given
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
 import org.mockito.Mockito.doReturn
 
 @QuarkusTest
@@ -16,13 +15,13 @@ class GreetingResourceTest {
 
     @Test
     fun testHelloEndpoint() {
-        doReturn("1.2.3").`when`(repository).getVersion()
+        doReturn("Hello").`when`(repository).getGreeting()
 
         given()
           .`when`().get("/hello")
           .then()
              .statusCode(200)
-             .body(`is`("Hellouuuu! 1.2.3"))
+             .body(`is`("Hello Bitelchus"))
     }
 
 }
