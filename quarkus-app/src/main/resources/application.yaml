@@ -14,3 +14,8 @@ quarkus:
       max-size: 20
   flyway:
     migrate-at-start: true
+  vault:
+    url: "http://localhost:8200"
+    authentication:
+      client-token: "mytoken"
+    secret-config-kv-path: "myapp"

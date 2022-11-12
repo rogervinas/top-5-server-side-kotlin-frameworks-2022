@@ -52,3 +52,24 @@ Add the agroal extension plus one of jdbc-db2, jdbc-derby, jdbc-h2, jdbc-mariadb
 
 
 afegir flyway https://quarkus.io/guides/flyway
+
+
+export VAULT_ADDR=http://127.0.0.1:8200
+export VAULT_TOKEN=mytoken
+
+❯ vault kv put -mount=secret myapp mysecret=123456
+== Secret Path ==
+secret/data/hello
+
+======= Metadata =======
+Key                Value
+---                -----
+created_time       2022-11-09T20:27:15.700705694Z
+custom_metadata    <nil>
+deletion_time      n/a
+destroyed          false
+version            1
+
+quarkus extension add vault
+
+vault kv get secret/myapp

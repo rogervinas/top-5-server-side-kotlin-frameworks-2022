@@ -8,3 +8,24 @@ services:
       POSTGRES_DB: mydb
     ports:
       - "5432:5432"
+
+  vault:
+    image: vault:1.12.1
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: "mytoken"
+    ports:
+      - "8200:8200"
+
+  vault.cli:
+    image: vault:1.12.1
+    depends_on:
+      - vault
+    restart: "no"
+    environment:
+      VAULT_ADDR: "http://vault:8200"
+      VAULT_TOKEN: "mytoken"
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        until vault kv put -mount=secret myapp mysecret=voila; do sleep 1; done

@@ -16,7 +16,10 @@ class GreetingResource {
     @ConfigProperty(name = "greeting.name")
     private lateinit var name: String
 
+    @ConfigProperty(name = "mysecret")
+    private lateinit var mysecret: String
+
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    fun hello() = "${repository.getGreeting()} $name"
+    fun hello() = "${repository.getGreeting()} $name $mysecret"
 }
