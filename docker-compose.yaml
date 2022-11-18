@@ -28,4 +28,4 @@ services:
       - /bin/sh
       - -c
       - |
-        until vault kv put -mount=secret myapp mysecret=voila; do sleep 1; done
+        until vault kv put -mount=secret myapp greeting.secret=Watermelon; do sleep 1; done

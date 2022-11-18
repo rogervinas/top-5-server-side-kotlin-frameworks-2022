@@ -3,19 +3,13 @@ greeting:
 
 quarkus:
   datasource:
-    db-kind: "postgresql"
-    username: "myuser"
-    password: "mypassword"
-    jdbc:
-      url: "jdbc:postgresql://localhost:5432/mydb"
-      max-size: 20
-    reactive:
-      url: "postgresql://localhost:5432/mydb"
-      max-size: 20
+    devservices:
+      image-name: "postgres:14.5"
   flyway:
     migrate-at-start: true
   vault:
-    url: "http://localhost:8200"
-    authentication:
-      client-token: "mytoken"
     secret-config-kv-path: "myapp"
+    devservices:
+      image-name: "vault:1.12.1"
+      init-commands:
+        - "kv put secret/myapp greeting.secret=Apple"
