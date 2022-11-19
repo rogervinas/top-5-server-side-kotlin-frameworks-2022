@@ -8,7 +8,7 @@ import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType
 
 @Path("/hello")
-class GreetingResource {
+class GreetingController {
 
     @Inject
     private lateinit var repository: GreetingRepository
