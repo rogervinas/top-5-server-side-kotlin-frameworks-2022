@@ -73,3 +73,11 @@ version            1
 quarkus extension add vault
 
 vault kv get secret/myapp
+
+https://quarkus.io/guides/building-native-image
+sdk install java 22.3.r19-grl
+gu install native-image
+
+quarkus build --native
+
+https://quarkus.io/guides/building-native-image#multistage-docker
