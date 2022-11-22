@@ -29,3 +29,16 @@ services:
       - -c
       - |
         until vault kv put -mount=secret myapp greeting.secret=Watermelon; do sleep 1; done
+
+  quarkus-app:
+    image: quarkus-app
+    profiles:
+      - quarkus
+    depends_on:
+      - db
+      - vault
+    environment:
+      DB_HOST: "db"
+      VAULT_HOST: "vault"
+    ports:
+      - "8080:8080"

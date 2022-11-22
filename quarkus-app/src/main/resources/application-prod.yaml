@@ -4,12 +4,12 @@ quarkus:
     username: "myuser"
     password: "mypassword"
     jdbc:
-      url: "jdbc:postgresql://localhost:5432/mydb"
+      url: "jdbc:postgresql://${DB_HOST:localhost}:5432/mydb"
       max-size: 20
     reactive:
-      url: "postgresql://localhost:5432/mydb"
+      url: "postgresql://${DB_HOST:localhost}:5432/mydb"
       max-size: 20
   vault:
-    url: "http://localhost:8200"
+    url: "http://${VAULT_HOST:localhost}:8200"
     authentication:
       client-token: "mytoken"

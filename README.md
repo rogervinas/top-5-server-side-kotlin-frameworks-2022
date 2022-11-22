@@ -78,6 +78,17 @@ https://quarkus.io/guides/building-native-image
 sdk install java 22.3.r19-grl
 gu install native-image
 
-quarkus build --native
+quarkus build --native -Dquarkus.native.container-build=true
 
 https://quarkus.io/guides/building-native-image#multistage-docker
+
+java -jar build/quarkus-app/quarkus-run.jar
+
+
+docker build -f src/main/docker/Dockerfile.native -t quarkus-app .
+docker run -i --rm -p 8080:8080 --network mynetwork -e DB_HOST=db -e VAULT_HOST=vault quarkus-app
+
+docker compose up -d
+docker compose --profile quarkus up -d
+docker compose --profile quarkus down
+docker compose down
