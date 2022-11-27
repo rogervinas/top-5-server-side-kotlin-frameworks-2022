@@ -16,7 +16,7 @@ services:
     ports:
       - "8200:8200"
 
-  vault.cli:
+  vault-cli:
     image: vault:1.12.1
     depends_on:
       - vault
