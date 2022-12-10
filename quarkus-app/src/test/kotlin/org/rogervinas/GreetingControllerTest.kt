@@ -23,6 +23,6 @@ class GreetingControllerTest {
                 .get()
                 .then()
                 .statusCode(200)
-                .body(`is`("Hello my name is Bitelchus and my secret is Apple"))
+                .body(`is`("Hello my name is Bitelchus and my secret is Watermelon"))
     }
 }

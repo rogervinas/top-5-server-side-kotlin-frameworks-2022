@@ -42,3 +42,16 @@ services:
       VAULT_HOST: "vault"
     ports:
       - "8080:8080"
+
+  springboot-app:
+    image: docker.io/library/springboot-app:0.0.1-SNAPSHOT
+    profiles:
+      - springboot
+    depends_on:
+      - db
+      - vault
+    environment:
+      DB_HOST: "db"
+      VAULT_HOST: "vault"
+    ports:
+      - "8080:8080"

@@ -86,9 +86,14 @@ java -jar build/quarkus-app/quarkus-run.jar
 
 
 docker build -f src/main/docker/Dockerfile.native -t quarkus-app .
-docker run -i --rm -p 8080:8080 --network mynetwork -e DB_HOST=db -e VAULT_HOST=vault quarkus-app
+docker build -f src/main/docker/Dockerfile.jvm -t quarkus-app .
 
 docker compose up -d
 docker compose --profile quarkus up -d
-docker compose --profile quarkus down
 docker compose down
+
+docker-compose up -d
+docker-compose --profile springboot up -d
+docker-compose down
+
+./gradlew bootBuildImage

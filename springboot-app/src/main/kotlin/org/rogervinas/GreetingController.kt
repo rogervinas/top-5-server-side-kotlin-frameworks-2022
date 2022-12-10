@@ -13,6 +13,7 @@ class GreetingController(
         @Value("\${greeting.name}") private val name: String,
         @Value("\${greeting.secret}") private val secret: String
 ) {
+
     @GetMapping(produces = [MediaType.TEXT_PLAIN_VALUE])
     fun hello() = "${repository.getGreeting()} my name is $name and my secret is $secret"
 }

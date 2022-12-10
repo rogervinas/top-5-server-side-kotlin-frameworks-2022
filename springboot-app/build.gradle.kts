@@ -19,8 +19,11 @@ extra["springCloudVersion"] = "2021.0.5"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
-	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.cloud:spring-cloud-starter-vault-config")
+
+	implementation("org.springframework.boot:spring-boot-starter-jdbc")
+	implementation("org.postgresql:postgresql:42.5.1")
+	implementation("org.flywaydb:flyway-core:9.8.3")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")

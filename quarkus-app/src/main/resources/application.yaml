@@ -12,4 +12,4 @@ quarkus:
     devservices:
       image-name: "vault:1.12.1"
       init-commands:
-        - "kv put secret/myapp greeting.secret=Apple"
+        - "kv put secret/myapp greeting.secret=Watermelon"

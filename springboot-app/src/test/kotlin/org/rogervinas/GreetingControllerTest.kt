@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.TestPropertySource
 import org.springframework.test.web.reactive.server.WebTestClient
+import org.springframework.test.web.reactive.server.expectBody
 
 @WebFluxTest
 @TestPropertySource(properties = [
@@ -28,6 +29,6 @@ class GreetingControllerTest {
                 .get().uri("/hello")
                 .exchange()
                 .expectStatus().isOk
-                .expectBody().equals("Hello my name is Bitelchus and my secret is Apple")
+                .expectBody<String>().isEqualTo("Hello my name is Bitelchus and my secret is Apple")
     }
 }
