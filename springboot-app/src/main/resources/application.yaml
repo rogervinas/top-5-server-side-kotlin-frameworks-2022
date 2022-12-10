@@ -13,19 +13,12 @@ spring:
   config:
     import: optional:vault://
   datasource:
-    url: "jdbc:postgresql://${database.host}:${database.port}/${database.name}"
-    username: "${database.username}"
-    password: "${database.password}"
+    url: "jdbc:postgresql://${DB_HOST:localhost}:5432/mydb"
+    username: "myuser"
+    password: "mypassword"
     driver-class-name: "org.postgresql.Driver"
   flyway:
     enabled: true
-
-database:
-  host: "${DB_HOST:localhost}"
-  port: 5432
-  name: "mydb"
-  username: "myuser"
-  password: "mypassword"
 
 greeting:
   name: "Bitelchus"
