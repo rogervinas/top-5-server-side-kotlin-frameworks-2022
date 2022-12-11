@@ -14,15 +14,7 @@ To do so we will create a simple application with each one of these frameworks, 
 
 ![Scenario](doc/scenario.png)
 
-* Configuration and profiles
-* REST endpoint
-* Database with migrations
-* Secrets from Vault
-* Testing
-* Build as a docker image
-
-TODO: detailed diagram of the final solution and shared parts
-TODO: explain shared docker-compose
+We will use this [docker-compose.yaml](docker-compose.yaml) to start [vault](https://www.vaultproject.io/) and [postgresql](https://www.postgresql.org/). In order to put a `greeting.secret` in vault we will start another vault container overriding its entrypoint to just put the secret using vault-cli and die afterwards (maybe there is another more elegant way to do it but this one works).
 
 ## Spring Boot
 
@@ -40,7 +32,7 @@ greeting:
 
 More about profiles at https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config and https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.profiles
 
-### Database Configuration
+### GreetingRepository
 
 We just add the dependencies:
 ```
@@ -63,8 +55,7 @@ spring:
 
 and the flyway migrations under `src/main/resources/db/migrations`.
 
-### GreetingRepository
-
+Then we can implement `GreetingRepository` as:
 ```kotlin
 @Repository
 class GreetingRepository(private val jdbcTemplate: JdbcTemplate) {
@@ -99,7 +90,7 @@ class GreetingController(
 
 ### GreetingApplication
 
-We need a main application to put it all together:
+We need to create a main application:
 ```kotlin
 @SpringBootApplication
 class GreetingApplication
