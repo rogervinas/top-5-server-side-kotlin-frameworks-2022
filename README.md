@@ -10,7 +10,9 @@ This is a demo inspired by [Anton Arhipov](https://twitter.com/antonarhipov)'s [
 
 I have a lot of experience in Spring Boot, so I wanted to take a look at the other ones.
 
-To do so we will create a simple application with each one of these frameworks, implementing the following features:
+To do so we will create a simple application with each one of these frameworks, implementing the following scenario:
+
+![Scenario](doc/scenario.png)
 
 * Configuration and profiles
 * REST endpoint
@@ -559,5 +561,6 @@ docker compose --profile quarkus up -d
 curl http://localhost:8080/hello
 
 # stop all containers
+docker compose --profile quarkus down
 docker compose down
 ```
