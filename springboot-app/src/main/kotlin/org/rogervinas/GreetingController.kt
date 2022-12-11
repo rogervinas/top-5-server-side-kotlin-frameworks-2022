@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 class GreetingController(
         private val repository: GreetingRepository,
         @Value("\${greeting.name}") private val name: String,
-        @Value("\${greeting.secret}") private val secret: String
+        @Value("\${greeting.secret:unknown}") private val secret: String
 ) {
 
     @GetMapping(produces = [MediaType.TEXT_PLAIN_VALUE])

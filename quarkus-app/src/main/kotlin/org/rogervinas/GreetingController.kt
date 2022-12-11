@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType
 class GreetingController(
         private val repository: GreetingRepository,
         @ConfigProperty(name = "greeting.name") private val name: String,
-        @ConfigProperty(name = "greeting.secret") private val secret: String
+        @ConfigProperty(name = "greeting.secret", defaultValue = "unknown") private val secret: String
 ) {
     @GET
     @Produces(MediaType.TEXT_PLAIN)

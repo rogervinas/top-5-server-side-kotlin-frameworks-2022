@@ -11,7 +11,7 @@ import org.springframework.test.web.reactive.server.expectBody
 
 @WebFluxTest
 @TestPropertySource(properties = [
-    "greeting.secret=Apple"
+    "greeting.secret=apple"
 ])
 class GreetingControllerTest {
 
@@ -29,6 +29,6 @@ class GreetingControllerTest {
                 .get().uri("/hello")
                 .exchange()
                 .expectStatus().isOk
-                .expectBody<String>().isEqualTo("Hello my name is Bitelchus and my secret is Apple")
+                .expectBody<String>().isEqualTo("Hello my name is Bitelchus and my secret is apple")
     }
 }

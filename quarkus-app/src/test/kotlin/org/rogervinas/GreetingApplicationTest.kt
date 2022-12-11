@@ -14,6 +14,6 @@ class GreetingApplicationTest {
                 .`when`().get("/hello")
                 .then()
                 .statusCode(200)
-                .body(matchesPattern(".+ my name is Bitelchus and my secret is Watermelon"))
+                .body(matchesPattern(".+ my name is Bitelchus and my secret is watermelon"))
     }
 }
