@@ -1,6 +1,6 @@
 # Quarkus
 
-To begin with you can follow the [Quarkus quick start](https://quarkus.io/get-started/). You will see that there is a `quarkus` command line (easily installable via [sdkman](https://sdkman.io/)) to create an application choosing **Gradle** or **Maven** as the build tool. Once the application is created we can use both `quarkus` command line or `gradlew`/`mvn`.
+To begin with you can follow the [Quarkus quick start](https://quarkus.io/get-started/). You will see that there is a `quarkus` command line (easily installable via [sdkman](https://sdkman.io/)) to create an application choosing **Gradle** or **Maven** as the build tool. Once the application is created we can use both `quarkus` command line or `gradlew`/`mvnw`.
 
 You can also check [Creating your first application](https://quarkus.io/guides/getting-started) as well as [all the other guides](https://quarkus.io/guides/).
 
@@ -163,6 +163,8 @@ quarkus:
       init-commands:
         - "kv put secret/myapp greeting.secret=watermelon"
 ```
+
+Note that here we can use these `init-commands` to populate **Vault** 🥹
 
 For `prod` profile we configure **Vault** in `application-prod.yaml`:
 ```yaml
