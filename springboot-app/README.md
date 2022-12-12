@@ -247,3 +247,5 @@ curl http://localhost:8080/hello
 docker compose --profile springboot down
 docker compose down
 ```
+
+That's it! Happy coding! 💙

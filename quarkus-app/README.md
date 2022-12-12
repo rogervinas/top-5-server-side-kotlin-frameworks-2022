@@ -312,3 +312,5 @@ curl http://localhost:8080/hello
 # Stop all containers
 docker compose down
 ```
+
+That's it! Happy coding! 💙
