@@ -11,10 +11,10 @@ quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --extension='k
 ```
 
 A **Gradle** project will be created with the following:
-* src/main/docker: a few Dockerfiles with different options to create the application docker image.
-* src/main: main sources with a template `GreetingResource` implementing a REST endpoint on `/hello`.
-* src/test: test sources with an integration test of the endpoint.
-* src/native-test: test sources with the same integration test of the endpoint but starting the application using the docker native image.
+* **src/main/docker**: a few Dockerfiles with different options to create the application docker image.
+* **src/main**: main sources with a template `GreetingResource` implementing a REST endpoint on `/hello`.
+* **src/test**: test sources with an integration test of the endpoint.
+* **src/native-test**: test sources with the same integration test of the endpoint but starting the application using the docker native image.
 
 Just run it once to check everything is ok:
 ```shell
