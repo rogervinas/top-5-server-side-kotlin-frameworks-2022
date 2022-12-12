@@ -16,7 +16,9 @@ greeting:
 
 More documentation about configuration sources at [Externalized Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config) and [Profiles](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.profiles).
 
-## GreetingRepository
+## Implementation
+
+### GreetingRepository
 
 We will create a `GreetingRepository`:
 ```kotlin
@@ -51,7 +53,7 @@ spring:
 
 And the [flyway](https://flywaydb.org/) migrations under [src/main/resources/db/migration](src/main/resources/db/migration) to create and populate `greetings` table.
 
-## GreetingController
+### GreetingController
 
 We will create a `GreetingController` serving `/hello` endpoint:
 ```kotlin
@@ -72,7 +74,7 @@ class GreetingController(
 * The controller expects a `GreetingRepository` to be injected as well as two configuration properties, no matter what property source they come from (environment variables, system properties, configuration files, vault, ...).
 * We expect to get `greeting.secret` from vault, that is why we configure `unknown` as its default value, so it does not fail until we configure **Vault** properly.
 
-## GreetingApplication
+### GreetingApplication
 
 As a **Spring Boot** requirement, we need to create a main application:
 ```kotlin
@@ -86,7 +88,7 @@ fun main(args: Array<String>) {
 
 By convention, all classes under the same package of the main application will be scanned for annotations.
 
-## Vault Configuration
+### Vault Configuration
 
 We just add the dependency `org.springframework.cloud:spring-cloud-starter-vault-config` and we add the following configuration in `application.yaml`:
 ```yaml
@@ -110,7 +112,7 @@ Then we can access the configuration property `greeting.secret` stored in **Vaul
 
 You can check the documentation at [Spring Vault](https://spring.io/projects/spring-vault).
 
-## Testing the controller
+### Testing the controller
 
 We can test the controller with a "slice test", meaning only the parts needed by the controller will be started:
 ```kotlin
@@ -143,7 +145,7 @@ class GreetingControllerTest {
 * We mock the `GreetingRepository`.
 * We can use a `@TestPropertySource` to configure the `greeting.secret` property, since in this test we do not have **Vault**.
 
-## Testing the application
+### Testing the application
 
 To test the whole application we will use [Testcontainers](https://www.testcontainers.org/) and the docker compose file:
 ```kotlin
@@ -190,55 +192,58 @@ class GreetingApplicationTest {
 ## Run
 
 ```shell
-# start vault and database
+# Start Vault and Database
 docker compose up -d vault vault-cli db
 
-# start application
+# Start Application
 ./gradlew bootRun
 
-# make requests
+# Make requests
 curl http://localhost:8080/hello
 
-# stop application with control-c
+# Stop Application with control-c
 
-# stop vault and database
+# Stop all containers
 docker compose down
 ```
 
 ## Build a fatjar and run it
 
 ```shell
+# Build fatjar
 ./gradlew bootJar
 
-# start vault and database
+# Start Vault and Database
 docker compose up -d vault vault-cli db
 
-# start application
+# Start Application
 java -jar build/libs/springboot-app-0.0.1-SNAPSHOT.jar
 
-# make requests
+# Make requests
 curl http://localhost:8080/hello
 
-# stop application with control-c
+# Stop Application with control-c
 
-# stop vault and database
+# Stop all containers
 docker compose down
 ```
 
 ## Build a docker image and run it
 
 ```shell
+# Build docker image
 ./gradlew bootBuildImage
 
-# start vault and database
+# Start Vault and Database
 docker compose up -d vault vault-cli db
 
-# start application container
+# Start Application
 docker compose --profile springboot up -d
 
-# make requests
+# Make requests
 curl http://localhost:8080/hello
 
-# stop all containers
+# Stop all containers
+docker compose --profile springboot down
 docker compose down
 ```
