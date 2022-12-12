@@ -10,11 +10,15 @@ This is a demo inspired by [Anton Arhipov](https://twitter.com/antonarhipov)'s [
 
 I have a lot of experience in Spring Boot, so I wanted to take a look at the other ones 😜
 
-<img align="center" src="doc/meme.png">
+<p align="center">
+  <img align="center" src="doc/meme.png">
+</p>
 
 To do so we will create a simple application with each one of these frameworks, implementing the following scenario:
 
-<img align="center" src="doc/scenario.png">
+<p align="center">
+  <img align="center" src="doc/scenario.png">
+</p>
 
 We will use this [docker-compose.yaml](docker-compose.yaml) to start locally [vault](https://www.vaultproject.io/) and [postgresql](https://www.postgresql.org/), as well as the application containers.
 
