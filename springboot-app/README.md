@@ -71,8 +71,8 @@ class GreetingController(
 
 * `@RestController` annotation will tell Spring Boot to create an instance on startup and wire it properly as a REST endpoint on `/hello` path, scanning its annotated methods.
 * `@GetMapping` will map `hello` function answering to `GET /hello` requests.
-* The controller expects a `GreetingRepository` to be injected as well as two configuration properties, no matter what property source they come from (environment variables, system properties, configuration files, vault, ...).
-* We expect to get `greeting.secret` from vault, that is why we configure `unknown` as its default value, so it does not fail until we configure **Vault** properly.
+* The controller expects a `GreetingRepository` to be injected as well as two configuration properties, no matter what property source they come from (environment variables, system properties, configuration files, **Vault**, ...).
+* We expect to get `greeting.secret` from **Vault**, that is why we configure `unknown` as its default value, so it does not fail until we configure **Vault** properly.
 
 ### GreetingApplication
 
