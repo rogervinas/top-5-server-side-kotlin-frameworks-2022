@@ -10,11 +10,15 @@ This is a demo inspired by [Anton Arhipov](https://twitter.com/antonarhipov)'s [
 
 I have a lot of experience in Spring Boot, so I wanted to take a look at the other ones.
 
-![Meme](doc/meme.png)
+<p align="center">
+  <img align="center" src="doc/meme.png">
+</p>
 
 To do so we will create a simple application with each one of these frameworks, implementing the following scenario:
 
-![Scenario](doc/scenario.png)
+<p align="center">
+  <img align="center" src="doc/scenario.png">
+</p>
 
 We will use this [docker-compose.yaml](docker-compose.yaml) to start [vault](https://www.vaultproject.io/) and [postgresql](https://www.postgresql.org/) locally.
 
@@ -22,5 +26,5 @@ In order to put a `greeting.secret` in vault we will start another vault contain
 
 Please find below a step-by-step guide for each one of the top 5 frameworks. Here we go!
 
-1. [Spring Boot](doc/springboot.md)
-2. [Quarkus](doc/quarkus.md)
+1. [Spring Boot](springboot-app/)
+2. [Quarkus](quarkus-app/)
