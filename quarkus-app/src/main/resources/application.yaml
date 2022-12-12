@@ -1,0 +1,15 @@
+greeting:
+  name: "Bitelchus"
+
+quarkus:
+  datasource:
+    devservices:
+      image-name: "postgres:14.5"
+  flyway:
+    migrate-at-start: true
+  vault:
+    secret-config-kv-path: "myapp"
+    devservices:
+      image-name: "vault:1.12.1"
+      init-commands:
+        - "kv put secret/myapp greeting.secret=watermelon"

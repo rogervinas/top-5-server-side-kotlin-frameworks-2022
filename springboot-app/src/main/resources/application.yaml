@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    vault:
+      enabled: true
+      uri: "http://${VAULT_HOST:localhost}:8200"
+      authentication: "TOKEN"
+      token: "mytoken"
+      kv:
+        enabled: true
+        backend: "secret"
+        default-context: "myapp"
+        application-name: "myapp"
+  config:
+    import: optional:vault://
+  datasource:
+    url: "jdbc:postgresql://${DB_HOST:localhost}:5432/mydb"
+    username: "myuser"
+    password: "mypassword"
+    driver-class-name: "org.postgresql.Driver"
+  flyway:
+    enabled: true
+
+greeting:
+  name: "Bitelchus"

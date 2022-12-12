@@ -1,0 +1,57 @@
+services:
+
+  db:
+    image: postgres:14.5
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+
+  vault:
+    image: vault:1.12.1
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: "mytoken"
+    ports:
+      - "8200:8200"
+
+  vault-cli:
+    image: vault:1.12.1
+    depends_on:
+      - vault
+    restart: "no"
+    environment:
+      VAULT_ADDR: "http://vault:8200"
+      VAULT_TOKEN: "mytoken"
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        until vault kv put -mount=secret myapp greeting.secret=watermelon; do sleep 1; done
+
+  quarkus-app:
+    image: quarkus-app
+    profiles:
+      - quarkus
+    depends_on:
+      - db
+      - vault
+    environment:
+      DB_HOST: "db"
+      VAULT_HOST: "vault"
+    ports:
+      - "8080:8080"
+
+  springboot-app:
+    image: docker.io/library/springboot-app:0.0.1-SNAPSHOT
+    profiles:
+      - springboot
+    depends_on:
+      - db
+      - vault
+    environment:
+      DB_HOST: "db"
+      VAULT_HOST: "vault"
+    ports:
+      - "8080:8080"
