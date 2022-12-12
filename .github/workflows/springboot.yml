@@ -14,10 +14,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: springboot-app
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -29,3 +25,4 @@ jobs:
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
         arguments: build
+        build-root-directory: springboot-app
