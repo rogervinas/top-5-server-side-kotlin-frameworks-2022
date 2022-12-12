@@ -10,6 +10,8 @@ This is a demo inspired by [Anton Arhipov](https://twitter.com/antonarhipov)'s [
 
 I have a lot of experience in Spring Boot, so I wanted to take a look at the other ones.
 
+![Meme](doc/meme.png)
+
 To do so we will create a simple application with each one of these frameworks, implementing the following scenario:
 
 ![Scenario](doc/scenario.png)
