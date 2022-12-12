@@ -6,7 +6,7 @@ A lot of documentation guides at [spring.io/spring-boot](https://spring.io/proje
 
 ## YAML Configuration
 
-By default, Spring Initialzr creates a template using `application.properties` file. We can just rename it to `application.yaml` and it will work the same.
+By default, **Spring Initialzr** creates a template using `application.properties` file. We can just rename it to `application.yaml` and it will work the same.
 
 We can put there our first configuration property:
 ```yaml
@@ -27,8 +27,8 @@ class GreetingRepository(private val jdbcTemplate: JdbcTemplate) {
 }
 ```
 
-* The `@Repository` annotation will tell Spring Boot to create a singleton instance at startup.
-* We inject a `JdbcTemplate` (provided by the spring-boot-starter-jdbc autoconfiguration) to execute queries to the database.
+* The `@Repository` annotation will tell **Spring Boot** to create a singleton instance at startup.
+* We inject a `JdbcTemplate` (provided by the `spring-boot-starter-jdbc` autoconfiguration) to execute queries to the database.
 * We use `queryForObject` and that SQL to retrieve one random `greeting` from the `greetings` table.
 
 Additional to `spring-boot-starter-jdbc` we will need to add these extra dependencies:
@@ -49,7 +49,7 @@ spring:
     enabled: true
 ```
 
-And the [flyway](https://flywaydb.org/) migrations under `src/main/resources/db/migrations` to create and populate `greetings` table.
+And the [flyway](https://flywaydb.org/) migrations under [src/main/resources/db/migration](src/main/resources/db/migration) to create and populate `greetings` table.
 
 ## GreetingController
 
@@ -70,11 +70,11 @@ class GreetingController(
 * `@RestController` annotation will tell Spring Boot to create an instance on startup and wire it properly as a REST endpoint on `/hello` path, scanning its annotated methods.
 * `@GetMapping` will map `hello` function answering to `GET /hello` requests.
 * The controller expects a `GreetingRepository` to be injected as well as two configuration properties, no matter what property source they come from (environment variables, system properties, configuration files, vault, ...).
-* We expect to get `greeting.secret` from vault, that is why we configure `unknown` as its default value, so it does not fail until we configure vault properly.
+* We expect to get `greeting.secret` from vault, that is why we configure `unknown` as its default value, so it does not fail until we configure **Vault** properly.
 
 ## GreetingApplication
 
-As a Spring Boot requirement, we need to create a main application:
+As a **Spring Boot** requirement, we need to create a main application:
 ```kotlin
 @SpringBootApplication
 class GreetingApplication
@@ -106,7 +106,9 @@ spring:
     import: optional:vault://
 ```
 
-Then we can access the configuration property `greeting.secret` stored in vault.
+Then we can access the configuration property `greeting.secret` stored in **Vault**.
+
+You can check the documentation at [Spring Vault](https://spring.io/projects/spring-vault).
 
 ## Testing the controller
 
@@ -137,14 +139,13 @@ class GreetingControllerTest {
 }
 ```
 
-* We use `WebTestClient` to execute requests to the controller.
+* We use `WebTestClient` to execute requests to the endpoint.
 * We mock the `GreetingRepository`.
-* We can use a `@TestPropertySource` to configure the `greeting.secret` property, as in this test we do not have vault.
+* We can use a `@TestPropertySource` to configure the `greeting.secret` property, since in this test we do not have **Vault**.
 
 ## Testing the application
 
-To test the whole application we will use [Testcontainers](https://www.testcontainers.org/) and the docker compose file.
-
+To test the whole application we will use [Testcontainers](https://www.testcontainers.org/) and the docker compose file:
 ```kotlin
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Testcontainers
@@ -178,7 +179,7 @@ class GreetingApplicationTest {
 * We use the shared docker compose to start the required three containers.
 * We use `WebTestClient` again to test the endpoint.
 * We use pattern matching to check the greeting, as it is random.
-* As vault is now enabled, the secret should be `watermelon`.
+* As **Vault** is now enabled, the secret should be `watermelon`.
 
 ## Test
 
