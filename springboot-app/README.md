@@ -4,7 +4,9 @@ We can create a project using [Spring Initialzr](https://start.spring.io/#!type=
 
 A lot of documentation guides at [spring.io/spring-boot](https://spring.io/projects/spring-boot).
 
-## YAML Configuration
+## Implementation
+
+### YAML Configuration
 
 By default, **Spring Initialzr** creates a template using `application.properties` file. We can just rename it to `application.yaml` and it will work the same.
 
@@ -15,8 +17,6 @@ greeting:
 ```
 
 More documentation about configuration sources at [Externalized Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config) and [Profiles](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.profiles).
-
-## Implementation
 
 ### GreetingRepository
 
@@ -29,14 +29,14 @@ class GreetingRepository(private val jdbcTemplate: JdbcTemplate) {
 }
 ```
 
-* The `@Repository` annotation will tell **Spring Boot** to create a singleton instance at startup.
+* The `@Repository` annotation will make **Spring Boot** to create a singleton instance at startup.
 * We inject a `JdbcTemplate` (provided by the `spring-boot-starter-jdbc` autoconfiguration) to execute queries to the database.
 * We use `queryForObject` and that SQL to retrieve one random `greeting` from the `greetings` table.
 
 Additional to `spring-boot-starter-jdbc` we will need to add these extra dependencies:
-```
-org.postgresql:postgresql
-org.flywaydb:flyway-core
+```kotlin
+implementation("org.postgresql:postgresql")
+implementation("org.flywaydb:flyway-core")
 ```
 
 And the following configuration in `application.yaml`:
@@ -51,7 +51,7 @@ spring:
     enabled: true
 ```
 
-And the [flyway](https://flywaydb.org/) migrations under [src/main/resources/db/migration](src/main/resources/db/migration) to create and populate `greetings` table.
+And [Flyway](https://flywaydb.org/) migrations under [src/main/resources/db/migration](src/main/resources/db/migration) to create and populate `greetings` table.
 
 ### GreetingController
 
@@ -69,7 +69,7 @@ class GreetingController(
 }
 ```
 
-* `@RestController` annotation will tell Spring Boot to create an instance on startup and wire it properly as a REST endpoint on `/hello` path, scanning its annotated methods.
+* `@RestController` annotation will make Spring Boot to create an instance on startup and wire it properly as a REST endpoint on `/hello` path, scanning its annotated methods.
 * `@GetMapping` will map `hello` function answering to `GET /hello` requests.
 * The controller expects a `GreetingRepository` to be injected as well as two configuration properties, no matter what property source they come from (environment variables, system properties, configuration files, **Vault**, ...).
 * We expect to get `greeting.secret` from **Vault**, that is why we configure `unknown` as its default value, so it does not fail until we configure **Vault** properly.
@@ -112,9 +112,9 @@ Then we can access the configuration property `greeting.secret` stored in **Vaul
 
 You can check the documentation at [Spring Vault](https://spring.io/projects/spring-vault).
 
-### Testing the controller
+### Testing the endpoint
 
-We can test the controller with a "slice test", meaning only the parts needed by the controller will be started:
+We can test the endpoint with a "slice test", meaning only the parts needed by the controller will be started:
 ```kotlin
 @WebFluxTest
 @TestPropertySource(properties = [
@@ -142,7 +142,7 @@ class GreetingControllerTest {
 ```
 
 * We use `WebTestClient` to execute requests to the endpoint.
-* We mock the `GreetingRepository`.
+* We mock the repository with `@MockBean`.
 * We can use a `@TestPropertySource` to configure the `greeting.secret` property, since in this test we do not have **Vault**.
 
 ### Testing the application
