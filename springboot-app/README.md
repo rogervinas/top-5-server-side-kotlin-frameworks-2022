@@ -1,29 +1,43 @@
 # Spring Boot
 
-Quick start with [Spring Initialzr](https://start.spring.io/#!type=gradle-project-kotlin&language=kotlin&platformVersion=2.7.6&packaging=jar&jvmVersion=17&groupId=org.rogervinas&artifactId=springboot-app&name=springboot-app&description=Demo%20project%20for%20Spring%20Boot&packageName=org.rogervinas.springboot-app&dependencies=webflux,cloud-starter-vault-config,jdbc)
+We can create a project using [Spring Initialzr](https://start.spring.io/#!type=gradle-project-kotlin&language=kotlin&platformVersion=2.7.6&packaging=jar&jvmVersion=17&groupId=org.rogervinas&artifactId=springboot-app&name=springboot-app&description=Demo%20project%20for%20Spring%20Boot&packageName=org.rogervinas.springboot-app&dependencies=webflux,cloud-starter-vault-config,jdbc) and download it locally.
 
-Documentation at https://spring.io/projects/spring-boot
+A lot of documentation guides at [spring.io/spring-boot](https://spring.io/projects/spring-boot).
 
 ## YAML Configuration
 
-By default Spring Boot template is created using an `application.properties` file, but we can rename it to `application.yaml` and it will work the same. We can put there our first configuration property:
+By default, Spring Initialzr creates a template using `application.properties` file. We can just rename it to `application.yaml` and it will work the same.
+
+We can put there our first configuration property:
 ```yaml
 greeting:
   name: "Bitelchus"
 ```
 
-More about profiles at https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config and https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.profiles
+More documentation about configuration sources at [Externalized Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config) and [Profiles](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.profiles).
 
 ## GreetingRepository
 
-We just add the dependencies:
-```
-org.springframework.boot:spring-boot-starter-jdbc
-org.postgresql:postgresql:42.5.1
-org.flywaydb:flyway-core:9.8.3
+We will create a `GreetingRepository`:
+```kotlin
+@Repository
+class GreetingRepository(private val jdbcTemplate: JdbcTemplate) {
+  fun getGreeting() = jdbcTemplate
+    .queryForObject("SELECT greeting FROM greetings ORDER BY random() limit 1", String::class.java)
+}
 ```
 
-and the following configuration in `application.yaml`:
+* The `@Repository` annotation will tell Spring Boot to create a singleton instance at startup.
+* We inject a `JdbcTemplate` (provided by the spring-boot-starter-jdbc autoconfiguration) to execute queries to the database.
+* We use `queryForObject` and that SQL to retrieve one random `greeting` from the `greetings` table.
+
+Additional to `spring-boot-starter-jdbc` we will need to add these extra dependencies:
+```
+org.postgresql:postgresql
+org.flywaydb:flyway-core
+```
+
+And the following configuration in `application.yaml`:
 ```yaml
 spring:
   datasource:
@@ -35,23 +49,11 @@ spring:
     enabled: true
 ```
 
-and the flyway migrations under `src/main/resources/db/migrations`.
-
-Then we can implement `GreetingRepository` as:
-```kotlin
-@Repository
-class GreetingRepository(private val jdbcTemplate: JdbcTemplate) {
-  fun getGreeting() = jdbcTemplate
-    .queryForObject("SELECT greeting FROM greetings ORDER BY random() limit 1", String::class.java)
-}
-```
-
-* The `@Repository` annotation will tell Spring Boot to create an instance on startup.
-* We inject a `JdbcTemplate` (provided by the spring-boot-starter-jdbc autoconfiguration) to execute queries to the database.
-* We use `queryForObject` and that SQL to retrieve one random `greeting` from the `greetings` table.
+And the [flyway](https://flywaydb.org/) migrations under `src/main/resources/db/migrations` to create and populate `greetings` table.
 
 ## GreetingController
 
+We will create a `GreetingController` serving `/hello` endpoint:
 ```kotlin
 @RestController
 @RequestMapping("/hello")
@@ -65,14 +67,14 @@ class GreetingController(
 }
 ```
 
-* `@RestController` annotation will tell Spring Boot to create an instance on startup and wire it properly as a REST endpoint on `/hello` path, inspecting its annotated methods.
-* `@GetMapping` will map `hello` function on `GET /hello`.
-* The controller expects a GreetingRepository to be injected as well as two configuration properties, no matter what property source they come from (environment variables, system properties, configuration files, vault, ...)
+* `@RestController` annotation will tell Spring Boot to create an instance on startup and wire it properly as a REST endpoint on `/hello` path, scanning its annotated methods.
+* `@GetMapping` will map `hello` function answering to `GET /hello` requests.
+* The controller expects a `GreetingRepository` to be injected as well as two configuration properties, no matter what property source they come from (environment variables, system properties, configuration files, vault, ...).
 * We expect to get `greeting.secret` from vault, that is why we configure `unknown` as its default value, so it does not fail until we configure vault properly.
 
 ## GreetingApplication
 
-We need to create a main application:
+As a Spring Boot requirement, we need to create a main application:
 ```kotlin
 @SpringBootApplication
 class GreetingApplication
@@ -104,7 +106,7 @@ spring:
     import: optional:vault://
 ```
 
-Then we can access the property as `greeting.secret` stored in vault.
+Then we can access the configuration property `greeting.secret` stored in vault.
 
 ## Testing the controller
 
@@ -136,12 +138,12 @@ class GreetingControllerTest {
 ```
 
 * We use `WebTestClient` to execute requests to the controller.
-* We mock the `GreetingRepository`
+* We mock the `GreetingRepository`.
 * We can use a `@TestPropertySource` to configure the `greeting.secret` property, as in this test we do not have vault.
 
 ## Testing the application
 
-To test the whole application we will use Testcontainers and the docker compose file.
+To test the whole application we will use [Testcontainers](https://www.testcontainers.org/) and the docker compose file.
 
 ```kotlin
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -173,10 +175,10 @@ class GreetingApplicationTest {
 }
 ```
 
-* We use the shared docker compose to start three containers.
+* We use the shared docker compose to start the required three containers.
 * We use `WebTestClient` again to test the endpoint.
-* As the greeting is random, now we have to match.
-* As now we are using vault the secret is `watermelon`.
+* We use pattern matching to check the greeting, as it is random.
+* As vault is now enabled, the secret should be `watermelon`.
 
 ## Test
 
