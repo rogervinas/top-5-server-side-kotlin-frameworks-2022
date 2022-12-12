@@ -262,7 +262,7 @@ curl http://localhost:8080/hello
 docker compose down
 ```
 
-### Build a docker image and run it
+## Build a docker image and run it
 
 ```shell
 # Build docker image
@@ -283,7 +283,7 @@ docker compose --profile quarkus down
 docker compose down
 ```
 
-### Build a native executable and run it
+## Build a native executable and run it
 
 You can follow [Build a Native Executable](https://quarkus.io/guides/building-native-image) for more details, but what worked for me:
 ```shell
