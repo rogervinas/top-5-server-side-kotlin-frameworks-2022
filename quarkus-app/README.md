@@ -175,7 +175,7 @@ quarkus:
 
 ## Testing the endpoint
 
-We can test the endpoint this way:
+We rename the original `GreetingResourceTest` to `GreetingControllerTest` and we modify it this way:
 ```kotlin
 @QuarkusTest
 @TestHTTPEndpoint(GreetingController::class)

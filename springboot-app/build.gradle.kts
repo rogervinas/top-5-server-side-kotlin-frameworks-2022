@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
 	id("org.springframework.boot") version "2.7.6"
 	id("io.spring.dependency-management") version "1.0.15.RELEASE"
@@ -43,7 +41,7 @@ dependencyManagement {
 	}
 }
 
-tasks.withType<KotlinCompile> {
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "11"
@@ -52,4 +50,15 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	testLogging {
+		events(
+			org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED,
+			org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED,
+			org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+		)
+		exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+		showExceptions = true
+		showCauses = true
+		showStackTraces = true
+	}
 }
