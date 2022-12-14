@@ -11,9 +11,18 @@
 
 - [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
 
-## TODO
+## STEPS
 
 https://guides.micronaut.io/latest/creating-your-first-micronaut-app-gradle-kotlin.html
++ native
 
 https://micronaut.io/launch
+
+https://micronaut-projects.github.io/micronaut-test/latest/guide/#junit5
+
+IoC https://docs.micronaut.io/latest/guide/#ioc
+
+Configuration https://guides.micronaut.io/latest/micronaut-configuration-gradle-kotlin.html
+
+Spring to Micronaut https://guides.micronaut.io/latest/spring-boot-to-micronaut-application-class-gradle-kotlin.html
 

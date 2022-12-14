@@ -27,6 +27,8 @@ dependencies {
     implementation("io.micronaut:micronaut-validation")
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    testImplementation("io.mockk:mockk:1.13.3")
 }
 
 application {

@@ -1,7 +1,11 @@
 micronaut:
   application:
-    name: micronautApp
+    name: micronaut-app
+
 netty:
   default:
     allocator:
       max-order: 3
+
+greeting:
+  name: "Bitelchus"
