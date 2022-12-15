@@ -2,9 +2,11 @@ package org.rogervinas
 
 import jakarta.inject.Singleton
 
-@Singleton
-open class GreetingRepository {
+interface GreetingRepository {
+    fun getGreeting(): String
+}
 
-    fun getGreeting() = "Hola"
-    //.query("SELECT greeting FROM greetings ORDER BY random() limit 1")
+@Singleton
+class GreetingSimpleRepository : GreetingRepository {
+    override fun getGreeting() = "Hola"
 }

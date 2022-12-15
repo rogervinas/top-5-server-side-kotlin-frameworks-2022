@@ -2,6 +2,8 @@ package org.rogervinas
 
 import io.micronaut.context.annotation.Property
 import io.micronaut.http.HttpRequest
+import io.micronaut.http.HttpStatus
+import io.micronaut.http.HttpStatus.OK
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.test.annotation.MockBean
@@ -23,15 +25,17 @@ class GreetingControllerTest {
     @Inject
     private lateinit var repository: GreetingRepository
 
-    @MockBean(GreetingRepository::class)
-    fun repository() = mockk<GreetingRepository>()
-
     @Test
     fun `should say hello`() {
         every { repository.getGreeting() } returns "Hello"
 
         val request: HttpRequest<Any> = HttpRequest.GET("/hello")
-        val body = client.toBlocking().retrieve(request)
-        assertEquals("Hello my name is Bitelchus and my secret is apple", body)
+        val response = client.toBlocking().exchange(request, String::class.java)
+
+        assertEquals(OK, response.status)
+        assertEquals("Hello my name is Bitelchus and my secret is apple", response.body.get())
     }
+
+    @MockBean(GreetingRepository::class)
+    fun repository() = mockk<GreetingRepository>()
 }
