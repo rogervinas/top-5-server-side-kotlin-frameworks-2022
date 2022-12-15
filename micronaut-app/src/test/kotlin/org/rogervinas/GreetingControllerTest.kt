@@ -2,7 +2,6 @@ package org.rogervinas
 
 import io.micronaut.context.annotation.Property
 import io.micronaut.http.HttpRequest
-import io.micronaut.http.HttpStatus
 import io.micronaut.http.HttpStatus.OK
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
