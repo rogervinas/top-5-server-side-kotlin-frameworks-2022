@@ -3,10 +3,14 @@ package org.rogervinas
 import io.vertx.mutiny.pgclient.PgPool
 import javax.enterprise.context.ApplicationScoped
 
-@ApplicationScoped
-class GreetingRepository(private val client: PgPool) {
+interface GreetingRepository {
+    fun getGreeting(): String
+}
 
-    fun getGreeting() = client
+@ApplicationScoped
+class GreetingJdbcRepository(private val client: PgPool): GreetingRepository {
+
+    override fun getGreeting(): String = client
             .query("SELECT greeting FROM greetings ORDER BY random() limit 1")
             .executeAndAwait()
             .map { r -> r.get(String::class.java, "greeting") }

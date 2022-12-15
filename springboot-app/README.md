@@ -22,10 +22,14 @@ More documentation about configuration sources at [Externalized Configuration](h
 
 We will create a `GreetingRepository`:
 ```kotlin
+interface GreetingRepository {
+  fun getGreeting(): String
+}
+
 @Repository
-class GreetingRepository(private val jdbcTemplate: JdbcTemplate) {
-  fun getGreeting() = jdbcTemplate
-    .queryForObject("SELECT greeting FROM greetings ORDER BY random() limit 1", String::class.java)
+class GreetingJdbcRepository(private val jdbcTemplate: JdbcTemplate): GreetingRepository {
+  fun getGreeting(): String = jdbcTemplate
+    .queryForObject("SELECT greeting FROM greetings ORDER BY random() limit 1", String::class.java)!!
 }
 ```
 
