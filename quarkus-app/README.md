@@ -57,9 +57,13 @@ More documentation about configuration sources at [Configuration Reference](http
 
 We will create a `GreetingRepository`:
 ```kotlin
+interface GreetingRepository {
+  fun getGreeting(): String
+}
+
 @ApplicationScoped
-class GreetingRepository(private val client: PgPool) {
-  fun getGreeting() = client
+class GreetingJdbcRepository(private val client: PgPool): GreetingRepository {
+  override fun getGreeting(): String = client
     .query("SELECT greeting FROM greetings ORDER BY random() limit 1")
     .executeAndAwait()
     .map { r -> r.get(String::class.java, "greeting") }
