@@ -11,6 +11,8 @@
 
 - [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
 
+sdk install micronaut
+
 ## STEPS
 
 https://guides.micronaut.io/latest/creating-your-first-micronaut-app-gradle-kotlin.html
@@ -25,4 +27,20 @@ IoC https://docs.micronaut.io/latest/guide/#ioc
 Configuration https://guides.micronaut.io/latest/micronaut-configuration-gradle-kotlin.html
 
 Spring to Micronaut https://guides.micronaut.io/latest/spring-boot-to-micronaut-application-class-gradle-kotlin.html
+
+https://guides.micronaut.io/latest/micronaut-data-jdbc-repository-gradle-kotlin.html
+
+https://guides.micronaut.io/latest/micronaut-flyway-gradle-kotlin.html
+
+Add features data-jdbc, flyway, postgres 
+```
+mn create-app com.rogervinas \
+   --features=data-jdbc,postgres,flyway \
+   --build=gradle_kotlin --lang=kotlin --java-version=11 --test=junit
+```
+
+
+https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/
+
+https://docs.micronaut.io/latest/guide/#config
 

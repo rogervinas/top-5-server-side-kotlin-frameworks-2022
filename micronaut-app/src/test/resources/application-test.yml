@@ -1,0 +1,4 @@
+test-resources:
+  containers:
+    postgres:
+      image-name: "postgres:14.5"
