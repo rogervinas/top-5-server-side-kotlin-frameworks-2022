@@ -44,3 +44,26 @@ https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/
 
 https://docs.micronaut.io/latest/guide/#config
 
+./gradlew dockerBuild
+
+https://micronaut-projects.github.io/micronaut-gradle-plugin/snapshot/#_docker_support
+
+## Build a docker image and run it
+
+```shell
+# Build docker image
+./gradlew dockerBuild
+
+# Start Vault and Database
+docker compose up -d vault vault-cli db
+
+# Start Application
+docker compose --profile micronaut up -d
+
+# Make requests
+curl http://localhost:8080/hello
+
+# Stop all containers
+docker compose --profile micronaut down
+docker compose down
+```

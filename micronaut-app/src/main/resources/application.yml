@@ -1,6 +1,8 @@
 micronaut:
   application:
     name: "micronaut-app"
+  server:
+    port: 8080
 
 netty:
   default:
