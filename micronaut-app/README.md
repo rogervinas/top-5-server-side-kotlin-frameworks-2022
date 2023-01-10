@@ -48,6 +48,42 @@ https://docs.micronaut.io/latest/guide/#config
 
 https://micronaut-projects.github.io/micronaut-gradle-plugin/snapshot/#_docker_support
 
+## Run
+
+```shell
+# Start Application
+./gradlew run
+
+# Make requests
+curl http://localhost:8080/hello
+
+# Stop Application with control-c
+
+# Stop all containers
+docker compose down
+```
+
+## Build a fatjar and run it
+
+```shell
+# Build fatjar
+./gradlew jar
+
+# Start Vault and Database
+docker compose up -d vault vault-cli db
+
+# Start Application
+java -jar build/libs/springboot-app-0.0.1-SNAPSHOT.jar
+
+# Make requests
+curl http://localhost:8080/hello
+
+# Stop Application with control-c
+
+# Stop all containers
+docker compose down
+```
+
 ## Build a docker image and run it
 
 ```shell
@@ -67,3 +103,5 @@ curl http://localhost:8080/hello
 docker compose --profile micronaut down
 docker compose down
 ```
+
+https://micronaut-projects.github.io/micronaut-sql/latest/guide/#jasync
