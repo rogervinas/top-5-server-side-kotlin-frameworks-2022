@@ -1,0 +1,24 @@
+micronaut:
+  application:
+    name: "myapp"
+  server:
+    port: 8080
+  config-client:
+    enabled: true
+
+vault:
+  client:
+    config:
+      enabled: true
+    kv-version: "V2"
+    secret-engine-name: "secret"
+
+test-resources:
+  containers:
+    postgres:
+      image-name: "postgres:14.5"
+    hashicorp-vault:
+      image-name: "vault:1.12.1"
+      path: "secret/myapp"
+      secrets:
+        - "greeting.secret=watermelon"

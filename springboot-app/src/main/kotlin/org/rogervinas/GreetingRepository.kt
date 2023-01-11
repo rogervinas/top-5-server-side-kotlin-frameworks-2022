@@ -11,5 +11,5 @@ interface GreetingRepository {
 class GreetingJdbcRepository(private val jdbcTemplate: JdbcTemplate): GreetingRepository {
 
     override fun getGreeting(): String = jdbcTemplate
-            .queryForObject("SELECT greeting FROM greetings ORDER BY random() limit 1", String::class.java)!!
+            .queryForObject("SELECT greeting FROM greetings ORDER BY random() LIMIT 1", String::class.java)!!
 }

@@ -1,0 +1,4 @@
+vault:
+  client:
+    uri: "http://${VAULT_HOST:localhost}:8200"
+    token: "mytoken"

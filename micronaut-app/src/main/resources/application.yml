@@ -1,0 +1,21 @@
+micronaut:
+  server:
+    port: 8080
+
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+datasources:
+  default:
+    dialect: "POSTGRES"
+    driverClassName: "org.postgresql.Driver"
+
+flyway:
+  datasources:
+    default:
+      enabled: true
+
+greeting:
+  name: "Bitelchus"
