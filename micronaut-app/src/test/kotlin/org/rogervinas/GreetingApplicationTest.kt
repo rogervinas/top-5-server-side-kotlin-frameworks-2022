@@ -17,15 +17,12 @@ class GreetingApplicationTest {
     @field:Client("/")
     private lateinit var client: HttpClient
 
-    @Inject
-    private lateinit var repository: GreetingRepository
-
     @Test
     fun `should say hello`() {
         val request: HttpRequest<Any> = HttpRequest.GET("/hello")
         val response = client.toBlocking().exchange(request, String::class.java)
 
         assertEquals(OK, response.status)
-        assertTrue(response.body.get().matches(Regex(".+ my name is Bitelchus and my secret is unknown")))
+        assertTrue(response.body.get().matches(Regex(".+ my name is Bitelchus and my secret is watermelon")))
     }
 }

@@ -3,8 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version "1.6.21"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.6.21"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.micronaut.application") version "3.6.7"
-    id("io.micronaut.test-resources") version "3.6.7"
+    id("io.micronaut.application") version "3.7.0"
+    id("io.micronaut.test-resources") version "3.7.0"
 }
 
 version = "0.1"
@@ -26,6 +26,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     runtimeOnly("ch.qos.logback:logback-classic")
     implementation("io.micronaut:micronaut-validation")
+
+    implementation("io.micronaut.discovery:micronaut-discovery-client")
 
     kapt("io.micronaut.data:micronaut-data-processor")
     implementation("io.micronaut.data:micronaut-data-jdbc")

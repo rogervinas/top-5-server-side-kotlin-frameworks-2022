@@ -1,6 +1,4 @@
 micronaut:
-  application:
-    name: "micronaut-app"
   server:
     port: 8080
 
@@ -21,8 +19,3 @@ flyway:
 
 greeting:
   name: "Bitelchus"
-
-test-resources:
-  containers:
-    postgres:
-      image-name: "postgres:14.5"

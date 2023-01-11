@@ -105,3 +105,10 @@ docker compose down
 ```
 
 https://micronaut-projects.github.io/micronaut-sql/latest/guide/#jasync
+
+https://docs.micronaut.io/latest/guide/#distributedConfigurationVault
+
+https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/#modules-hashicorp-vault
+
+https://docs.micronaut.io/latest/guide/#bootstrap
+
