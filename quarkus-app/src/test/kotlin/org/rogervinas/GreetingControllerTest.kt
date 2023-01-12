@@ -12,17 +12,17 @@ import org.mockito.Mockito.doReturn
 @TestHTTPEndpoint(GreetingController::class)
 class GreetingControllerTest {
 
-    @InjectMock
-    private lateinit var repository: GreetingRepository
+  @InjectMock
+  private lateinit var repository: GreetingRepository
 
-    @Test
-    fun `should say hello`() {
-        doReturn("Hello").`when`(repository).getGreeting()
+  @Test
+  fun `should say hello`() {
+    doReturn("Hello").`when`(repository).getGreeting()
 
-        `when`()
-                .get()
-                .then()
-                .statusCode(200)
-                .body(`is`("Hello my name is Bitelchus and my secret is watermelon"))
-    }
+    `when`()
+          .get()
+          .then()
+          .statusCode(200)
+          .body(`is`("Hello my name is Bitelchus and my secret is watermelon"))
+  }
 }

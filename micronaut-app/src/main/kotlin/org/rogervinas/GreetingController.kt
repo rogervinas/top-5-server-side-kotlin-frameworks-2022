@@ -8,11 +8,11 @@ import io.micronaut.http.annotation.Produces
 
 @Controller("/hello")
 class GreetingController(
-    private val repository: GreetingRepository,
-    @Property(name = "greeting.name") private val name: String,
-    @Property(name = "greeting.secret", defaultValue = "unknown") private val secret: String
+      private val repository: GreetingRepository,
+      @Property(name = "greeting.name") private val name: String,
+      @Property(name = "greeting.secret", defaultValue = "unknown") private val secret: String
 ) {
-    @Get
-    @Produces(MediaType.TEXT_PLAIN)
-    fun hello() = "${repository.getGreeting()} my name is $name and my secret is $secret"
+  @Get
+  @Produces(MediaType.TEXT_PLAIN)
+  fun hello() = "${repository.getGreeting()} my name is $name and my secret is $secret"
 }

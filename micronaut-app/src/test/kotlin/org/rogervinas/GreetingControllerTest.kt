@@ -17,24 +17,24 @@ import org.junit.jupiter.api.Test
 @Property(name = "greeting.secret", value = "apple")
 class GreetingControllerTest {
 
-    @Inject
-    @field:Client("/")
-    private lateinit var client: HttpClient
+  @Inject
+  @field:Client("/")
+  private lateinit var client: HttpClient
 
-    @Inject
-    private lateinit var repository: GreetingRepository
+  @Inject
+  private lateinit var repository: GreetingRepository
 
-    @Test
-    fun `should say hello`() {
-        every { repository.getGreeting() } returns "Hello"
+  @Test
+  fun `should say hello`() {
+    every { repository.getGreeting() } returns "Hello"
 
-        val request: HttpRequest<Any> = HttpRequest.GET("/hello")
-        val response = client.toBlocking().exchange(request, String::class.java)
+    val request: HttpRequest<Any> = HttpRequest.GET("/hello")
+    val response = client.toBlocking().exchange(request, String::class.java)
 
-        assertEquals(OK, response.status)
-        assertEquals("Hello my name is Bitelchus and my secret is apple", response.body.get())
-    }
+    assertEquals(OK, response.status)
+    assertEquals("Hello my name is Bitelchus and my secret is apple", response.body.get())
+  }
 
-    @MockBean(GreetingRepository::class)
-    fun repository() = mockk<GreetingRepository>()
+  @MockBean(GreetingRepository::class)
+  fun repository() = mockk<GreetingRepository>()
 }

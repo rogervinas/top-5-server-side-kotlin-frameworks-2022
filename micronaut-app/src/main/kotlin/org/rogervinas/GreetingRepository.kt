@@ -6,20 +6,20 @@ import javax.sql.DataSource
 import javax.transaction.Transactional
 
 interface GreetingRepository {
-    fun getGreeting(): String
+  fun getGreeting(): String
 }
 
 @Singleton
-open class GreetingSimpleRepository(dataSource: DataSource) : GreetingRepository {
+class GreetingJdbcRepository(dataSource: DataSource) : GreetingRepository {
 
-    private val jdbi = Jdbi.create(dataSource)
+  private val jdbi = Jdbi.create(dataSource)
 
-    @Transactional
-    override fun getGreeting(): String = jdbi
-            .open()
-            .use {
-                it.createQuery("SELECT greeting FROM greetings ORDER BY random() LIMIT 1")
-                        .mapTo(String::class.java)
-                        .first()
-            }
+  @Transactional
+  override fun getGreeting(): String = jdbi
+        .open()
+        .use {
+          it.createQuery("SELECT greeting FROM greetings ORDER BY random() LIMIT 1")
+                .mapTo(String::class.java)
+                .first()
+        }
 }
