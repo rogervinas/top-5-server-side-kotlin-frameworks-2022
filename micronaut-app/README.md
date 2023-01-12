@@ -449,3 +449,4 @@ https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/#modu
 
 https://docs.micronaut.io/latest/guide/#bootstrap
 
+https://guides.micronaut.io/latest/micronaut-rest-assured-gradle-kotlin.html
