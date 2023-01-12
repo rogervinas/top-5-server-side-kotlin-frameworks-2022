@@ -10,7 +10,7 @@ interface GreetingRepository {
 }
 
 @Singleton
-class GreetingJdbcRepository(dataSource: DataSource) : GreetingRepository {
+open class GreetingJdbcRepository(dataSource: DataSource) : GreetingRepository {
 
   private val jdbi = Jdbi.create(dataSource)
 
