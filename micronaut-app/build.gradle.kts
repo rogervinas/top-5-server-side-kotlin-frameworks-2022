@@ -75,7 +75,7 @@ micronaut {
 }
 
 tasks.named<io.micronaut.gradle.docker.MicronautDockerfile>("dockerfile") {
-    baseImage.set("eclipse-temurin:11-jre-alpine")
+    baseImage.set("eclipse-temurin:17-jre-alpine")
 }
 
 tasks.withType<Test> {

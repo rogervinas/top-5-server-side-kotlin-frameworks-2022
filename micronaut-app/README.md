@@ -247,11 +247,6 @@ class GreetingApplicationTest {
 
 # Make requests
 curl http://localhost:8080/hello
-
-# Stop Application with control-c
-
-# Stop all containers
-docker compose down
 ```
 
 ## Build a fatjar and run it
@@ -277,6 +272,14 @@ docker compose down
 
 ## Build a docker image and run it
 
+**Micronaut** configures a base docker image by default but we can customize it in `build.gradle.kts`:
+```kotlin
+tasks.named<io.micronaut.gradle.docker.MicronautDockerfile>("dockerfile") {
+  baseImage.set("eclipse-temurin:17-jre-alpine")
+}
+```
+
+Then:
 ```shell
 # Build docker image
 ./gradlew dockerBuild
