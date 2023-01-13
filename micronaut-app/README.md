@@ -13,7 +13,7 @@ To create our sample gradle & kotlin application using the command line:
 sdk install micronaut
 mn create-app micronaut-app \
    --features=data-jdbc,postgres,flyway \
-   --build=gradle_kotlin --lang=kotlin --java-version=11 --test=junit
+   --build=gradle_kotlin --lang=kotlin --java-version=17 --test=junit
 ```
 
 Just run it once to check everything is ok:
