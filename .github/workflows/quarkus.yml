@@ -3,8 +3,12 @@ name: Quarkus
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - quarkus-app/**
   pull_request:
     branches: [ "main" ]
+    paths:
+      - quarkus-app/**
 
 permissions:
   contents: read
