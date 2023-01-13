@@ -47,18 +47,18 @@ application {
 }
 
 java {
-    sourceCompatibility = JavaVersion.toVersion("11")
+    sourceCompatibility = JavaVersion.toVersion("17")
 }
 
 tasks {
     compileKotlin {
         kotlinOptions {
-            jvmTarget = "11"
+            jvmTarget = "17"
         }
     }
     compileTestKotlin {
         kotlinOptions {
-            jvmTarget = "11"
+            jvmTarget = "17"
         }
     }
 }
@@ -75,7 +75,7 @@ micronaut {
 }
 
 tasks.named<io.micronaut.gradle.docker.MicronautDockerfile>("dockerfile") {
-    baseImage.set("eclipse-temurin:11-jre-alpine")
+    baseImage.set("eclipse-temurin:17-jre-alpine")
 }
 
 tasks.withType<Test> {
