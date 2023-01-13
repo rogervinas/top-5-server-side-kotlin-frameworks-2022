@@ -297,7 +297,7 @@ docker compose down
 
 ## Build a native executable and run it
 
-You can follow [Generate a Micronaut Application Native Executable with GraalVM](https://guides.micronaut.io/latest/creating-your-first-micronaut-app-gradle-kotlin.html#generate-a-micronaut-application-native-executable-with-graalvm) for more details, but what worked for me:
+You can follow [Generate a Micronaut Application Native Executable with GraalVM](https://guides.micronaut.io/latest/creating-your-first-micronaut-app-gradle-kotlin.html#generate-a-micronaut-application-native-executable-with-graalvm) for more details, but what worked for me (using [sdkman](https://sdkman.io/)):
 ```shell
 # Install GraalVM via sdkman
 sdk install java 22.3.r19-grl
@@ -314,7 +314,7 @@ gu install native-image
 docker compose up -d vault vault-cli db
 
 # Start Application using native executable
-./build/quarkus-app-1.0.0-SNAPSHOT-runner
+MICRONAUT_ENVIRONMENTS=prod ./build/native/nativeCompile/micronaut-app 
 
 # Make requests
 curl http://localhost:8080/hello
