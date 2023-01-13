@@ -44,7 +44,7 @@ greeting:
   name: "Bitelchus"
 ```
 
-Note that in **Quarkus** we have these [Default profiles](https://quarkus.io/guides/config-reference#default-profiles):
+Note that in **Quarkus** we have these [Default profiles](https://quarkus.io/guides/config-reference#default-profiles) (similar to "profiles" in **Spring Boot**):
 * **dev** - Activated when in development mode (i.e. quarkus:dev).
 * **test** - Activated when running tests.
 * **prod** - The default profile when not running in development or test mode.

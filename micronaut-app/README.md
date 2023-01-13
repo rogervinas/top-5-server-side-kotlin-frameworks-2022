@@ -156,14 +156,14 @@ test-resources:
 
 Note that some of this configuration was already set in `application.yaml` but we move it here, so it is available in the "bootstrap" phase.
 
-Once thing not currently mentioned in the documentation is that we need to add this dependency to enable "bootstrap":
+Once thing not currently mentioned in the documentation is that we need to add this dependency to enable [the "bootstrap" phase](https://docs.micronaut.io/latest/guide/#bootstrap):
 ```kotlin
 implementation("io.micronaut.discovery:micronaut-discovery-client")
 ```
 
 [Test Resources for Hashicorp Vault](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/#modules-hashicorp-vault) allow us to populate **Vault**, so for dev and test it will start a ready-to-use **Vault** container 🥹
 
-For `prod` environment we configure **Vault** in `bootstrap-prod.yaml`, and doing so we will disable 
+For `prod` environment we configure **Vault** in `bootstrap-prod.yaml`:
 ```yaml
 vault:
   client:
@@ -204,7 +204,7 @@ class GreetingControllerTest {
 }
 ```
 
-* `@MicronautTest` will start all "Test Resources" container, despite not needed 🤷
+* `@MicronautTest` will start all "Test Resources" containers, despite not needed 🤷
 * We mock the repository with `@MockBean`.
 * We use **Micronaut**'s `HttpClient` to test the endpoint.
 * We set `greeting.secret` property just for this test (so we do not use the **Vault** value).
@@ -295,12 +295,34 @@ docker compose --profile micronaut down
 docker compose down
 ```
 
-That's it! Happy coding! 💙
+## Build a native executable and run it
 
-https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/
-https://docs.micronaut.io/latest/guide/#config
-https://micronaut-projects.github.io/micronaut-gradle-plugin/snapshot/#_docker_support
-https://micronaut-projects.github.io/micronaut-sql/latest/guide/#jasync
-https://docs.micronaut.io/latest/guide/#distributedConfigurationVault
-https://docs.micronaut.io/latest/guide/#bootstrap
-https://guides.micronaut.io/latest/micronaut-rest-assured-gradle-kotlin.html
+You can follow [Generate a Micronaut Application Native Executable with GraalVM](https://guides.micronaut.io/latest/creating-your-first-micronaut-app-gradle-kotlin.html#generate-a-micronaut-application-native-executable-with-graalvm) for more details, but what worked for me:
+```shell
+# Install GraalVM via sdkman
+sdk install java 22.3.r19-grl
+sdk default java 22.3.r19-grl
+export GRAALVM_HOME=$JAVA_HOME
+
+# Install the native-image
+gu install native-image
+
+# Build native executable
+./gradlew nativeCompile
+
+# Start Vault and Database
+docker compose up -d vault vault-cli db
+
+# Start Application using native executable
+./build/quarkus-app-1.0.0-SNAPSHOT-runner
+
+# Make requests
+curl http://localhost:8080/hello
+
+# Stop Application with control-c
+
+# Stop all containers
+docker compose down
+```
+
+That's it! Happy coding! 💙
