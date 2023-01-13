@@ -1,6 +1,6 @@
 plugins {
-  id("org.springframework.boot") version "3.0.1"
-  id("io.spring.dependency-management") version "1.1.0"
+  id("org.springframework.boot") version "2.7.7"
+  id("io.spring.dependency-management") version "1.0.15.RELEASE"
   id("org.graalvm.buildtools.native") version "0.9.18"
   kotlin("jvm") version "1.7.22"
   kotlin("plugin.spring") version "1.7.22"
@@ -14,7 +14,7 @@ repositories {
 	mavenCentral()
 }
 
-extra["springCloudVersion"] = "2022.0.0"
+extra["springCloudVersion"] = "2021.0.5"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -40,6 +40,14 @@ dependencyManagement {
 	imports {
 		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
 	}
+}
+
+graalvmNative {
+  binaries {
+    named("main") {
+      mainClass.set("org.rogervinas.GreetingApplicationKt")
+    }
+  }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {

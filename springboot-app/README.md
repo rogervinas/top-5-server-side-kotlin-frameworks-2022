@@ -254,7 +254,18 @@ docker compose down
 
 ## Build a native executable and run it
 
-You can follow [GraalVM Native Image Support](https://docs.spring.io/spring-boot/docs/current/reference/html/native-image.html#native-image) for more details, but what worked for me (using [sdkman](https://sdkman.io/)):
+In `build.gradle.kts`:
+```kotlin
+graalvmNative {
+  binaries {
+    named("main") {
+      mainClass.set("org.rogervinas.GreetingApplicationKt")
+    }
+  }
+}
+```
+
+Then, using [sdkman](https://sdkman.io/):
 ```shell
 # Install GraalVM via sdkman
 sdk install java 22.3.r19-grl
@@ -271,7 +282,7 @@ gu install native-image
 docker compose up -d vault vault-cli db
 
 # Start Application using native executable
- 
+
 
 # Make requests
 curl http://localhost:8080/hello
@@ -281,5 +292,7 @@ curl http://localhost:8080/hello
 # Stop all containers
 docker compose down
 ```
+
+You can follow [GraalVM Native Image Support](https://docs.spring.io/spring-boot/docs/current/reference/html/native-image.html#native-image) and [Gradle plugin for GraalVM Native Image building](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html) for more details.
 
 That's it! Happy coding! 💙
