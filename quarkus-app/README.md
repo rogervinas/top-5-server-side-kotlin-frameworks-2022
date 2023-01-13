@@ -44,7 +44,7 @@ greeting:
   name: "Bitelchus"
 ```
 
-Note that in **Quarkus** we have these [Default profiles](https://quarkus.io/guides/config-reference#default-profiles):
+Note that in **Quarkus** we have these [Default profiles](https://quarkus.io/guides/config-reference#default-profiles) (similar to "profiles" in **Spring Boot**):
 * **dev** - Activated when in development mode (i.e. quarkus:dev).
 * **test** - Activated when running tests.
 * **prod** - The default profile when not running in development or test mode.
@@ -64,7 +64,7 @@ interface GreetingRepository {
 @ApplicationScoped
 class GreetingJdbcRepository(private val client: PgPool): GreetingRepository {
   override fun getGreeting(): String = client
-    .query("SELECT greeting FROM greetings ORDER BY random() limit 1")
+    .query("SELECT greeting FROM greetings ORDER BY random() LIMIT 1")
     .executeAndAwait()
     .map { r -> r.get(String::class.java, "greeting") }
     .first()
@@ -291,7 +291,7 @@ docker compose down
 
 ## Build a native executable and run it
 
-You can follow [Build a Native Executable](https://quarkus.io/guides/building-native-image) for more details, but what worked for me:
+You can follow [Build a Native Executable](https://quarkus.io/guides/building-native-image) for more details, but what worked for me (using [sdkman](https://sdkman.io/))::
 ```shell
 # Install GraalVM via sdkman
 sdk install java 22.3.r19-grl

@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test
 @QuarkusTest
 class GreetingApplicationTest {
 
-    @Test
-    fun `should say hello`() {
-        given()
-                .`when`().get("/hello")
-                .then()
-                .statusCode(200)
-                .body(matchesPattern(".+ my name is Bitelchus and my secret is watermelon"))
-    }
+  @Test
+  fun `should say hello`() {
+    given()
+          .`when`().get("/hello")
+          .then()
+          .statusCode(200)
+          .body(matchesPattern(".+ my name is Bitelchus and my secret is watermelon"))
+  }
 }

@@ -55,3 +55,17 @@ services:
       VAULT_HOST: "vault"
     ports:
       - "8080:8080"
+
+  micronaut-app:
+    image: micronaut-app:latest
+    profiles:
+      - micronaut
+    depends_on:
+      - db
+      - vault
+    environment:
+      MICRONAUT_ENVIRONMENTS: "prod"
+      DB_HOST: "db"
+      VAULT_HOST: "vault"
+    ports:
+      - "8080:8080"
