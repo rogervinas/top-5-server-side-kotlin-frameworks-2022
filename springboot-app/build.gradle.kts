@@ -1,13 +1,14 @@
 plugins {
-	id("org.springframework.boot") version "2.7.6"
-	id("io.spring.dependency-management") version "1.0.15.RELEASE"
-	kotlin("jvm") version "1.6.21"
-	kotlin("plugin.spring") version "1.6.21"
+  id("org.springframework.boot") version "2.7.7"
+  id("io.spring.dependency-management") version "1.0.15.RELEASE"
+  id("org.graalvm.buildtools.native") version "0.9.18"
+  kotlin("jvm") version "1.7.22"
+  kotlin("plugin.spring") version "1.7.22"
 }
 
 group = "org.rogervinas"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
@@ -21,7 +22,7 @@ dependencies {
 
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.postgresql:postgresql:42.5.1")
-	implementation("org.flywaydb:flyway-core:9.8.3")
+	implementation("org.flywaydb:flyway-core:9.10.2")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
@@ -41,10 +42,18 @@ dependencyManagement {
 	}
 }
 
+graalvmNative {
+  binaries {
+    named("main") {
+      mainClass.set("org.rogervinas.GreetingApplicationKt")
+    }
+  }
+}
+
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
+		jvmTarget = "17"
 	}
 }
 
