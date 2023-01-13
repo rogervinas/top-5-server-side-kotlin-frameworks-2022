@@ -7,7 +7,7 @@ You can also check [Creating your first application](https://quarkus.io/guides/g
 To create a simple application with a reactive REST endpoint:
 ```shell
 sdk install quarkus
-quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --extension='kotlin,resteasy-reactive-jackson'
+quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --java=17 --kotlin --extension='kotlin,resteasy-reactive-jackson'
 ```
 
 A **Gradle** project will be created with the following:
