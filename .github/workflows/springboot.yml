@@ -3,8 +3,12 @@ name: SpringBoot
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - springboot-app/**
   pull_request:
     branches: [ "main" ]
+    paths:
+      - springboot-app/**
 
 permissions:
   contents: read
