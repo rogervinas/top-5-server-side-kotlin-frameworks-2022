@@ -3,8 +3,12 @@ name: Micronaut
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - micronaut-app/**
   pull_request:
     branches: [ "main" ]
+    paths:
+      - micronaut-app/**
 
 permissions:
   contents: read
