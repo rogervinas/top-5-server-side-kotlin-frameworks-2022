@@ -1,4 +1,4 @@
-capluginManagement {
+pluginManagement {
     val quarkusPluginVersion: String by settings
     val quarkusPluginId: String by settings
     repositories {
