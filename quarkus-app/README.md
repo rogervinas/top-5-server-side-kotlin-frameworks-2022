@@ -291,7 +291,7 @@ docker compose down
 
 ## Build a native executable and run it
 
-You can follow [Build a Native Executable](https://quarkus.io/guides/building-native-image) for more details, but what worked for me (using [sdkman](https://sdkman.io/))::
+Following [Build a Native Executable](https://quarkus.io/guides/building-native-image):
 ```shell
 # Install GraalVM via sdkman
 sdk install java 22.3.r19-grl
