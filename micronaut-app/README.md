@@ -300,7 +300,7 @@ docker compose down
 
 ## Build a native executable and run it
 
-You can follow [Generate a Micronaut Application Native Executable with GraalVM](https://guides.micronaut.io/latest/creating-your-first-micronaut-app-gradle-kotlin.html#generate-a-micronaut-application-native-executable-with-graalvm) for more details, but what worked for me (using [sdkman](https://sdkman.io/)):
+Following [Generate a Micronaut Application Native Executable with GraalVM](https://guides.micronaut.io/latest/creating-your-first-micronaut-app-gradle-kotlin.html#generate-a-micronaut-application-native-executable-with-graalvm):
 ```shell
 # Install GraalVM via sdkman
 sdk install java 22.3.r19-grl
@@ -327,5 +327,7 @@ curl http://localhost:8080/hello
 # Stop all containers
 docker compose down
 ```
+
+💡 As there were some reflection problems I had to add this [reflect-config.json](src/main/resources/META-INF/native-image/reflect-config.json) configuration generated with [the native agent](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html#agent-support).
 
 That's it! Happy coding! 💙
