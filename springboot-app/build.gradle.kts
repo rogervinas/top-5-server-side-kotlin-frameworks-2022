@@ -41,6 +41,14 @@ dependencyManagement {
 	}
 }
 
+graalvmNative {
+  binaries {
+    named("main") {
+      mainClass.set("org.rogervinas.GreetingApplicationKt")
+    }
+  }
+}
+
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
