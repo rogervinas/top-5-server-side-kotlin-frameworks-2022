@@ -100,7 +100,7 @@ datasources:
     password: "mypassword"
 ```
 
-Configuring it will disable [Test Resources](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/) for **PostgreSQL**.
+Configuring it will disable [Test Resources](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/) for **PostgreSQL** on `prod` environment.
 
 [Flyway](https://flywaydb.org/) is already enabled as we created the project adding the `flyway` feature, so we only need to add migrations under [src/main/resources/db/migration](src/main/resources/db/migration) to create and populate `greetings` table.
 
@@ -171,7 +171,7 @@ vault:
     token: "mytoken"
 ```
 
-And as usual, configuring it will disable [Test Resources](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/) for **Vault**.
+And as usual, configuring it will disable [Test Resources](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/) for **Vault** on `prod` environment.
 
 ## Testing the endpoint
 
