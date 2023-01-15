@@ -328,6 +328,6 @@ curl http://localhost:8080/hello
 docker compose down
 ```
 
-💡 As there were some reflection problems I had to add [reflect-config.json](src/main/resources/META-INF/native-image/reflect-config.json) generated with [the native agent](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html#agent-support).
+💡 As there were some reflection problems I had to add this [reflect-config.json](src/main/resources/META-INF/native-image/reflect-config.json) configuration generated with [the native agent](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html#agent-support).
 
 That's it! Happy coding! 💙
