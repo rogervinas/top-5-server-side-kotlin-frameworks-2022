@@ -11,24 +11,24 @@ import org.springframework.test.web.reactive.server.expectBody
 
 @WebFluxTest
 @TestPropertySource(properties = [
-    "greeting.secret=apple"
+  "greeting.secret=apple"
 ])
 class GreetingControllerTest {
 
-    @MockBean
-    private lateinit var repository: GreetingRepository
+  @MockBean
+  private lateinit var repository: GreetingRepository
 
-    @Autowired
-    private lateinit var client: WebTestClient
+  @Autowired
+  private lateinit var client: WebTestClient
 
-    @Test
-    fun `should say hello`() {
-        doReturn("Hello").`when`(repository).getGreeting()
+  @Test
+  fun `should say hello`() {
+    doReturn("Hello").`when`(repository).getGreeting()
 
-        client
-                .get().uri("/hello")
-                .exchange()
-                .expectStatus().isOk
-                .expectBody<String>().isEqualTo("Hello my name is Bitelchus and my secret is apple")
-    }
+    client
+          .get().uri("/hello")
+          .exchange()
+          .expectStatus().isOk
+          .expectBody<String>().isEqualTo("Hello my name is Bitelchus and my secret is apple")
+  }
 }
