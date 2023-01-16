@@ -175,7 +175,7 @@ class GreetingApplicationTest {
       .get().uri("/hello")
 	  .exchange()
       .expectStatus().isOk
-	  .expectBody<String>().consumeWith {
+      .expectBody<String>().consumeWith {
         assertThat(it.responseBody!!).matches(".+ my name is Bitelchus and my secret is watermelon")
       }
   }
