@@ -176,7 +176,7 @@ class GreetingApplicationTest {
 	  .exchange()
       .expectStatus().isOk
 	  .expectBody<String>().consumeWith {
-        it.responseBody!!.matches(Regex(".+ my name is Bitelchus and my secret is watermelon"))
+        assertThat(it.responseBody!!).matches(".+ my name is Bitelchus and my secret is watermelon")
       }
   }
 }
