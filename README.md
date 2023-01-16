@@ -30,10 +30,10 @@ In order to put a `greeting.secret` in vault we will start another **Vault** con
 
 Please find below a step-by-step guide for each one of the top 5 frameworks. Here we go!
 
-1. [Spring Boot](springboot-app)
-2. [Quarkus](quarkus-app)
-3. [Micronaut](micronaut-app)
-4. Ktor - coming soon!
-5. http4k - coming soon!
+* 🥇 [Spring Boot App](springboot-app)
+* 🥈 [Quarkus App](quarkus-app)
+* 🥉 [Micronaut App](micronaut-app)
+* 🏅 Ktor App - coming soon!
+* 🏅 http4k App - coming soon!
 
 Happy coding! 💙
