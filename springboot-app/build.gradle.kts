@@ -63,11 +63,3 @@ tasks.withType<Test> {
 		showStackTraces = true
 	}
 }
-
-//graalvmNative {
-//  binaries {
-//    named("main") {
-//      mainClass.set("org.rogervinas.GreetingApplicationKt")
-//    }
-//  }
-//}
