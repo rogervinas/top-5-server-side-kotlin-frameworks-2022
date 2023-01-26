@@ -11,6 +11,7 @@ import org.springframework.test.web.reactive.server.expectBody
 
 @WebFluxTest
 @TestPropertySource(properties = [
+  "spring.cloud.vault.enabled=false",
   "greeting.secret=apple"
 ])
 class GreetingControllerTest {
