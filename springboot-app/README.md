@@ -122,6 +122,7 @@ We can test the endpoint with a "slice test", meaning only the parts needed by t
 ```kotlin
 @WebFluxTest
 @TestPropertySource(properties = [
+  "spring.cloud.vault.enabled=false",
   "greeting.secret=apple"
 ])
 class GreetingControllerTest {
@@ -147,7 +148,7 @@ class GreetingControllerTest {
 
 * We use `WebTestClient` to execute requests to the endpoint.
 * We mock the repository with `@MockBean`.
-* We can use a `@TestPropertySource` to configure the `greeting.secret` property, since in this test we do not have **Vault**.
+* We can use a `@TestPropertySource` to configure the `greeting.secret` property and `spring.cloud.vault.enabled=false` to disable **Vault**.
 
 ### Testing the application
 
