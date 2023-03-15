@@ -3,7 +3,7 @@ ktor:
     port: 8080
   application:
     modules:
-      - org.rogervinas.GreetingApplicationKt.module2
+      - org.rogervinas.GreetingApplicationKt.module
 
 database:
   host: "$DB_HOST:localhost"

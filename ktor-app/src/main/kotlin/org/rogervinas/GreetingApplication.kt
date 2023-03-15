@@ -12,12 +12,10 @@ fun main() {
 */
 
 fun main(args: Array<String>) {
-  println("JOJOJOO")
   EngineMain.main(args)
 }
 
 fun Application.module() {
-  println("JIJIJI")
   val host = environment.config.property("database.host").getString()
   val port = environment.config.property("database.port").getString()
   val name = environment.config.property("database.name").getString()

@@ -3,10 +3,12 @@ package org.rogervinas
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.server.config.*
 import io.ktor.server.testing.*
 import io.mockk.every
 import io.mockk.mockk
+import org.assertj.core.api.Assertions.assertThat
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -24,8 +26,8 @@ class GreetingControllerTest {
       greetingController("Bitelchus", "apple", repository)
     }
     client.get("/hello").apply {
-      assertEquals(HttpStatusCode.OK, status)
-      assertEquals("Hello my name is Bitelchus and my secret is apple", bodyAsText())
+      assertThat(status).isEqualTo(OK)
+      assertThat(bodyAsText()).isEqualTo("Hello my name is Bitelchus and my secret is apple")
     }
   }
 }

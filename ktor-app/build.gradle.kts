@@ -39,7 +39,21 @@ dependencies {
   implementation("ch.qos.logback:logback-classic:$logback_version")
 
   testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
-  testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+  testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version")
 
   testImplementation("io.mockk:mockk:1.13.4")
+
+  testImplementation("org.testcontainers:junit-jupiter:1.17.6")
+  testImplementation("org.assertj:assertj-core:3.24.0")
+}
+
+tasks.withType<Test> {
+  useJUnitPlatform()
+  testLogging {
+    events(
+          org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED,
+          org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED,
+          org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+    )
+  }
 }
