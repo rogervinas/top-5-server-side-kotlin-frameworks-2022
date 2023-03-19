@@ -1,6 +1,8 @@
 package org.rogervinas
 
+import io.ktor.server.application.Application
 import java.sql.Connection
+import java.sql.DriverManager
 
 interface GreetingRepository {
   fun getGreeting(): String
@@ -40,4 +42,14 @@ class GreetingJdbcRepository(private val connection: Connection) : GreetingRepos
         """.trimIndent())
     }
   }
+}
+
+public fun Application.greetingRepository(): GreetingRepository {
+  val host = environment.config.property("database.host").getString()
+  val port = environment.config.property("database.port").getString()
+  val name = environment.config.property("database.name").getString()
+  val username = environment.config.property("database.username").getString()
+  val password = environment.config.property("database.password").getString()
+  val connection = DriverManager.getConnection("jdbc:postgresql://$host:$port/$name", username, password)
+  return GreetingJdbcRepository(connection)
 }

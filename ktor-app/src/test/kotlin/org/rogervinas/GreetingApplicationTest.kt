@@ -1,9 +1,9 @@
 package org.rogervinas
 
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
+import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode.Companion.OK
-import io.ktor.server.testing.*
+import io.ktor.server.testing.testApplication
 import org.assertj.core.api.Assertions.assertThat
 import org.testcontainers.containers.DockerComposeContainer
 import org.testcontainers.containers.wait.strategy.Wait.forLogMessage

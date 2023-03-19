@@ -1,16 +1,14 @@
 package org.rogervinas
 
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
+import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode.Companion.OK
-import io.ktor.server.config.*
-import io.ktor.server.testing.*
+import io.ktor.server.config.MapApplicationConfig
+import io.ktor.server.testing.testApplication
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
 import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class GreetingControllerTest {
 

@@ -4,8 +4,15 @@ https://start.ktor.io
 or ktor intellij plugin
 configuration in code, yaml, hocon file
 
+Configuration in YAML file
+Add sample code
+
+Add plugins postgres
+
 vault no puc afegir
 postgres puc afegir
+
+
 
 https://github.com/karlazzampersonal/ktor-vault
 

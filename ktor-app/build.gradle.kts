@@ -26,15 +26,12 @@ repositories {
 
 dependencies {
   implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
+  implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
   implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
   implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
-
   implementation("io.ktor:ktor-server-config-yaml")
 
   implementation("org.postgresql:postgresql:$postgres_version")
-  implementation("com.h2database:h2:$h2_version")
-
-  implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
 
   implementation("ch.qos.logback:logback-classic:$logback_version")
 
@@ -42,7 +39,6 @@ dependencies {
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version")
 
   testImplementation("io.mockk:mockk:1.13.4")
-
   testImplementation("org.testcontainers:junit-jupiter:1.17.6")
   testImplementation("org.assertj:assertj-core:3.24.0")
 }

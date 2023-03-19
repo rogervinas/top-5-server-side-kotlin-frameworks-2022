@@ -1,8 +1,7 @@
 package org.rogervinas
 
-import io.ktor.server.application.*
-import io.ktor.server.netty.*
-import java.sql.DriverManager
+import io.ktor.server.application.Application
+import io.ktor.server.netty.EngineMain
 
 /*
 fun main() {
@@ -16,14 +15,7 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-  val host = environment.config.property("database.host").getString()
-  val port = environment.config.property("database.port").getString()
-  val name = environment.config.property("database.name").getString()
-  val username = environment.config.property("database.username").getString()
-  val password = environment.config.property("database.password").getString()
-  val connection = DriverManager.getConnection("jdbc:postgresql://$host:$port/$name", username, password)
-  val repository = GreetingJdbcRepository(connection)
-
+  val repository = greetingRepository()
   greetingController(
         environment.config.property("greeting.name").getString(),
         environment.config.propertyOrNull("greeting.secret")?.getString() ?: "unknown",
