@@ -39,7 +39,14 @@ dependencies {
 
   testImplementation("io.mockk:mockk:1.13.4")
   testImplementation("org.testcontainers:junit-jupiter:1.17.6")
-  testImplementation("org.assertj:assertj-core:3.24.0")
+  testImplementation("org.assertj:assertj-core:3.24.2")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+  kotlinOptions {
+    freeCompilerArgs = listOf("-Xjsr305=strict")
+    jvmTarget = "17"
+  }
 }
 
 tasks.withType<Test> {
