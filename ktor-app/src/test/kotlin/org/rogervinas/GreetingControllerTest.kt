@@ -12,7 +12,9 @@ import kotlin.test.Test
 
 class GreetingControllerTest {
 
-  private val repository = mockk<GreetingRepository>()
+  private val repository = mockk<GreetingRepository>().apply {
+    every { getGreeting() } returns "Hello"
+  }
 
   @Test
   fun `should say hello`() = testApplication {
@@ -20,7 +22,6 @@ class GreetingControllerTest {
       config = MapApplicationConfig()
     }
     application {
-      every { repository.getGreeting() } returns "Hello"
       greetingController("Bitelchus", "apple", repository)
     }
     client.get("/hello").apply {

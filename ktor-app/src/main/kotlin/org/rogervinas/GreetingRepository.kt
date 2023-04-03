@@ -44,7 +44,7 @@ class GreetingJdbcRepository(private val connection: Connection) : GreetingRepos
   }
 }
 
-public fun Application.greetingRepository(): GreetingRepository {
+fun Application.greetingRepository(): GreetingRepository {
   val host = environment.config.property("database.host").getString()
   val port = environment.config.property("database.port").getString()
   val name = environment.config.property("database.name").getString()
