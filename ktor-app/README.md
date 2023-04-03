@@ -1,19 +1,22 @@
 # Ktor
 
-To begin with you can follow the [xxx](xxx) guide.
+To begin with you can follow the [Creating Ktor applications](https://ktor.io/create/) guide.
 
-To create a Ktor project we have two alternatives:
-* Use [IntelliJ Idea plugin]() 
-* Use [](https://start.ktor.io) web interface (similar to [Spring Initializr](https://start.spring.io/) for **Spring Boot**)
+To create a Ktor project we have three alternatives:
+* Use [IntelliJ Idea plugin](https://ktor.io/docs/intellij-idea.html) 
+* Use [start.ktor.io](https://start.ktor.io) web interface (similar to [Spring Initializr](https://start.spring.io/) for **Spring Boot**)
+* Create a project [manually](https://ktor.io/docs/server-dependencies.html)
 
---You can also check [all the other guides](https://guides.micronaut.io/latest/index.html) as well as [the user documentation](https://docs.micronaut.io/latest/guide/).
+For example this project has been created using [start.ktor.io](https://start.ktor.io) and these options:
+* Adjust project settings:
+  * Build system = Gradle Kotlin
+  * Engine = Netty
+  * Configuration in = YAML file
+  * Add sample code ✓
+* Add plugins:
+  * Postgres ✓
 
-Crear amb start:
-Configuration in YAML file
-Add sample code
-Add plugins postgres
-
-Just run it once to check everything is ok:
+Once created you can run it to check everything is ok:
 ```shell
 ./gradlew run
 ```
@@ -28,14 +31,29 @@ Hello World!
 
 ### YAML configuration
 
-As we've chosen configuration by YAML all is set si no necessitem afegir dep `io.ktor:ktor-server-config-yaml` i cridar a:
-```kotlin
-fun main(args: Array<String>) {
-  EngineMain.main(args)
-}
+As we generated the project choosing "Configuration in YAML file" all is set, and we can add our custom property in `application.yaml`:
+```yaml
+greeting:
+  name: "Bitelchus"
 ```
 
-i els moduls s'han d'afegir per configuracio no per codi:
+If we had chosen "Configuration in Code" we would need to make these changes:
+
+1) Add `io.ktor:ktor-server-config-yaml` dependency.
+2) Change Application's main method from:
+  ```kotlin
+  fun main() {
+    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = GreetingApplication::module)
+      .start(wait = true)
+  }
+  ```
+  To:
+  ```kotlin
+  fun main() {
+    EngineMain.main(args)
+  }
+  ```
+3) Add Application's port and modules in `application.yaml`:
 ```yaml
 ktor:
   deployment:
@@ -44,22 +62,6 @@ ktor:
     modules:
       - org.rogervinas.GreetingApplicationKt.module
 ```
-
-We can add to `application.yaml` our first configuration property:
-```yaml
-greeting:
-  name: "Bitelchus"
-```
-
-Si usem configuration per codi llavors no es llegeix el yaml i en el main:
-```kotlin
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
-        .start(wait = true)
-}
-```
-
-Environments o profiles??
 
 ### GreetingRepository
 
@@ -106,19 +108,14 @@ class GreetingJdbcRepository(private val connection: Connection) : GreetingRepos
   }
 }
 ```
+* As Ktor does not offer any specific database support:
+  * We just use plain `java.sql` code (instead of any database connection library)
+  * We just create the `greetings` table if it does not exist (instead of any database migration library like [flyway](https://flywaydb.org/))
+* Adding Postgres plugin when creating the project should add two dependencies:
+  * `org.postgresql:postgresql` for production.
+  * `com.h2database:h2` for testing, that we can remove it as we will use [Testcontainers](https://www.testcontainers.org/)
 
-* No usem cap migration pk Ktor no incorpora, pero podriem usar flyway o similar standalone.
-* Per simplificar tambe usem directament java.sql, pero podriem usar qualsevol third-party.
-
-Com que hem afegit la plugin postgres ja tenim les deps:
-
-```kotlin
-implementation("org.postgresql:postgresql:$postgres_version")
-```
-
-Eliminem la part de h2 pk ho farem duna altra manera, 
-
-Creem una extension per crear el repo:
+Following Ktor conventions we create an Application extension to create the repository:
 ```kotlin
 fun Application.greetingRepository(): GreetingRepository {
   val host = environment.config.property("database.host").getString()
@@ -131,7 +128,7 @@ fun Application.greetingRepository(): GreetingRepository {
 }
 ```
 
-amb aquesta config a application.yaml:
+And we add these properties in `application.yaml`:
 ```yaml
 database:
   host: "$DB_HOST:localhost"
@@ -141,11 +138,11 @@ database:
   password: "mypassword"
 ```
 
-En el cas del host pren el valor de la variable d'entorn DB_HOST per bla bla bla
+Note that we allow to override `database.host` with the value of `DB_HOST` environment variable, or "localhost" if not set. This is only needed when running locally using docker compose.
 
 ### GreetingController
 
-We will create a `GreetingController` to serve the `/hello` endpoint:
+We create a `GreetingController` to serve the `/hello` endpoint:
 ```kotlin
 fun Application.greetingController(
   name: String,
@@ -162,11 +159,29 @@ fun Application.greetingController(
 }
 ```
 
-Mes info a ...
+Complete documentation at [Routing](https://ktor.io/docs/routing-in-ktor.html) guide.
 
 ### Vault configuration
 
-https://github.com/karlazzampersonal/ktor-vault
+Ktor does not support Vault. Just for this sample we will use [karlazzampersonal/ktor-vault](https://github.com/karlazzampersonal/ktor-vault) plugin.
+
+### Application
+
+As defined in `application.yaml` the only module loaded will be `org.rogervinas.GreetingApplicationKt.module` so we need to implement it:
+```kotlin
+// File GreetingApplication.kt
+
+fun Application.module() {
+  val repository = greetingRepository()
+  greetingController(
+    environment.config.property("greeting.name").getString(),
+    environment.config.propertyOrNull("greeting.secret")?.getString() ?: "unknown",
+    repository
+  )
+}
+```
+* It will create a `GreetingRepository` ...
+* ... and a `GreetingController` injecting the repository created in the previous step.
 
 ## Testing the endpoint
 
@@ -193,10 +208,9 @@ class GreetingControllerTest {
     }
 }
 ```
-
-* We use testApplication with an empty configuration to just test the controller
+* We use testApplication DSL with an empty configuration to just test the controller.
 * We mock the repository with `mockk`.
-* More https://ktor.io/docs/testing.htm
+* Complete documentation at [Testing](https://ktor.io/docs/testing.htm) guide. 
 
 ## Testing the application
 
@@ -223,11 +237,9 @@ class GreetingApplicationTest {
   }
 }
 ```
-
-* Testcontainers to test with a real postgres and vault.
-* El sample usa h2 pero millor un postgres
+* We use [Testcontainers](https://www.testcontainers.org/) to test with **Postgres** and **Vault** containers.
 * We use pattern matching to check the greeting, as it is random.
-* NO ENCARA As this test uses **Vault**, the secret should be `watermelon`.
+* As this test uses **Vault**, the secret should be `watermelon`.
 
 ## Test
 
@@ -236,8 +248,6 @@ class GreetingApplicationTest {
 ```
 
 ## Run
-
-!! LA MAIN CLASS s-especifica al build.gradle.kts
 
 ```shell
 # Start Vault and Database
@@ -253,6 +263,13 @@ curl http://localhost:8080/hello
 
 # Stop all containers
 docker compose down
+```
+
+Note that main class is specified in `build.gradle.kts`:
+```kotlin
+application {
+  mainClass.set("org.rogervinas.GreetingApplicationKt")
+}
 ```
 
 ## Build a fatjar and run it
@@ -276,28 +293,41 @@ curl http://localhost:8080/hello
 docker compose down
 ```
 
-## Build a docker image and run it
+More documentation at [Creating fat JARs](https://ktor.io/docs/fatjar.html) guide.
 
-Configure a base docker image???
+## Build a docker image and run it
 
 Then:
 ```shell
 # Build docker image
-./gradlew buildImage
+./gradlew publishImageToLocalRegistry
 
 # Start Vault and Database
 docker compose up -d vault vault-cli db
 
 # Start Application
-docker compose --profile micronaut up -d
+docker compose --profile ktor up -d
 
 # Make requests
 curl http://localhost:8080/hello
 
 # Stop all containers
-docker compose --profile micronaut down
+docker compose --profile ktor down
 docker compose down
 ```
+
+We can configure "Image name", "Image tag" and "JRE version" in `build.gradle.kts`:
+```kotlin
+ktor {
+  docker {
+    localImageName.set("${project.name}")
+    imageTag.set("${project.version}")
+    jreVersion.set(io.ktor.plugin.features.JreVersion.JRE_17)
+  }
+}
+```
+
+More documentation at [Docker](https://ktor.io/docs/docker.html) guide.
 
 ## Build a native executable and run it
 

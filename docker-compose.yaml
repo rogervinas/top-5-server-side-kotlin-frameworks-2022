@@ -31,7 +31,7 @@ services:
         until vault kv put -mount=secret myapp greeting.secret=watermelon; do sleep 1; done
 
   quarkus-app:
-    image: quarkus-app
+    image: quarkus-app:latest
     profiles:
       - quarkus
     depends_on:
@@ -65,6 +65,20 @@ services:
       - vault
     environment:
       MICRONAUT_ENVIRONMENTS: "prod"
+      DB_HOST: "db"
+      VAULT_HOST: "vault"
+    ports:
+      - "8080:8080"
+
+
+  ktor-app:
+    image: ktor-app:0.0.1
+    profiles:
+      - ktor
+    depends_on:
+      - db
+      - vault
+    environment:
       DB_HOST: "db"
       VAULT_HOST: "vault"
     ports:
