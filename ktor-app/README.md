@@ -43,7 +43,7 @@ If we had chosen "Configuration in Code" we would need to make these changes:
 2) Change Application's main method from:
   ```kotlin
   fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = GreetingApplication::module)
+    embeddedServer(factory = Netty, port = 8080, host = "0.0.0.0", module = Application::module)
       .start(wait = true)
   }
   ```
@@ -77,14 +77,22 @@ class GreetingJdbcRepository(private val connection: Connection) : GreetingRepos
     createGreetingsTable() 
   }
 
-  override fun getGreeting(): String = connection.createStatement().use { statement ->
-    statement.executeQuery("SELECT greeting FROM greetings ORDER BY random() LIMIT 1").use { resultSet ->
-      return if (resultSet.next()) {
-        resultSet.getString("greeting")
-      } else {
-        throw Exception("No greetings found!")
-      }
-    }
+  override fun getGreeting(): String = connection
+    .createStatement()
+    .use { statement ->
+      statement
+        .executeQuery("""
+          SELECT greeting FROM greetings
+          ORDER BY random() LIMIT 1
+          """.trimIndent()
+        )
+        .use { resultSet ->
+          return if (resultSet.next()) {
+            resultSet.getString("greeting")
+          } else {
+            throw Exception("No greetings found!")
+          }
+        }
   }
 
   private fun createGreetingsTable() {
