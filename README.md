@@ -34,7 +34,7 @@ Please find below a step-by-step guide for each one of the top 5 frameworks. Her
 * 🥇 [Spring Boot App](springboot-app)
 * 🥈 [Quarkus App](quarkus-app)
 * 🥉 [Micronaut App](micronaut-app)
-* 🏅 Ktor App - coming soon!
+* 🏅 [Ktor App](ktor-app)
 * 🏅 http4k App - coming soon!
 
 Happy coding! 💙
