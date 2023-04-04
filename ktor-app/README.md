@@ -279,6 +279,7 @@ class GreetingApplicationTest {
 * We use [Testcontainers](https://www.testcontainers.org/) to test with **Postgres** and **Vault** containers.
 * We use pattern matching to check the greeting, as it is random.
 * As this test uses **Vault**, the secret should be `watermelon`.
+* Complete documentation at [Testing](https://ktor.io/docs/testing.htm) guide.
 
 ## Test
 
