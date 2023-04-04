@@ -22,6 +22,7 @@ class GreetingApplicationTest {
           .withLocalCompose(true)
           .waitingFor("db", forLogMessage(".*database system is ready to accept connections.*", 1))
           .waitingFor("vault", forLogMessage(".*Development mode.*", 1))
+          .waitingFor("vault-cli", forLogMessage(".*created_time.*", 1))
   }
 
   @Test
