@@ -1,19 +1,17 @@
 package org.rogervinas
 
+import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpStatusCode.Companion.OK
+import io.ktor.server.testing.testApplication
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
-import org.springframework.test.web.reactive.server.WebTestClient
-import org.springframework.test.web.reactive.server.expectBody
 import org.testcontainers.containers.DockerComposeContainer
 import org.testcontainers.containers.wait.strategy.Wait.forLogMessage
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import java.io.File
+import kotlin.test.Test
 
-@SpringBootTest(webEnvironment = RANDOM_PORT)
 @Testcontainers
 class GreetingApplicationTest {
 
@@ -27,17 +25,11 @@ class GreetingApplicationTest {
           .waitingFor("vault-cli", forLogMessage(".*created_time.*", 1))
   }
 
-  @Autowired
-  private lateinit var client: WebTestClient
-
   @Test
-  fun `should say hello`() {
-    client
-          .get().uri("/hello")
-          .exchange()
-          .expectStatus().isOk
-          .expectBody<String>().consumeWith {
-            assertThat(it.responseBody!!).matches(".+ my name is Bitelchus and my secret is watermelon")
-          }
+  fun `should say hello`() = testApplication {
+    client.get("/hello").apply {
+      assertThat(status).isEqualTo(OK)
+      assertThat(bodyAsText()).matches(".+ my name is Bitelchus and my secret is watermelon")
+    }
   }
 }

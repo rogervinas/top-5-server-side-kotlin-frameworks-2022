@@ -1,0 +1,23 @@
+ktor:
+  deployment:
+    port: 8080
+  application:
+    modules:
+      - org.rogervinas.GreetingApplicationKt.module
+
+database:
+  host: "$DB_HOST:localhost"
+  port: 5432
+  name: "mydb"
+  username: "myuser"
+  password: "mypassword"
+
+vault:
+  protocol: "http"
+  host: "$VAULT_HOST:localhost"
+  port: 8200
+  token: "mytoken"
+  path: "secret/myapp"
+
+greeting:
+  name: "Bitelchus"

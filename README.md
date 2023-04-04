@@ -1,6 +1,7 @@
 [![SpringBoot](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/springboot.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/springboot.yml)
 [![Quarkus](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/quarkus.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/quarkus.yml)
 [![Micronaut](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/micronaut.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/micronaut.yml)
+[![Ktor](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml)
 
 # Top 5 Server-Side Frameworks for Kotlin in 2022
 
@@ -33,7 +34,7 @@ Please find below a step-by-step guide for each one of the top 5 frameworks. Her
 * 🥇 [Spring Boot App](springboot-app)
 * 🥈 [Quarkus App](quarkus-app)
 * 🥉 [Micronaut App](micronaut-app)
-* 🏅 Ktor App - coming soon!
+* 🏅 [Ktor App](ktor-app)
 * 🏅 http4k App - coming soon!
 
 Happy coding! 💙
