@@ -12,5 +12,12 @@ database:
   username: "myuser"
   password: "mypassword"
 
+vault:
+  protocol: "http"
+  host: "$VAULT_HOST:localhost"
+  port: 8200
+  token: "mytoken"
+  path: "secret/myapp"
+
 greeting:
   name: "Bitelchus"

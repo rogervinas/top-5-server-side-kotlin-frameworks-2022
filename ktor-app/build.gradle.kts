@@ -40,6 +40,8 @@ dependencies {
 
   implementation("org.postgresql:postgresql:$postgres_version")
 
+  implementation("com.bettercloud:vault-java-driver:5.1.0")
+
   implementation("ch.qos.logback:logback-classic:$logback_version")
 
   testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")

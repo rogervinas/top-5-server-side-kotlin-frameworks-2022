@@ -28,7 +28,7 @@ class GreetingApplicationTest {
   fun `should say hello`() = testApplication {
     client.get("/hello").apply {
       assertThat(status).isEqualTo(OK)
-      assertThat(bodyAsText()).matches(".+ my name is Bitelchus and my secret is unknown")
+      assertThat(bodyAsText()).matches(".+ my name is Bitelchus and my secret is watermelon")
     }
   }
 }

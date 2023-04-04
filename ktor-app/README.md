@@ -2,7 +2,7 @@
 
 To begin with you can follow the [Creating Ktor applications](https://ktor.io/create/) guide.
 
-To create a Ktor project we have three alternatives:
+To create a **Ktor** project we have three alternatives:
 * Use [IntelliJ Idea plugin](https://ktor.io/docs/intellij-idea.html) 
 * Use [start.ktor.io](https://start.ktor.io) web interface (similar to [Spring Initializr](https://start.spring.io/) for **Spring Boot**)
 * Create a project [manually](https://ktor.io/docs/server-dependencies.html)
@@ -108,14 +108,14 @@ class GreetingJdbcRepository(private val connection: Connection) : GreetingRepos
   }
 }
 ```
-* As Ktor does not offer any specific database support:
+* As **Ktor** does not offer any specific database support:
   * We just use plain `java.sql` code (instead of any database connection library)
   * We just create the `greetings` table if it does not exist (instead of any database migration library like [flyway](https://flywaydb.org/))
 * Adding Postgres plugin when creating the project should add two dependencies:
   * `org.postgresql:postgresql` for production.
   * `com.h2database:h2` for testing, that we can remove it as we will use [Testcontainers](https://www.testcontainers.org/)
 
-Following Ktor conventions we create an Application extension to create the repository:
+Following **Ktor** conventions we create an Application extension to create the repository:
 ```kotlin
 fun Application.greetingRepository(): GreetingRepository {
   val host = environment.config.property("database.host").getString()
@@ -163,7 +163,37 @@ Complete documentation at [Routing](https://ktor.io/docs/routing-in-ktor.html) g
 
 ### Vault configuration
 
-Ktor does not support Vault. Just for this sample we will use [karlazzampersonal/ktor-vault](https://github.com/karlazzampersonal/ktor-vault) plugin.
+**Ktor** does not support **Vault**, so we will simply use [BetterCloud/vault-java-driver](https://github.com/BetterCloud/vault-java-driver):
+```kotlin
+private fun Application.vaultData(): Map<String, String> {
+  val vaultProtocol = environment.config.property("vault.protocol").getString()
+  val vaultHost = environment.config.property("vault.host").getString()
+  val vaultPort = environment.config.property("vault.port").getString()
+  val vaultToken = environment.config.property("vault.token").getString()
+  val vaultPath = environment.config.property("vault.path").getString()
+  val vaultConfig = VaultConfig()
+    .address("$vaultProtocol://$vaultHost:$vaultPort")
+    .token(vaultToken)
+    .build()
+  return Vault(vaultConfig).logical().read(vaultPath).data.toMap()
+}
+```
+
+With these properties in `application.yaml`:
+```yaml
+vault:
+  protocol: "http"
+  host: "$VAULT_HOST:localhost"
+  port: 8200
+  token: "mytoken"
+  path: "secret/myapp"
+```
+
+Note that we allow to override `vault.host` with the value of `VAULT_HOST` environment variable, or "localhost" if not set. This is only needed when running locally using docker compose, same as with `database.host`.
+
+As an alternative, we could also use [karlazzampersonal/ktor-vault](https://github.com/karlazzampersonal/ktor-vault) plugin. 
+
+Finally, check next section to see how to get `greeting.secret` from **Vault**.
 
 ### Application
 
@@ -172,10 +202,11 @@ As defined in `application.yaml` the only module loaded will be `org.rogervinas.
 // File GreetingApplication.kt
 
 fun Application.module() {
+  val vaultData = vaultData() 
   val repository = greetingRepository()
   greetingController(
     environment.config.property("greeting.name").getString(),
-    environment.config.propertyOrNull("greeting.secret")?.getString() ?: "unknown",
+    vaultData["greeting.secret"] ?: "unknown",
     repository
   )
 }
@@ -232,7 +263,7 @@ class GreetingApplicationTest {
   fun `should say hello`() = testApplication {
     client.get("/hello").apply {
       assertThat(status).isEqualTo(OK)
-      assertThat(bodyAsText()).matches(".+ my name is Bitelchus and my secret is unknown")
+      assertThat(bodyAsText()).matches(".+ my name is Bitelchus and my secret is watermelon")
     }
   }
 }
@@ -329,95 +360,4 @@ ktor {
 
 More documentation at [Docker](https://ktor.io/docs/docker.html) guide.
 
-## Build a native executable and run it
-
-Following [Generate a Micronaut Application Native Executable with GraalVM](https://guides.micronaut.io/latest/creating-your-first-micronaut-app-gradle-kotlin.html#generate-a-micronaut-application-native-executable-with-graalvm):
-```shell
-# Install GraalVM via sdkman
-sdk install java 22.3.r19-grl
-sdk default java 22.3.r19-grl
-export GRAALVM_HOME=$JAVA_HOME
-
-# Install the native-image
-gu install native-image
-
-# Build native executable
-./gradlew nativeCompile
-
-# Start Vault and Database
-docker compose up -d vault vault-cli db
-
-# Start Application using native executable
-MICRONAUT_ENVIRONMENTS=prod ./build/native/nativeCompile/micronaut-app 
-
-# Make requests
-curl http://localhost:8080/hello
-
-# Stop Application with control-c
-
-# Stop all containers
-docker compose down
-```
-
 That's it! Happy coding! 💙
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Ktor
-
-
-or ktor intellij plugin
-configuration in code, yaml, hocon file
-
-
-vault no puc afegir
-postgres puc afegir
-
-
-
-
-
-l
-
-https://ktor.io/docs/configuration-file.html#read-configuration-in-code
-
-ktor + flyway es third party o sigui que res
-
-
-## Run
-
-```shell
-# Start Vault and Database
-docker compose up -d vault vault-cli db
-
-# Start Application
-./gradlew run
-
-# Make requests
-curl http://localhost:8080/hello
-
-# Stop Application with control-c
-
-# Stop all containers
-docker compose down
-```
-
-
-pas a junit5
