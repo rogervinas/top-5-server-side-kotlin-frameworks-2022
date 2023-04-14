@@ -151,7 +151,7 @@ Next section will show how to use this `Environment.withVault()` extension.
 
 ### Application
 
-There is no particular convention in **Http4k** so we will make our own in `GreetingApplication.kt`:
+There is no particular convention in **Http4k** so we will make our own:
 
 We will create a `GreetingRepository`:
 ```kotlin
