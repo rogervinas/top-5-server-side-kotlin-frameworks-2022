@@ -1,8 +1,11 @@
 package org.rogervinas
 
+import com.bettercloud.vault.Vault
+import com.bettercloud.vault.VaultConfig
 import org.http4k.cloudnative.env.Environment
 import org.http4k.cloudnative.env.Environment.Companion.ENV
 import org.http4k.cloudnative.env.EnvironmentKey
+import org.http4k.cloudnative.env.MapEnvironment
 import org.http4k.core.HttpHandler
 import org.http4k.core.then
 import org.http4k.filter.DebuggingFilters.PrintRequest
@@ -21,9 +24,31 @@ class GreetingApplication {
     const val DATABASE_NAME = "DATABASE_NAME"
     const val DATABASE_USERNAME = "DATABASE_USERNAME"
     const val DATABASE_PASSWORD = "DATABASE_PASSWORD"
+
     const val GREETING_NAME = "GREETING_NAME"
     const val GREETING_SECRET = "GREETING_SECRET"
+
+    const val VAULT_PROTOCOL = "VAULT_PROTOCOL"
+    const val VAULT_HOST = "VAULT_HOST"
+    const val VAULT_PORT = "VAULT_PORT"
+    const val VAULT_TOKEN = "VAULT_TOKEN"
+    const val VAULT_PATH = "VAULT_PATH"
+
     const val SERVER_PORT = "SERVER_PORT"
+
+    private fun Environment.withVault(): Environment {
+      val vaultProtocol = EnvironmentKey.string().defaulted(VAULT_PROTOCOL, "http")(this)
+      val vaultHost = EnvironmentKey.string().defaulted(VAULT_HOST, "localhost")(this)
+      val vaultPort = EnvironmentKey.int().defaulted(VAULT_PORT, 8200)(this)
+      val vaultToken = EnvironmentKey.string().defaulted(VAULT_TOKEN, "mytoken")(this)
+      val vaultPath = EnvironmentKey.string().defaulted(VAULT_PATH, "secret/myapp")(this)
+      val vaultConfig = VaultConfig()
+        .address("$vaultProtocol://$vaultHost:$vaultPort")
+        .token(vaultToken)
+        .build()
+      val vaultData = Vault(vaultConfig).logical().read(vaultPath).data
+      return MapEnvironment.from(vaultData.toProperties()).overrides(this)
+    }
 
     private fun greetingRepository(env: Environment): GreetingRepository {
       val host = EnvironmentKey.string().defaulted(DATABASE_HOST, "localhost")(env)
@@ -42,9 +67,10 @@ class GreetingApplication {
     }
 
     fun greetingApplication(env: Environment): Http4kServer {
-      val port = EnvironmentKey.int().defaulted(SERVER_PORT, 8080)(env)
-      val repository = greetingRepository(env)
-      val controller = greetingController(env, repository)
+      val envWithVault = env.withVault()
+      val port = EnvironmentKey.int().defaulted(SERVER_PORT, 8080)(envWithVault)
+      val repository = greetingRepository(envWithVault)
+      val controller = greetingController(envWithVault, repository)
       return PrintRequest().then(controller).asServer(Undertow(port))
     }
   }
