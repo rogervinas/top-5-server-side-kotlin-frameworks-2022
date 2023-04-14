@@ -38,6 +38,13 @@ targetCompatibility = JavaVersion.VERSION_11
 
 test {
     useJUnitPlatform()
+    testLogging {
+      events(
+            org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED,
+            org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+      )
+    }
 }
 
 dependencies {
@@ -45,9 +52,16 @@ dependencies {
     implementation "org.http4k:http4k-core:${http4kVersion}"
     implementation "org.http4k:http4k-format-jackson:${http4kVersion}"
     implementation "org.http4k:http4k-server-undertow:${http4kVersion}"
+    implementation "org.http4k:http4k-cloudnative:${http4kVersion}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+
+    implementation "org.postgresql:postgresql:42.5.1"
+
     testImplementation "org.http4k:http4k-testing-approval:${http4kVersion}"
     testImplementation "org.http4k:http4k-testing-hamkrest:${http4kVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+
+    testImplementation "io.mockk:mockk:1.13.4"
+    testImplementation "org.testcontainers:junit-jupiter:1.17.6"
 }
