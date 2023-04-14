@@ -123,14 +123,14 @@ class GreetingJdbcRepository(private val connection: Connection) : GreetingRepos
   * `org.postgresql:postgresql` for production.
   * `com.h2database:h2` for testing, that we can remove it as we will use [Testcontainers](https://www.testcontainers.org/)
 
-Following **Ktor** conventions we create an Application extension to create the repository:
+We create this function to create the repository:
 ```kotlin
-fun Application.greetingRepository(): GreetingRepository {
-  val host = environment.config.property("database.host").getString()
-  val port = environment.config.property("database.port").getString()
-  val name = environment.config.property("database.name").getString()
-  val username = environment.config.property("database.username").getString()
-  val password = environment.config.property("database.password").getString()
+private fun greetingRepository(config: ApplicationConfig): GreetingRepository {
+  val host = config.property("database.host").getString()
+  val port = config.property("database.port").getString()
+  val name = config.property("database.name").getString()
+  val username = config.property("database.username").getString()
+  val password = config.property("database.password").getString()
   val connection = DriverManager.getConnection("jdbc:postgresql://$host:$port/$name", username, password)
   return GreetingJdbcRepository(connection)
 }
@@ -167,23 +167,26 @@ fun Application.greetingController(
 }
 ```
 
+We just name it `GreetingController` to follow the same convention as the other frameworks in this series, mainly **SpringBoot**.
+
 Complete documentation at [Routing](https://ktor.io/docs/routing-in-ktor.html) guide.
 
 ### Vault configuration
 
 **Ktor** does not support **Vault**, so we will simply use [BetterCloud/vault-java-driver](https://github.com/BetterCloud/vault-java-driver):
 ```kotlin
-private fun Application.vaultData(): Map<String, String> {
-  val vaultProtocol = environment.config.property("vault.protocol").getString()
-  val vaultHost = environment.config.property("vault.host").getString()
-  val vaultPort = environment.config.property("vault.port").getString()
-  val vaultToken = environment.config.property("vault.token").getString()
-  val vaultPath = environment.config.property("vault.path").getString()
+private fun ApplicationConfig.withVault(): ApplicationConfig {
+  val vaultProtocol = this.property("vault.protocol").getString()
+  val vaultHost = this.property("vault.host").getString()
+  val vaultPort = this.property("vault.port").getString()
+  val vaultToken = this.property("vault.token").getString()
+  val vaultPath = this.property("vault.path").getString()
   val vaultConfig = VaultConfig()
     .address("$vaultProtocol://$vaultHost:$vaultPort")
     .token(vaultToken)
     .build()
-  return Vault(vaultConfig).logical().read(vaultPath).data.toMap()
+  val vaultData = Vault(vaultConfig).logical().read(vaultPath).data
+  return this.mergeWith(MapApplicationConfig(vaultData.entries.map { Pair(it.key, it.value) }))
 }
 ```
 
@@ -201,26 +204,24 @@ Note that we allow to override `vault.host` with the value of `VAULT_HOST` envir
 
 As an alternative, we could also use [karlazzampersonal/ktor-vault](https://github.com/karlazzampersonal/ktor-vault) plugin. 
 
-Finally, check next section to see how to get `greeting.secret` from **Vault**.
+Next section will show how to use this `ApplicationConfig.withVault()` extension.
 
 ### Application
 
 As defined in `application.yaml` the only module loaded will be `org.rogervinas.GreetingApplicationKt.module` so we need to implement it:
 ```kotlin
-// File GreetingApplication.kt
-
 fun Application.module() {
-  val vaultData = vaultData() 
-  val repository = greetingRepository()
+  val environmentConfig = environment.config.withVault()
+  val repository = greetingRepository(environmentConfig)
   greetingController(
-    environment.config.property("greeting.name").getString(),
-    vaultData["greeting.secret"] ?: "unknown",
+    environmentConfig.property("greeting.name").getString(),
+    environmentConfig.propertyOrNull("greeting.secret")?.getString() ?: "unknown",
     repository
   )
 }
 ```
-* It will create a `GreetingRepository` ...
-* ... and a `GreetingController` injecting the repository created in the previous step.
+* It will merge default `ApplicationConfig` and override it with **Vault** values.
+* It will create a `GreetingRepository` and a `GreetingController`.
 
 ## Testing the endpoint
 
