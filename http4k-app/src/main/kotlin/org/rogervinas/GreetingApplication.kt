@@ -19,11 +19,11 @@ import java.sql.DriverManager
 
 class GreetingApplication {
   companion object {
-    const val DATABASE_HOST = "DATABASE_HOST"
-    const val DATABASE_PORT = "DATABASE_PORT"
-    const val DATABASE_NAME = "DATABASE_NAME"
-    const val DATABASE_USERNAME = "DATABASE_USERNAME"
-    const val DATABASE_PASSWORD = "DATABASE_PASSWORD"
+    const val DB_HOST = "DB_HOST"
+    const val DB_PORT = "DB_PORT"
+    const val DB_NAME = "DB_NAME"
+    const val DB_USERNAME = "DB_USERNAME"
+    const val DB_PASSWORD = "DB_PASSWORD"
 
     const val GREETING_NAME = "GREETING_NAME"
     const val GREETING_SECRET = "GREETING_SECRET"
@@ -51,11 +51,11 @@ class GreetingApplication {
     }
 
     private fun greetingRepository(env: Environment): GreetingRepository {
-      val host = EnvironmentKey.string().defaulted(DATABASE_HOST, "localhost")(env)
-      val port = EnvironmentKey.int().defaulted(DATABASE_PORT, 5432)(env)
-      val name = EnvironmentKey.string().defaulted(DATABASE_NAME, "mydb")(env)
-      val username = EnvironmentKey.string().defaulted(DATABASE_USERNAME, "myuser")(env)
-      val password = EnvironmentKey.string().defaulted(DATABASE_PASSWORD, "mypassword")(env)
+      val host = EnvironmentKey.string().defaulted(DB_HOST, "localhost")(env)
+      val port = EnvironmentKey.int().defaulted(DB_PORT, 5432)(env)
+      val name = EnvironmentKey.string().defaulted(DB_NAME, "mydb")(env)
+      val username = EnvironmentKey.string().defaulted(DB_USERNAME, "myuser")(env)
+      val password = EnvironmentKey.string().defaulted(DB_PASSWORD, "mypassword")(env)
       val connection = DriverManager.getConnection("jdbc:postgresql://$host:$port/$name", username, password)
       return GreetingJdbcRepository(connection)
     }

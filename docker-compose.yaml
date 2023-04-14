@@ -70,11 +70,23 @@ services:
     ports:
       - "8080:8080"
 
-
   ktor-app:
     image: ktor-app:0.0.1
     profiles:
       - ktor
+    depends_on:
+      - db
+      - vault
+    environment:
+      DB_HOST: "db"
+      VAULT_HOST: "vault"
+    ports:
+      - "8080:8080"
+
+  http4k-app:
+    image: http4k-app:latest
+    profiles:
+      - http4k
     depends_on:
       - db
       - vault

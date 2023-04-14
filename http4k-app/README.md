@@ -156,11 +156,11 @@ There is no particular convention in **Http4k** so we will make our own in `Gree
 We will create a `GreetingRepository`:
 ```kotlin
 private fun greetingRepository(env: Environment): GreetingRepository {
-  val host = EnvironmentKey.string().defaulted(DATABASE_HOST, "localhost")(env)
-  val port = EnvironmentKey.int().defaulted(DATABASE_PORT, 5432)(env)
-  val name = EnvironmentKey.string().defaulted(DATABASE_NAME, "mydb")(env)
-  val username = EnvironmentKey.string().defaulted(DATABASE_USERNAME, "myuser")(env)
-  val password = EnvironmentKey.string().defaulted(DATABASE_PASSWORD, "mypassword")(env)
+  val host = EnvironmentKey.string().defaulted(DB_HOST, "localhost")(env)
+  val port = EnvironmentKey.int().defaulted(DB_PORT, 5432)(env)
+  val name = EnvironmentKey.string().defaulted(DB_NAME, "mydb")(env)
+  val username = EnvironmentKey.string().defaulted(DB_USERNAME, "myuser")(env)
+  val password = EnvironmentKey.string().defaulted(DB_PASSWORD, "mypassword")(env)
   val connection = DriverManager.getConnection("jdbc:postgresql://$host:$port/$name", username, password)
   return GreetingJdbcRepository(connection)
 }
@@ -317,6 +317,41 @@ curl http://localhost:8080/hello
 # Stop Application with control-c
 
 # Stop all containers
+docker compose down
+```
+
+## Build a docker image and run it
+
+**Http4k** does not support creating docker images out of the box, but for example we can create this `Dockerfile`:
+```dockerfile
+FROM registry.access.redhat.com/ubi8/openjdk-11:1.15
+
+COPY build/libs/http4k-app.jar /app/
+
+EXPOSE 8080
+
+ENV JAVA_APP_JAR="/app/http4k-app.jar"
+```
+
+And then:
+```shell
+# Build fatjar
+./gradlew shadowJar
+
+# Build docker image and publish it to local registry
+docker build . -t http4k-app
+
+# Start Vault and Database
+docker compose up -d vault vault-cli db
+
+# Start Application
+docker compose --profile http4k up -d
+
+# Make requests
+curl http://localhost:8080/hello
+
+# Stop all containers
+docker compose --profile http4k down
 docker compose down
 ```
 
