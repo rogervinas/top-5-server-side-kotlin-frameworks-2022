@@ -19,13 +19,6 @@ class GreetingControllerTest {
   private val controller = greetingController("Bitelchus", "apple", repository)
 
   @Test
-  fun `should ping`() {
-    val response = controller(Request(GET, "/ping"))
-    assertThat(response, hasStatus(Status.OK))
-    assertThat(response, hasBody("pong"))
-  }
-
-  @Test
   fun `should say hello`() {
     val response = controller(Request(GET, "/hello"))
     assertThat(response, hasStatus(Status.OK))

@@ -11,9 +11,6 @@ fun greetingController(
   secret: String,
   repository: GreetingRepository
 ) = routes(
-  "/ping" bind GET to {
-    Response(Status.OK).body("pong")
-  },
   "/hello" bind GET to {
     Response(Status.OK)
       .body("${repository.getGreeting()} my name is $name and my secret is $secret")

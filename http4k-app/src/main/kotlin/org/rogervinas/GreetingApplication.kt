@@ -25,7 +25,7 @@ class GreetingApplication {
     const val GREETING_SECRET = "GREETING_SECRET"
     const val SERVER_PORT = "SERVER_PORT"
 
-    fun greetingRepository(env: Environment): GreetingRepository {
+    private fun greetingRepository(env: Environment): GreetingRepository {
       val host = EnvironmentKey.string().defaulted(DATABASE_HOST, "localhost")(env)
       val port = EnvironmentKey.int().defaulted(DATABASE_PORT, 5432)(env)
       val name = EnvironmentKey.string().defaulted(DATABASE_NAME, "mydb")(env)
@@ -35,7 +35,7 @@ class GreetingApplication {
       return GreetingJdbcRepository(connection)
     }
 
-    fun greetingController(env: Environment, repository: GreetingRepository): HttpHandler {
+    private fun greetingController(env: Environment, repository: GreetingRepository): HttpHandler {
       val name = EnvironmentKey.string().defaulted(GREETING_NAME, "Bitelchus")(env)
       val secret = EnvironmentKey.string().defaulted(GREETING_SECRET, "unknown")(env)
       return greetingController(name, secret, repository)

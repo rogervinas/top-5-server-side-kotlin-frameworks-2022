@@ -53,13 +53,6 @@ class GreetingApplicationTest {
   }
 
   @Test
-  fun `should ping`() {
-    val response = client(Request(GET, "http://localhost:${application.port()}/ping"))
-    assertThat(response, hasStatus(OK))
-    assertThat(response, hasBody("pong"))
-  }
-
-  @Test
   fun `should say hello`() {
     val response = client(Request(GET, "http://localhost:${application.port()}/hello"))
     assertThat(response, hasStatus(OK))
