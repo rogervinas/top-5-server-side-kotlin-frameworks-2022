@@ -57,6 +57,8 @@ dependencies {
 
     implementation "org.postgresql:postgresql:42.5.1"
 
+    implementation "com.bettercloud:vault-java-driver:5.1.0"
+
     testImplementation "org.http4k:http4k-testing-approval:${http4kVersion}"
     testImplementation "org.http4k:http4k-testing-hamkrest:${http4kVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"

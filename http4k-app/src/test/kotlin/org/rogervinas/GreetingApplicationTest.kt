@@ -56,6 +56,6 @@ class GreetingApplicationTest {
   fun `should say hello`() {
     val response = client(Request(GET, "http://localhost:${application.port()}/hello"))
     assertThat(response, hasStatus(OK))
-    assertThat(response, hasBody(Regex(".+ my name is Bitelchus and my secret is unknown")))
+    assertThat(response, hasBody(Regex(".+ my name is Bitelchus and my secret is watermelon")))
   }
 }
