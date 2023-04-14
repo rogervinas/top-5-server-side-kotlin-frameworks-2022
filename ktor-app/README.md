@@ -337,9 +337,8 @@ More documentation at [Creating fat JARs](https://ktor.io/docs/fatjar.html) guid
 
 ## Build a docker image and run it
 
-Then:
 ```shell
-# Build docker image
+# Build docker image and publish it to local registry
 ./gradlew publishImageToLocalRegistry
 
 # Start Vault and Database
