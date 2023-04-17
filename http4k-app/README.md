@@ -25,7 +25,7 @@ For example this project has been created using [Project Wizard](https://toolbox
 
 Note some features missing with [Project Wizard](https://toolbox.http4k.org/project):
 * It generates Gradle Groovy (we cannot choose Gradle Kotlin DSL 😭)
-* It configures Java 11
+* It only configures Java 11
 * It does not generate a .gitignore file
 
 Once created you can run it to check everything is ok:
