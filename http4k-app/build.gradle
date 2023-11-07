@@ -64,6 +64,6 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 
-    testImplementation "io.mockk:mockk:1.13.4"
+    testImplementation "io.mockk:mockk:1.13.8"
     testImplementation "org.testcontainers:junit-jupiter:1.19.1"
 }
