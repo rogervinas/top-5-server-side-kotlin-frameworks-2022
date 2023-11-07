@@ -1,23 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: gradle
-    directory: "/http4k-app"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: gradle
-    directory: "/ktor-app"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: gradle
-    directory: "/micronaut-app"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: gradle
-    directory: "/quarkus-app"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: gradle
-    directory: "/springboot-app"
+    directory: "/"
     schedule:
       interval: "weekly"
   - package-ecosystem: github-actions
