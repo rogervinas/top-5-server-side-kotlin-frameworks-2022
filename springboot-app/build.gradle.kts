@@ -21,7 +21,7 @@ dependencies {
 
   implementation("org.springframework.boot:spring-boot-starter-jdbc")
   implementation("org.postgresql:postgresql:42.6.0")
-  implementation("org.flywaydb:flyway-core:9.10.2")
+  implementation("org.flywaydb:flyway-core:10.0.0")
 
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
