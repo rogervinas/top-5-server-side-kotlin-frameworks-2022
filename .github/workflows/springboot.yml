@@ -4,6 +4,8 @@ on:
   push:
     branches: [ "main" ]
     paths:
+      - .github/workflows/springboot
+      - docker-compose.yaml
       - springboot-app/**
   pull_request:
     branches: [ "main" ]
@@ -13,7 +15,7 @@ on:
 permissions:
   contents: read
 
-jobs:        
+jobs:
   build:
 
     runs-on: ubuntu-latest
