@@ -47,7 +47,7 @@ dependencies {
   testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version")
 
-  testImplementation("io.mockk:mockk:1.13.4")
+  testImplementation("io.mockk:mockk:1.13.8")
   testImplementation("org.testcontainers:junit-jupiter:1.19.1")
   testImplementation("org.assertj:assertj-core:3.24.2")
 }
