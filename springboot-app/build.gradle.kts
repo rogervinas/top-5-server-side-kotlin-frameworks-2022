@@ -1,8 +1,8 @@
 plugins {
   id("org.springframework.boot") version "3.0.1"
-  id("io.spring.dependency-management") version "1.1.0"
-  kotlin("jvm") version "1.7.22"
-  kotlin("plugin.spring") version "1.7.22"
+  id("io.spring.dependency-management") version "1.1.3"
+  kotlin("jvm") version "1.9.20"
+  kotlin("plugin.spring") version "1.9.20"
 }
 
 group = "org.rogervinas"
@@ -20,7 +20,7 @@ dependencies {
   implementation("org.springframework.cloud:spring-cloud-starter-vault-config")
 
   implementation("org.springframework.boot:spring-boot-starter-jdbc")
-  implementation("org.postgresql:postgresql:42.5.1")
+  implementation("org.postgresql:postgresql:42.6.0")
   implementation("org.flywaydb:flyway-core:9.10.2")
 
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
