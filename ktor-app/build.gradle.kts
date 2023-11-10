@@ -5,7 +5,7 @@ val postgres_version: String by project
 
 plugins {
   kotlin("jvm") version "1.9.20"
-  id("io.ktor.plugin") version "2.2.4"
+  id("io.ktor.plugin") version "2.3.6"
   id("org.jetbrains.kotlin.plugin.serialization") version "1.9.20"
 }
 
@@ -23,7 +23,7 @@ ktor {
   docker {
     localImageName.set("${project.name}")
     imageTag.set("${project.version}")
-    jreVersion.set(io.ktor.plugin.features.JreVersion.JRE_17)
+    jreVersion.set(JavaVersion.VERSION_21)
   }
 }
 
@@ -55,7 +55,7 @@ dependencies {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
   kotlinOptions {
     freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "17"
+    jvmTarget = "21"
   }
 }
 
