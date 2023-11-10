@@ -1,5 +1,5 @@
 plugins {
-  id("org.springframework.boot") version "3.0.1"
+  id("org.springframework.boot") version "3.1.5"
   id("io.spring.dependency-management") version "1.1.3"
   kotlin("jvm") version "1.9.20"
   kotlin("plugin.spring") version "1.9.20"
@@ -7,13 +7,13 @@ plugins {
 
 group = "org.rogervinas"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_21
 
 repositories {
   mavenCentral()
 }
 
-extra["springCloudVersion"] = "2022.0.0"
+extra["springCloudVersion"] = "2022.0.4"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -45,7 +45,7 @@ dependencyManagement {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
   kotlinOptions {
     freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "17"
+    jvmTarget = "21"
   }
 }
 

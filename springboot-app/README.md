@@ -1,3 +1,8 @@
+[![SpringBoot](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/springboot.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/springboot.yml)
+![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)
+![Kotlin](https://img.shields.io/badge/Kotlin-1.9.20-blue?labelColor=black)
+![WireMock](https://img.shields.io/badge/SpringBoot-3.1.5-blue?labelColor=black)
+
 # Spring Boot
 
 We can create a project using [Spring Initialzr](https://start.spring.io/#!type=gradle-project-kotlin&language=kotlin&platformVersion=3.0.1&packaging=jar&jvmVersion=17&groupId=org.rogervinas&artifactId=springboot-app&name=springboot-app&description=Demo%20project%20for%20Spring%20Boot&packageName=org.rogervinas.springboot-app&dependencies=webflux,cloud-starter-vault-config,jdbc) and download it locally.
