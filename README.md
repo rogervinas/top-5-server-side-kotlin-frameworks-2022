@@ -14,7 +14,7 @@
 ![Micronaut](https://img.shields.io/badge/Micronaut-3.8.1-blue?labelColor=black)
 
 [![Ktor](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml)
-![Java](https://img.shields.io/badge/Java-17-blue?labelColor=black)
+![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9.20-blue?labelColor=black)
 ![Ktor](https://img.shields.io/badge/Ktor-2.3.6-blue?labelColor=black)
 
