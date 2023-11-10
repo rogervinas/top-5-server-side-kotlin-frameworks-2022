@@ -4,9 +4,9 @@ val logback_version: String by project
 val postgres_version: String by project
 
 plugins {
-  kotlin("jvm") version "$kotlin_version"
-  id("io.ktor.plugin") version "$ktor_version"
-  id("org.jetbrains.kotlin.plugin.serialization") version "$kotlin_version"
+  kotlin("jvm") version "1.9.20"
+  id("io.ktor.plugin") version "2.2.4"
+  id("org.jetbrains.kotlin.plugin.serialization") version "1.9.20"
 }
 
 group = "org.rogervinas"
