@@ -20,8 +20,11 @@ dependencies {
   implementation("org.springframework.cloud:spring-cloud-starter-vault-config")
 
   implementation("org.springframework.boot:spring-boot-starter-jdbc")
+  // TODO not still compatible with current version of SpringBoot
+  // implementation("org.flywaydb:flyway-core:10.0.0")
+  // implementation("org.flywaydb:flyway-database-postgresql:10.0.0")
+  implementation("org.flywaydb:flyway-core:9.22.3")
   implementation("org.postgresql:postgresql:42.6.0")
-  implementation("org.flywaydb:flyway-core:9.10.2")
 
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
