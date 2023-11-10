@@ -1,25 +1,25 @@
 [![SpringBoot](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/springboot.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/springboot.yml)
-![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black&)
+[![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)](https%3A%2F%2Fopenjdk.org%2F)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9.20-blue?labelColor=black&link=https%3A%2F%2Fkotlinlang.org%2F)
 ![SpringBoot](https://img.shields.io/badge/SpringBoot-3.1.5-blue?labelColor=black&link=https%3A%2F%2Fspring.io%2Fprojects%2Fspring-boot)
 
 [![Quarkus](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/quarkus.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/quarkus.yml)
-![Java](https://img.shields.io/badge/Java-17-blue?labelColor=black&link=https%3A%2F%2Fopenjdk.org%2F)
+[![Java](https://img.shields.io/badge/Java-17-blue?labelColor=black)](https%3A%2F%2Fopenjdk.org%2F)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9.20-blue?labelColor=black&link=https%3A%2F%2Fkotlinlang.org%2F)
 ![Quarkus](https://img.shields.io/badge/Quarkus-2.15.3.Final-blue?labelColor=black&link=https%3A%2F%2Fquarkus.io%2F)
 
 [![Micronaut](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/micronaut.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/micronaut.yml)
-![Java](https://img.shields.io/badge/Java-17-blue?labelColor=black&link=https%3A%2F%2Fopenjdk.org%2F)
+[![Java](https://img.shields.io/badge/Java-17-blue?labelColor=black)](https%3A%2F%2Fopenjdk.org%2F)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.6.21-blue?labelColor=black&link=https%3A%2F%2Fkotlinlang.org%2F)
 ![Micronaut](https://img.shields.io/badge/Micronaut-3.8.1-blue?labelColor=black&link=https%3A%2F%2Fmicronaut.io%2F)
 
 [![Ktor](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml)
-![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black&link=https%3A%2F%2Fopenjdk.org%2F)
+[![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)](https%3A%2F%2Fopenjdk.org%2F)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9.20-blue?labelColor=black&link=https%3A%2F%2Fkotlinlang.org%2F)
 ![Ktor](https://img.shields.io/badge/Ktor-2.3.6-blue?labelColor=black&link=https%3A%2F%2Fktor.io%2F)
 
 [![Http4k](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/http4k.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/http4k.yml)
-![Java](https://img.shields.io/badge/Java-11-blue?labelColor=black&link=https%3A%2F%2Fopenjdk.org%2F)
+[![Java](https://img.shields.io/badge/Java-11-blue?labelColor=black)](https%3A%2F%2Fopenjdk.org%2F)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.8.20-blue?labelColor=black&link=https%3A%2F%2Fkotlinlang.org%2F)
 ![Http4k](https://img.shields.io/badge/Http4k-4.41.3.0-blue?labelColor=black&link=https%3A%2F%2Fwww.http4k.org%2F)
 
