@@ -29,12 +29,12 @@ repositories {
 
 apply plugin: 'kotlin'
 
-compileKotlin.kotlinOptions.jvmTarget = "11"
-compileTestKotlin.kotlinOptions.jvmTarget = "11"
+compileKotlin.kotlinOptions.jvmTarget = "21"
+compileTestKotlin.kotlinOptions.jvmTarget = "21"
 compileTestKotlin.kotlinOptions.freeCompilerArgs += "-Xjvm-default=all"
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_21
+targetCompatibility = JavaVersion.VERSION_21
 
 test {
     useJUnitPlatform()
