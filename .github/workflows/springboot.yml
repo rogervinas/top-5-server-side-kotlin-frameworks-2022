@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - .github/workflows/springboot
+      - .github/workflows
       - docker-compose.yaml
       - springboot-app/**
   pull_request:
