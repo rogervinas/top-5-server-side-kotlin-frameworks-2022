@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - .github/workflows/http4k
+      - .github/workflows
       - docker-compose.yaml
       - http4k-app/**
   pull_request:

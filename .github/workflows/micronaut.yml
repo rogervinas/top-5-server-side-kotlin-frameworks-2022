@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - .github/workflows/micronaut
+      - .github/workflows
       - docker-compose.yaml
       - micronaut-app/**
   pull_request:

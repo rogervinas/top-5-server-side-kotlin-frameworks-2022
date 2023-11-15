@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - .github/workflows/ktor
+      - .github/workflows
       - docker-compose.yaml
       - ktor-app/**
   pull_request:
