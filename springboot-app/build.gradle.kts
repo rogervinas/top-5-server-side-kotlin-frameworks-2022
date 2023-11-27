@@ -13,7 +13,7 @@ repositories {
   mavenCentral()
 }
 
-extra["springCloudVersion"] = "2023.0.0-RC1"
+val springCloudVersion = "2023.0.0-RC1"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -41,7 +41,7 @@ dependencies {
 
 dependencyManagement {
   imports {
-    mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")
   }
 }
 
