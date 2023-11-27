@@ -11,6 +11,7 @@ java.sourceCompatibility = JavaVersion.VERSION_21
 
 repositories {
   mavenCentral()
+  maven { url = uri("https://repo.spring.io/milestone") }
 }
 
 val springCloudVersion = "2023.0.0-RC1"
