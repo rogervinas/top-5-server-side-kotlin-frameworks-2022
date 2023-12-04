@@ -34,7 +34,7 @@ dependencies {
     implementation("io.micronaut.flyway:micronaut-flyway")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("org.postgresql:postgresql:42.5.1")
-    implementation("org.jdbi:jdbi3-core:3.36.0")
+    implementation("org.jdbi:jdbi3-core:3.42.0")
 
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
