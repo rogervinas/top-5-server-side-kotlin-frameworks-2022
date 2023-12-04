@@ -4,12 +4,14 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - .github/workflows
+      - .github/workflows/http4k.yml
       - docker-compose.yaml
       - http4k-app/**
   pull_request:
     branches: [ "main" ]
     paths:
+      - .github/workflows/http4k.yml
+      - docker-compose.yaml
       - http4k-app/**
 
 permissions:
