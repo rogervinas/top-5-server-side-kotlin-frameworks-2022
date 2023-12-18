@@ -14,14 +14,15 @@ repositories {
 }
 
 val springCloudVersion = "2023.0.0"
+val flywayVersion = "10.3.0"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
   implementation("org.springframework.cloud:spring-cloud-starter-vault-config")
 
   implementation("org.springframework.boot:spring-boot-starter-jdbc")
-  implementation("org.flywaydb:flyway-core:10.2.0")
-  implementation("org.flywaydb:flyway-database-postgresql:10.3.0")
+  implementation("org.flywaydb:flyway-core:$flywayVersion")
+  implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
   implementation("org.postgresql:postgresql:42.7.1")
 
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
