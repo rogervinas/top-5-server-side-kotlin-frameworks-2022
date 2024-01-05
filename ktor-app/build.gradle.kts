@@ -49,7 +49,7 @@ dependencies {
 
   testImplementation("io.mockk:mockk:1.13.8")
   testImplementation("org.testcontainers:junit-jupiter:1.19.3")
-  testImplementation("org.assertj:assertj-core:3.24.2")
+  testImplementation("org.assertj:assertj-core:3.25.0")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
