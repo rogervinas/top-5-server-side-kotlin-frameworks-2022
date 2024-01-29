@@ -48,7 +48,7 @@ dependencies {
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version")
 
   testImplementation("io.mockk:mockk:1.13.9")
-  testImplementation("org.testcontainers:junit-jupiter:1.19.3")
+  testImplementation("org.testcontainers:junit-jupiter:1.19.4")
   testImplementation("org.assertj:assertj-core:3.25.2")
 }
 
