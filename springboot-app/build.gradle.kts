@@ -35,7 +35,7 @@ dependencies {
   testImplementation("io.projectreactor:reactor-test")
 
   testImplementation("org.testcontainers:junit-jupiter:1.19.4")
-  testImplementation("org.assertj:assertj-core:3.25.1")
+  testImplementation("org.assertj:assertj-core:3.25.2")
 }
 
 dependencyManagement {
