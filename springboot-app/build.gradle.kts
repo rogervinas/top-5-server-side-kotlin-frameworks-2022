@@ -34,7 +34,7 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
 
-  testImplementation("org.testcontainers:junit-jupiter:1.19.4")
+  testImplementation("org.testcontainers:junit-jupiter:1.19.5")
   testImplementation("org.assertj:assertj-core:3.25.3")
 }
 
