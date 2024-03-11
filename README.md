@@ -16,7 +16,7 @@
 [![Ktor](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml)
 ![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue?labelColor=black)
-![Ktor](https://img.shields.io/badge/Ktor-2.3.8-blue?labelColor=black)
+![Ktor](https://img.shields.io/badge/Ktor-2.3.9-blue?labelColor=black)
 
 [![Http4k](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/http4k.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/http4k.yml)
 ![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)
