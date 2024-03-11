@@ -5,7 +5,7 @@ val postgres_version: String by project
 
 plugins {
   kotlin("jvm") version "1.9.23"
-  id("io.ktor.plugin") version "2.3.8"
+  id("io.ktor.plugin") version "2.3.9"
   id("org.jetbrains.kotlin.plugin.serialization") version "1.9.23"
 }
 
@@ -48,7 +48,7 @@ dependencies {
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version")
 
   testImplementation("io.mockk:mockk:1.13.10")
-  testImplementation("org.testcontainers:junit-jupiter:1.19.6")
+  testImplementation("org.testcontainers:junit-jupiter:1.19.7")
   testImplementation("org.assertj:assertj-core:3.25.3")
 }
 
