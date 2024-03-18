@@ -8,10 +8,10 @@ updates:
     directory: "/ktor-app"
     schedule:
       interval: "weekly"
-  - package-ecosystem: gradle
-    directory: "/micronaut-app"
-    schedule:
-      interval: "weekly"
+# - package-ecosystem: gradle
+#   directory: "/micronaut-app"
+#   schedule:
+#     interval: "weekly"
   - package-ecosystem: gradle
     directory: "/quarkus-app"
     schedule:
