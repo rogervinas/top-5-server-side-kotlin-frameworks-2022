@@ -4,10 +4,20 @@ updates:
     directory: "/http4k-app"
     schedule:
       interval: "weekly"
+    groups:
+      dependencies:
+        applies-to: version-updates
+        patterns:
+          - "*"      
   - package-ecosystem: gradle
     directory: "/ktor-app"
     schedule:
       interval: "weekly"
+    groups:
+      dependencies:
+        applies-to: version-updates
+        patterns:
+          - "*"      
 # - package-ecosystem: gradle
 #   directory: "/micronaut-app"
 #   schedule:
@@ -16,10 +26,20 @@ updates:
     directory: "/quarkus-app"
     schedule:
       interval: "weekly"
+    groups:
+      dependencies:
+        applies-to: version-updates
+        patterns:
+          - "*"      
   - package-ecosystem: gradle
     directory: "/springboot-app"
     schedule:
       interval: "weekly"
+    groups:
+      dependencies:
+        applies-to: version-updates
+        patterns:
+          - "*"      
   - package-ecosystem: github-actions
     directory: /
     schedule:
