@@ -1,8 +1,8 @@
 plugins {
   id("org.springframework.boot") version "3.2.5"
   id("io.spring.dependency-management") version "1.1.5"
-  kotlin("jvm") version "1.9.23"
-  kotlin("plugin.spring") version "1.9.23"
+  kotlin("jvm") version "2.0.0"
+  kotlin("plugin.spring") version "2.0.0"
 }
 
 group = "org.rogervinas"
@@ -34,7 +34,7 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
 
-  testImplementation("org.testcontainers:junit-jupiter:1.19.7")
+  testImplementation("org.testcontainers:junit-jupiter:1.19.8")
   testImplementation("org.assertj:assertj-core:3.25.3")
 }
 
