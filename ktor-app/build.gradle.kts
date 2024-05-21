@@ -4,9 +4,9 @@ val logback_version: String by project
 val postgres_version: String by project
 
 plugins {
-  kotlin("jvm") version "1.9.23"
-  id("io.ktor.plugin") version "2.3.10"
-  id("org.jetbrains.kotlin.plugin.serialization") version "1.9.23"
+  kotlin("jvm") version "2.0.0"
+  id("io.ktor.plugin") version "2.3.11"
+  id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
 }
 
 group = "org.rogervinas"
@@ -47,8 +47,8 @@ dependencies {
   testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version")
 
-  testImplementation("io.mockk:mockk:1.13.10")
-  testImplementation("org.testcontainers:junit-jupiter:1.19.7")
+  testImplementation("io.mockk:mockk:1.13.11")
+  testImplementation("org.testcontainers:junit-jupiter:1.19.8")
   testImplementation("org.assertj:assertj-core:3.25.3")
 }
 
