@@ -13,7 +13,7 @@ repositories {
   mavenCentral()
 }
 
-val springCloudVersion = "2023.0.1"
+val springCloudVersion = "2023.0.2"
 val flywayVersion = "10.13.0"
 
 dependencies {
