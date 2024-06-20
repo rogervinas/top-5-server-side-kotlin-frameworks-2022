@@ -1,1 +1,1 @@
-rootProject.name="micronaut-app"
+rootProject.name = "micronaut-app"

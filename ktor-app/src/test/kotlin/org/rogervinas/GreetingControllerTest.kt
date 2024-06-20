@@ -11,22 +11,23 @@ import org.assertj.core.api.Assertions.assertThat
 import kotlin.test.Test
 
 class GreetingControllerTest {
-
-  private val repository = mockk<GreetingRepository>().apply {
-    every { getGreeting() } returns "Hello"
-  }
+  private val repository =
+    mockk<GreetingRepository>().apply {
+      every { getGreeting() } returns "Hello"
+    }
 
   @Test
-  fun `should say hello`() = testApplication {
-    environment {
-      config = MapApplicationConfig()
+  fun `should say hello`() =
+    testApplication {
+      environment {
+        config = MapApplicationConfig()
+      }
+      application {
+        greetingController("Bitelchus", "apple", repository)
+      }
+      client.get("/hello").apply {
+        assertThat(status).isEqualTo(OK)
+        assertThat(bodyAsText()).isEqualTo("Hello my name is Bitelchus and my secret is apple")
+      }
     }
-    application {
-      greetingController("Bitelchus", "apple", repository)
-    }
-    client.get("/hello").apply {
-      assertThat(status).isEqualTo(OK)
-      assertThat(bodyAsText()).isEqualTo("Hello my name is Bitelchus and my secret is apple")
-    }
-  }
 }

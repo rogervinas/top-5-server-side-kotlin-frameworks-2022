@@ -42,10 +42,11 @@ class GreetingApplication {
       val vaultPort = EnvironmentKey.int().defaulted(VAULT_PORT, 8200)(this)
       val vaultToken = EnvironmentKey.string().defaulted(VAULT_TOKEN, "mytoken")(this)
       val vaultPath = EnvironmentKey.string().defaulted(VAULT_PATH, "secret/myapp")(this)
-      val vaultConfig = VaultConfig()
-        .address("$vaultProtocol://$vaultHost:$vaultPort")
-        .token(vaultToken)
-        .build()
+      val vaultConfig =
+        VaultConfig()
+          .address("$vaultProtocol://$vaultHost:$vaultPort")
+          .token(vaultToken)
+          .build()
       val vaultData = Vault(vaultConfig).logical().read(vaultPath).data
       return MapEnvironment.from(vaultData.toProperties()).overrides(this)
     }
@@ -60,7 +61,10 @@ class GreetingApplication {
       return GreetingJdbcRepository(connection)
     }
 
-    private fun greetingController(env: Environment, repository: GreetingRepository): HttpHandler {
+    private fun greetingController(
+      env: Environment,
+      repository: GreetingRepository,
+    ): HttpHandler {
       val name = EnvironmentKey.string().defaulted(GREETING_NAME, "Bitelchus")(env)
       val secret = EnvironmentKey.string().defaulted(GREETING_SECRET, "unknown")(env)
       return greetingController(name, secret, repository)

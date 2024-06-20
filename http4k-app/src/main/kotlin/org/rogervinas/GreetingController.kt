@@ -9,10 +9,10 @@ import org.http4k.routing.routes
 fun greetingController(
   name: String,
   secret: String,
-  repository: GreetingRepository
+  repository: GreetingRepository,
 ) = routes(
   "/hello" bind GET to {
     Response(Status.OK)
       .body("${repository.getGreeting()} my name is $name and my secret is $secret")
-  }
+  },
 )

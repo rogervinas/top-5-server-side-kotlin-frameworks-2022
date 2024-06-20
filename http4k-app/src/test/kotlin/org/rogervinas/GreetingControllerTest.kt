@@ -11,10 +11,10 @@ import org.http4k.hamkrest.hasStatus
 import org.junit.jupiter.api.Test
 
 class GreetingControllerTest {
-
-  private val repository = mockk<GreetingRepository>().apply {
-    every { getGreeting() } returns "Hello"
-  }
+  private val repository =
+    mockk<GreetingRepository>().apply {
+      every { getGreeting() } returns "Hello"
+    }
 
   private val controller = greetingController("Bitelchus", "apple", repository)
 

@@ -7,9 +7,9 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 
 fun Application.greetingController(
-      name: String,
-      secret: String,
-      repository: GreetingRepository
+  name: String,
+  secret: String,
+  repository: GreetingRepository,
 ) {
   routing {
     get("/hello") {

@@ -1,12 +1,17 @@
-val ktor_version: String by project
-val kotlin_version: String by project
-val logback_version: String by project
-val postgres_version: String by project
+import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
+
+val ktorVersion: String = project.property("ktor_version") as String
+val kotlinVersion: String = project.property("kotlin_version") as String
+val logbackVersion: String = project.property("logback_version") as String
+val postgresVersion: String = project.property("postgres_version") as String
 
 plugins {
   kotlin("jvm") version "2.0.0"
   id("io.ktor.plugin") version "2.3.11"
   id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
+  id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
 }
 
 group = "org.rogervinas"
@@ -32,40 +37,41 @@ repositories {
 }
 
 dependencies {
-  implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
-  implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
-  implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
-  implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
+  implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
+  implementation("io.ktor:ktor-server-netty-jvm:$ktorVersion")
+  implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktorVersion")
+  implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktorVersion")
   implementation("io.ktor:ktor-server-config-yaml")
 
-  implementation("org.postgresql:postgresql:$postgres_version")
+  implementation("org.postgresql:postgresql:$postgresVersion")
 
   implementation("com.bettercloud:vault-java-driver:5.1.0")
 
-  implementation("ch.qos.logback:logback-classic:$logback_version")
+  implementation("ch.qos.logback:logback-classic:$logbackVersion")
 
-  testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
-  testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlin_version")
+  testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
+  testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlinVersion")
 
   testImplementation("io.mockk:mockk:1.13.11")
   testImplementation("org.testcontainers:junit-jupiter:1.19.8")
   testImplementation("org.assertj:assertj-core:3.26.0")
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-  kotlinOptions {
-    freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "21"
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+
+kotlin {
+  compilerOptions {
+    freeCompilerArgs.addAll("-Xjsr305=strict")
   }
 }
 
 tasks.withType<Test> {
   useJUnitPlatform()
   testLogging {
-    events(
-          org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED,
-          org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED,
-          org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
-    )
+    events(PASSED, SKIPPED, FAILED)
   }
 }

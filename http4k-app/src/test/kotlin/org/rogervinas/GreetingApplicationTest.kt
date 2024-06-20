@@ -22,25 +22,26 @@ import java.util.Properties
 
 @Testcontainers
 class GreetingApplicationTest {
-
   companion object {
     @Container
-    private val container = DockerComposeContainer(File("../docker-compose.yaml"))
-      .withServices("db", "vault", "vault-cli")
-      .withLocalCompose(true)
-      .waitingFor("db", forLogMessage(".*database system is ready to accept connections.*", 1))
-      .waitingFor("vault", forLogMessage(".*Development mode.*", 1))
-      .waitingFor("vault-cli", forLogMessage(".*created_time.*", 1))
+    private val container =
+      DockerComposeContainer(File("../docker-compose.yaml"))
+        .withServices("db", "vault", "vault-cli")
+        .withLocalCompose(true)
+        .waitingFor("db", forLogMessage(".*database system is ready to accept connections.*", 1))
+        .waitingFor("vault", forLogMessage(".*Development mode.*", 1))
+        .waitingFor("vault-cli", forLogMessage(".*created_time.*", 1))
   }
 
   private val client = OkHttp()
-  private val application = greetingApplication(
-    MapEnvironment.from(
-      Properties().apply {
-        this[SERVER_PORT] = 0
-      }
+  private val application =
+    greetingApplication(
+      MapEnvironment.from(
+        Properties().apply {
+          this[SERVER_PORT] = 0
+        },
+      ),
     )
-  )
 
   @BeforeEach
   fun start() {
