@@ -20,7 +20,7 @@
 
 [![Http4k](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/http4k.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/http4k.yml)
 ![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)
-![Kotlin](https://img.shields.io/badge/Kotlin-1.9.20-blue?labelColor=black)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.0.0-blue?labelColor=black)
 ![Http4k](https://img.shields.io/badge/Http4k-5.9.0.0-blue?labelColor=black)
 
 # Top 5 Server-Side Frameworks for Kotlin in 2022

@@ -11,15 +11,15 @@ interface GreetingRepository {
 
 @Singleton
 open class GreetingJdbcRepository(dataSource: DataSource) : GreetingRepository {
-
   private val jdbi = Jdbi.create(dataSource)
 
   @Transactional
-  override fun getGreeting(): String = jdbi
-        .open()
-        .use {
-          it.createQuery("SELECT greeting FROM greetings ORDER BY random() LIMIT 1")
-                .mapTo(String::class.java)
-                .first()
-        }
+  override fun getGreeting(): String =
+    jdbi
+      .open()
+      .use {
+        it.createQuery("SELECT greeting FROM greetings ORDER BY random() LIMIT 1")
+          .mapTo(String::class.java)
+          .first()
+      }
 }

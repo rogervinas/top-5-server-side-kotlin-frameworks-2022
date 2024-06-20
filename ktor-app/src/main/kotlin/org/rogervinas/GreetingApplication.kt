@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
     factory = Netty,
     port = 8080,
     host = "0.0.0.0",
-    module = Application::module
+    module = Application::module,
   )
     .start(wait = true)
 }
@@ -28,7 +28,7 @@ fun Application.module() {
   greetingController(
     environmentConfig.property("greeting.name").getString(),
     environmentConfig.propertyOrNull("greeting.secret")?.getString() ?: "unknown",
-    repository
+    repository,
   )
 }
 
@@ -48,10 +48,11 @@ private fun ApplicationConfig.withVault(): ApplicationConfig {
   val vaultPort = this.property("vault.port").getString()
   val vaultToken = this.property("vault.token").getString()
   val vaultPath = this.property("vault.path").getString()
-  val vaultConfig = VaultConfig()
-    .address("$vaultProtocol://$vaultHost:$vaultPort")
-    .token(vaultToken)
-    .build()
+  val vaultConfig =
+    VaultConfig()
+      .address("$vaultProtocol://$vaultHost:$vaultPort")
+      .token(vaultToken)
+      .build()
   val vaultData = Vault(vaultConfig).logical().read(vaultPath).data
   return this.mergeWith(MapApplicationConfig(vaultData.entries.map { Pair(it.key, it.value) }))
 }

@@ -10,12 +10,13 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.reactive.server.expectBody
 
 @WebFluxTest
-@TestPropertySource(properties = [
-  "spring.cloud.vault.enabled=false",
-  "greeting.secret=apple"
-])
+@TestPropertySource(
+  properties = [
+    "spring.cloud.vault.enabled=false",
+    "greeting.secret=apple",
+  ],
+)
 class GreetingControllerTest {
-
   @MockBean
   private lateinit var repository: GreetingRepository
 
@@ -27,9 +28,9 @@ class GreetingControllerTest {
     doReturn("Hello").`when`(repository).getGreeting()
 
     client
-          .get().uri("/hello")
-          .exchange()
-          .expectStatus().isOk
-          .expectBody<String>().isEqualTo("Hello my name is Bitelchus and my secret is apple")
+      .get().uri("/hello")
+      .exchange()
+      .expectStatus().isOk
+      .expectBody<String>().isEqualTo("Hello my name is Bitelchus and my secret is apple")
   }
 }

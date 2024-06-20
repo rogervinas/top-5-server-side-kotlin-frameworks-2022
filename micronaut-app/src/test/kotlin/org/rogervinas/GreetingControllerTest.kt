@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test
 @MicronautTest
 @Property(name = "greeting.secret", value = "apple")
 class GreetingControllerTest {
-
   @Inject
   @field:Client("/")
   private lateinit var client: HttpClient

@@ -14,22 +14,23 @@ import kotlin.test.Test
 
 @Testcontainers
 class GreetingApplicationTest {
-
   companion object {
     @Container
-    private val container = DockerComposeContainer(File("../docker-compose.yaml"))
-          .withServices("db", "vault", "vault-cli")
-          .withLocalCompose(true)
-          .waitingFor("db", forLogMessage(".*database system is ready to accept connections.*", 1))
-          .waitingFor("vault", forLogMessage(".*Development mode.*", 1))
-          .waitingFor("vault-cli", forLogMessage(".*created_time.*", 1))
+    private val container =
+      DockerComposeContainer(File("../docker-compose.yaml"))
+        .withServices("db", "vault", "vault-cli")
+        .withLocalCompose(true)
+        .waitingFor("db", forLogMessage(".*database system is ready to accept connections.*", 1))
+        .waitingFor("vault", forLogMessage(".*Development mode.*", 1))
+        .waitingFor("vault-cli", forLogMessage(".*created_time.*", 1))
   }
 
   @Test
-  fun `should say hello`() = testApplication {
-    client.get("/hello").apply {
-      assertThat(status).isEqualTo(OK)
-      assertThat(bodyAsText()).matches(".+ my name is Bitelchus and my secret is watermelon")
+  fun `should say hello`() =
+    testApplication {
+      client.get("/hello").apply {
+        assertThat(status).isEqualTo(OK)
+        assertThat(bodyAsText()).matches(".+ my name is Bitelchus and my secret is watermelon")
+      }
     }
-  }
 }
