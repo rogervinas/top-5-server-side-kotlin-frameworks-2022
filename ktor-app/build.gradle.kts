@@ -9,7 +9,7 @@ val postgresVersion: String = project.property("postgres_version") as String
 
 plugins {
   kotlin("jvm") version "2.0.0"
-  id("io.ktor.plugin") version "2.3.11"
+  id("io.ktor.plugin") version "2.3.12"
   id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
   id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
 }
