@@ -54,7 +54,7 @@ dependencies {
 
   testImplementation("io.mockk:mockk:1.13.11")
   testImplementation("org.testcontainers:junit-jupiter:1.19.8")
-  testImplementation("org.assertj:assertj-core:3.26.0")
+  testImplementation("org.assertj:assertj-core:3.26.3")
 }
 
 java {
