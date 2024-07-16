@@ -4,7 +4,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
   id("org.springframework.boot") version "3.3.1"
-  id("io.spring.dependency-management") version "1.1.5"
+  id("io.spring.dependency-management") version "1.1.6"
   kotlin("jvm") version "2.0.0"
   kotlin("plugin.spring") version "2.0.0"
   id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
@@ -17,7 +17,7 @@ repositories {
   mavenCentral()
 }
 
-val springCloudVersion = "2023.0.2"
+val springCloudVersion = "2023.0.3"
 val flywayVersion = "10.15.2"
 
 dependencies {
@@ -39,7 +39,7 @@ dependencies {
   testImplementation("io.projectreactor:reactor-test")
 
   testImplementation("org.testcontainers:junit-jupiter:1.19.8")
-  testImplementation("org.assertj:assertj-core:3.26.0")
+  testImplementation("org.assertj:assertj-core:3.26.3")
 }
 
 dependencyManagement {
