@@ -2,13 +2,13 @@ name: Ktor
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ] 
     paths:
       - .github/workflows/ktor.yml
       - docker-compose.yaml
       - ktor-app/**
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ] 
     paths:
       - .github/workflows/ktor.yml
       - docker-compose.yaml
@@ -19,18 +19,21 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Java
       uses: actions/setup-java@v4
       with:
-        java-version: '21'
-        distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@ac2d340dc04d9e1113182899e983b5400c17cda1
+        java-version: 21
+        distribution: temurin
+        cache: gradle
+
+    - name: Build
+      uses: gradle/actions/setup-gradle@v3
       with:
         arguments: build
         build-root-directory: ktor-app
