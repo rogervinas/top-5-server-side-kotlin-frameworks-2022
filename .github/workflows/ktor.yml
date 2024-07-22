@@ -2,13 +2,13 @@ name: Ktor
 
 on:
   push:
-    branches: [ main ] 
+    branches: [ main ]
     paths:
       - .github/workflows/ktor.yml
       - docker-compose.yaml
       - ktor-app/**
   pull_request:
-    branches: [ main ] 
+    branches: [ main ]
     paths:
       - .github/workflows/ktor.yml
       - docker-compose.yaml

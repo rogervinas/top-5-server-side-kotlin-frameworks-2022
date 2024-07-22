@@ -2,13 +2,13 @@ name: Http4k
 
 on:
   push:
-    branches: [ main ] 
+    branches: [ main ]
     paths:
       - .github/workflows/http4k.yml
       - docker-compose.yaml
       - http4k-app/**
   pull_request:
-    branches: [ main ] 
+    branches: [ main ]
     paths:
       - .github/workflows/http4k.yml
       - docker-compose.yaml

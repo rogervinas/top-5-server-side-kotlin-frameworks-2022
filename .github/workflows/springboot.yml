@@ -2,13 +2,13 @@ name: SpringBoot
 
 on:
   push:
-    branches: [ main ] 
+    branches: [ main ]
     paths:
       - .github/workflows/springboot.yml
       - docker-compose.yaml
       - springboot-app/**
   pull_request:
-    branches: [ main ] 
+    branches: [ main ]
     paths:
       - .github/workflows/springboot.yml
       - docker-compose.yaml

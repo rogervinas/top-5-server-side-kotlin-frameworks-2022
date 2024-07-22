@@ -2,13 +2,13 @@ name: Quarkus
 
 on:
   push:
-    branches: [ main ] 
+    branches: [ main ]
     paths:
       - .github/workflows/quarkus.yml
       - docker-compose.yaml
       - quarkus-app/**
   pull_request:
-    branches: [ main ] 
+    branches: [ main ]
     paths:
       - .github/workflows/quarkus.yml
       - docker-compose.yaml
