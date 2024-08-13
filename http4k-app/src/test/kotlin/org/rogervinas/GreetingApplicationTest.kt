@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.rogervinas.GreetingApplication.Companion.SERVER_PORT
 import org.rogervinas.GreetingApplication.Companion.greetingApplication
-import org.testcontainers.containers.DockerComposeContainer
+import org.testcontainers.containers.ComposeContainer
 import org.testcontainers.containers.wait.strategy.Wait.forLogMessage
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
@@ -25,7 +25,7 @@ class GreetingApplicationTest {
   companion object {
     @Container
     private val container =
-      DockerComposeContainer(File("../docker-compose.yaml"))
+      ComposeContainer(File("../docker-compose.yaml"))
         .withServices("db", "vault", "vault-cli")
         .withLocalCompose(true)
         .waitingFor("db", forLogMessage(".*database system is ready to accept connections.*", 1))
