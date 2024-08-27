@@ -3,10 +3,10 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
-  id("org.springframework.boot") version "3.3.2"
+  id("org.springframework.boot") version "3.3.3"
   id("io.spring.dependency-management") version "1.1.6"
-  kotlin("jvm") version "2.0.10"
-  kotlin("plugin.spring") version "2.0.10"
+  kotlin("jvm") version "2.0.20"
+  kotlin("plugin.spring") version "2.0.20"
   id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
 }
 
@@ -18,7 +18,7 @@ repositories {
 }
 
 val springCloudVersion = "2023.0.3"
-val flywayVersion = "10.17.1"
+val flywayVersion = "10.17.2"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -27,7 +27,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-jdbc")
   implementation("org.flywaydb:flyway-core:$flywayVersion")
   implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
-  implementation("org.postgresql:postgresql:42.7.3")
+  implementation("org.postgresql:postgresql:42.7.4")
 
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
