@@ -3,7 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
-  kotlin("jvm") version "2.0.10"
+  kotlin("jvm") version "2.0.20"
   application
   id("com.github.johnrengelman.shadow") version "8.1.1"
   id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
@@ -39,7 +39,7 @@ dependencies {
   implementation("org.http4k:http4k-cloudnative:$http4kVersion")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
 
-  implementation("org.postgresql:postgresql:42.7.3")
+  implementation("org.postgresql:postgresql:42.7.4")
 
   implementation("com.bettercloud:vault-java-driver:5.1.0")
 
