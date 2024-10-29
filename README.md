@@ -1,11 +1,11 @@
 [![SpringBoot](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/springboot.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/springboot.yml)
 ![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.0.21-blue?labelColor=black)
-![SpringBoot](https://img.shields.io/badge/SpringBoot-3.3.4-blue?labelColor=black)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.x-blue?labelColor=black)
+![SpringBoot](https://img.shields.io/badge/SpringBoot-3.3.x-blue?labelColor=black)
 
 [![Quarkus](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/quarkus.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/quarkus.yml)
 ![Java](https://img.shields.io/badge/Java-17-blue?labelColor=black)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.0.21-blue?labelColor=black)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.x-blue?labelColor=black)
 ![Quarkus](https://img.shields.io/badge/Quarkus-2.15.3.Final-blue?labelColor=black)
 
 [![Micronaut](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/micronaut.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/micronaut.yml)
@@ -15,12 +15,12 @@
 
 [![Ktor](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml)
 ![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.0.20-blue?labelColor=black)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.x-blue?labelColor=black)
 ![Ktor](https://img.shields.io/badge/Ktor-2.3.12-blue?labelColor=black)
 
 [![Http4k](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/http4k.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/http4k.yml)
 ![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.0.20-blue?labelColor=black)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.x-blue?labelColor=black)
 ![Http4k](https://img.shields.io/badge/Http4k-5.9.0.0-blue?labelColor=black)
 
 # Top 5 Server-Side Frameworks for Kotlin in 2022
