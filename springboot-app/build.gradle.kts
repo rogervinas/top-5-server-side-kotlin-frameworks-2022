@@ -17,7 +17,7 @@ repositories {
 }
 
 val springCloudVersion = "2024.0.0"
-val flywayVersion = "11.1.1"
+val flywayVersion = "11.2.0"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -26,7 +26,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-jdbc")
   implementation("org.flywaydb:flyway-core:$flywayVersion")
   implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
-  implementation("org.postgresql:postgresql:42.7.4")
+  implementation("org.postgresql:postgresql:42.7.5")
 
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
@@ -38,7 +38,7 @@ dependencies {
   testImplementation("io.projectreactor:reactor-test")
 
   testImplementation("org.testcontainers:junit-jupiter:1.20.4")
-  testImplementation("org.assertj:assertj-core:3.27.2")
+  testImplementation("org.assertj:assertj-core:3.27.3")
 }
 
 dependencyManagement {
