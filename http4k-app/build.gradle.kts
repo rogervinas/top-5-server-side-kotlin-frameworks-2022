@@ -39,7 +39,7 @@ dependencies {
   implementation("org.http4k:http4k-cloudnative:$http4kVersion")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
 
-  implementation("org.postgresql:postgresql:42.7.4")
+  implementation("org.postgresql:postgresql:42.7.5")
 
   implementation("com.bettercloud:vault-java-driver:5.1.0")
 
@@ -48,7 +48,7 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
   testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
-  testImplementation("io.mockk:mockk:1.13.14")
+  testImplementation("io.mockk:mockk:1.13.16")
   testImplementation("org.testcontainers:junit-jupiter:1.20.4")
 }
 
