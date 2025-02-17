@@ -8,10 +8,10 @@ val logbackVersion: String = project.property("logback_version") as String
 val postgresVersion: String = project.property("postgres_version") as String
 
 plugins {
-  kotlin("jvm") version "2.0.20"
-  id("io.ktor.plugin") version "2.3.12"
-  id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20"
-  id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
+  kotlin("jvm") version "2.1.10"
+  id("io.ktor.plugin") version "3.1.0"
+  id("org.jetbrains.kotlin.plugin.serialization") version "2.1.10"
+  id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
 }
 
 group = "org.rogervinas"
@@ -52,9 +52,9 @@ dependencies {
   testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlinVersion")
 
-  testImplementation("io.mockk:mockk:1.13.12")
-  testImplementation("org.testcontainers:junit-jupiter:1.20.2")
-  testImplementation("org.assertj:assertj-core:3.26.3")
+  testImplementation("io.mockk:mockk:1.13.16")
+  testImplementation("org.testcontainers:junit-jupiter:1.20.4")
+  testImplementation("org.assertj:assertj-core:3.27.3")
 }
 
 java {
