@@ -6,7 +6,7 @@ plugins {
   kotlin("jvm") version "2.1.10"
   application
   id("com.github.johnrengelman.shadow") version "8.1.1"
-  id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
+  id("org.jlleitschuh.gradle.ktlint") version "12.2.0"
 }
 
 buildscript {
@@ -48,8 +48,8 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
   testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
-  testImplementation("io.mockk:mockk:1.13.16")
-  testImplementation("org.testcontainers:junit-jupiter:1.20.4")
+  testImplementation("io.mockk:mockk:1.13.17")
+  testImplementation("org.testcontainers:junit-jupiter:1.20.5")
 }
 
 java {
