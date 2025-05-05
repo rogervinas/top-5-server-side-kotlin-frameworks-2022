@@ -48,8 +48,8 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
   testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
-  testImplementation("io.mockk:mockk:1.14.0")
-  testImplementation("org.testcontainers:junit-jupiter:1.20.6")
+  testImplementation("io.mockk:mockk:1.14.2")
+  testImplementation("org.testcontainers:junit-jupiter:1.21.0")
 }
 
 java {
