@@ -3,7 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
-  kotlin("jvm") version "2.1.20"
+  kotlin("jvm") version "2.1.21"
   application
   id("com.github.johnrengelman.shadow") version "8.1.1"
   id("org.jlleitschuh.gradle.ktlint") version "12.2.0"
