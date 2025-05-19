@@ -5,8 +5,8 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 plugins {
   id("org.springframework.boot") version "3.4.5"
   id("io.spring.dependency-management") version "1.1.7"
-  kotlin("jvm") version "2.1.20"
-  kotlin("plugin.spring") version "2.1.20"
+  kotlin("jvm") version "2.1.21"
+  kotlin("plugin.spring") version "2.1.21"
 }
 
 group = "org.rogervinas"
@@ -17,7 +17,7 @@ repositories {
 }
 
 val springCloudVersion = "2024.0.1"
-val flywayVersion = "11.8.1"
+val flywayVersion = "11.8.2"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
