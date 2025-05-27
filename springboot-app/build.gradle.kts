@@ -14,9 +14,10 @@ version = "0.0.1-SNAPSHOT"
 
 repositories {
   mavenCentral()
+  maven { url = uri("https://repo.spring.io/milestone") }
 }
 
-val springCloudVersion = "2024.0.1"
+val springCloudVersion = "2025.0.0-RC1"
 val flywayVersion = "11.8.2"
 
 dependencies {
