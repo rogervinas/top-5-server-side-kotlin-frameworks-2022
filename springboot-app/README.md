@@ -127,7 +127,7 @@ We can test the endpoint with a "slice test", meaning only the parts needed by t
 ])
 class GreetingControllerTest {
 
-  @MockBean
+  @MockitoBean
   private lateinit var repository: GreetingRepository
 
   @Autowired
@@ -147,7 +147,7 @@ class GreetingControllerTest {
 ```
 
 * We use `WebTestClient` to execute requests to the endpoint.
-* We mock the repository with `@MockBean`.
+* We mock the repository with `@MockitoBean`.
 * We can use a `@TestPropertySource` to configure the `greeting.secret` property and `spring.cloud.vault.enabled=false` to disable **Vault**.
 
 ### Testing the application

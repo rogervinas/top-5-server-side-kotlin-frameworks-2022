@@ -3,7 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
-  id("org.springframework.boot") version "3.4.5"
+  id("org.springframework.boot") version "3.5.0"
   id("io.spring.dependency-management") version "1.1.7"
   kotlin("jvm") version "2.1.21"
   kotlin("plugin.spring") version "2.1.21"
@@ -14,9 +14,10 @@ version = "0.0.1-SNAPSHOT"
 
 repositories {
   mavenCentral()
+  maven { url = uri("https://repo.spring.io/milestone") }
 }
 
-val springCloudVersion = "2024.0.1"
+val springCloudVersion = "2025.0.0-RC1"
 val flywayVersion = "11.8.2"
 
 dependencies {
