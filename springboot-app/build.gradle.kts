@@ -17,7 +17,7 @@ repositories {
   maven { url = uri("https://repo.spring.io/milestone") }
 }
 
-val springCloudVersion = "2025.0.0-RC1"
+val springCloudVersion = "2025.0.0"
 val flywayVersion = "11.8.2"
 
 dependencies {
@@ -27,7 +27,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-jdbc")
   implementation("org.flywaydb:flyway-core:$flywayVersion")
   implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
-  implementation("org.postgresql:postgresql:42.7.5")
+  implementation("org.postgresql:postgresql:42.7.6")
 
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
@@ -38,7 +38,7 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
 
-  testImplementation("org.testcontainers:junit-jupiter:1.21.0")
+  testImplementation("org.testcontainers:junit-jupiter:1.21.1")
   testImplementation("org.assertj:assertj-core:3.27.3")
 }
 
