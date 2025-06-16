@@ -39,7 +39,7 @@ dependencies {
   implementation("org.http4k:http4k-cloudnative:$http4kVersion")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
 
-  implementation("org.postgresql:postgresql:42.7.6")
+  implementation("org.postgresql:postgresql:42.7.7")
 
   implementation("com.bettercloud:vault-java-driver:5.1.0")
 
