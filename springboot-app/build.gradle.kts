@@ -3,7 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
-  id("org.springframework.boot") version "3.5.0"
+  id("org.springframework.boot") version "3.5.3"
   id("io.spring.dependency-management") version "1.1.7"
   kotlin("jvm") version "2.1.21"
   kotlin("plugin.spring") version "2.1.21"
@@ -18,7 +18,7 @@ repositories {
 }
 
 val springCloudVersion = "2025.0.0"
-val flywayVersion = "11.9.1"
+val flywayVersion = "11.9.2"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -38,7 +38,7 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
 
-  testImplementation("org.testcontainers:junit-jupiter:1.21.1")
+  testImplementation("org.testcontainers:junit-jupiter:1.21.2")
   testImplementation("org.assertj:assertj-core:3.27.3")
 }
 
