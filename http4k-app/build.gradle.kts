@@ -3,7 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
-  kotlin("jvm") version "2.1.21"
+  kotlin("jvm") version "2.2.0"
   application
   id("com.github.johnrengelman.shadow") version "8.1.1"
   id("org.jlleitschuh.gradle.ktlint") version "12.3.0"
@@ -48,8 +48,8 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
   testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
-  testImplementation("io.mockk:mockk:1.14.2")
-  testImplementation("org.testcontainers:junit-jupiter:1.21.1")
+  testImplementation("io.mockk:mockk:1.14.4")
+  testImplementation("org.testcontainers:junit-jupiter:1.21.3")
 }
 
 java {
