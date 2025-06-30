@@ -4,8 +4,8 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
-  kotlin("jvm") version "2.1.21"
-  kotlin("plugin.allopen") version "2.1.21"
+  kotlin("jvm") version "2.2.0"
+  kotlin("plugin.allopen") version "2.2.0"
   id("io.quarkus")
   id("org.jlleitschuh.gradle.ktlint") version "12.3.0"
 }
