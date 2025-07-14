@@ -7,7 +7,7 @@ plugins {
   kotlin("jvm") version "2.2.0"
   kotlin("plugin.allopen") version "2.2.0"
   id("io.quarkus")
-  id("org.jlleitschuh.gradle.ktlint") version "12.3.0"
+  id("org.jlleitschuh.gradle.ktlint") version "13.0.0"
 }
 
 group = "org.rogervinas"
