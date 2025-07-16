@@ -8,7 +8,9 @@ interface GreetingRepository {
 }
 
 @ApplicationScoped
-class GreetingJdbcRepository(private val client: PgPool) : GreetingRepository {
+class GreetingJdbcRepository(
+  private val client: PgPool,
+) : GreetingRepository {
   override fun getGreeting(): String =
     client
       .query("SELECT greeting FROM greetings ORDER BY random() LIMIT 1")
