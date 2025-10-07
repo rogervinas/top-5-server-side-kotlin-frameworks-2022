@@ -18,7 +18,7 @@ repositories {
 }
 
 val springCloudVersion = "2025.0.0"
-val flywayVersion = "11.13.1"
+val flywayVersion = "11.13.2"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -39,7 +39,7 @@ dependencies {
   testImplementation("io.projectreactor:reactor-test")
 
   testImplementation("org.testcontainers:junit-jupiter:1.21.3")
-  testImplementation("org.assertj:assertj-core:3.27.5")
+  testImplementation("org.assertj:assertj-core:3.27.6")
 }
 
 dependencyManagement {
