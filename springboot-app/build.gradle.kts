@@ -3,7 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
-  id("org.springframework.boot") version "3.5.7"
+  id("org.springframework.boot") version "4.0.0"
   id("io.spring.dependency-management") version "1.1.7"
   kotlin("jvm") version "2.2.21"
   kotlin("plugin.spring") version "2.2.21"
@@ -17,8 +17,8 @@ repositories {
   maven { url = uri("https://repo.spring.io/milestone") }
 }
 
-val springCloudVersion = "2025.0.0"
-val flywayVersion = "11.16.0"
+val springCloudVersion = "2025.1.0"
+val flywayVersion = "11.18.0"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
