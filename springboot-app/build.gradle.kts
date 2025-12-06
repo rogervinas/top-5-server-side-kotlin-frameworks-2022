@@ -30,13 +30,12 @@ dependencies {
   implementation("org.postgresql:postgresql:42.7.8")
 
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-  implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
-  testImplementation("io.projectreactor:reactor-test")
+  testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
 
   testImplementation("org.testcontainers:junit-jupiter:1.21.3")
   testImplementation("org.assertj:assertj-core:3.27.6")
