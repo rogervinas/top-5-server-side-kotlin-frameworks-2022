@@ -162,7 +162,6 @@ class GreetingApplicationTest {
     @Container
 	private val container = DockerComposeContainer(File("../docker-compose.yaml"))
 	  .withServices("db", "vault", "vault-cli")
-	  .withLocalCompose(true)
 	  .waitingFor("db", forLogMessage(".*database system is ready to accept connections.*", 1))
 	  .waitingFor("vault", forLogMessage(".*Development mode.*", 1))
   }
