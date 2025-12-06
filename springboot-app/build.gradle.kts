@@ -36,6 +36,7 @@ dependencies {
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
+  testImplementation("org.springframework.boot:spring-boot-starter-webclient-test")
 
   testImplementation("org.testcontainers:junit-jupiter:1.21.3")
   testImplementation("org.assertj:assertj-core:3.27.6")
