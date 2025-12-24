@@ -3,10 +3,10 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
-  id("org.springframework.boot") version "4.0.0"
+  id("org.springframework.boot") version "4.0.1"
   id("io.spring.dependency-management") version "1.1.7"
-  kotlin("jvm") version "2.2.21"
-  kotlin("plugin.spring") version "2.2.21"
+  kotlin("jvm") version "2.3.0"
+  kotlin("plugin.spring") version "2.3.0"
 }
 
 group = "org.rogervinas"
@@ -18,7 +18,7 @@ repositories {
 }
 
 val springCloudVersion = "2025.1.0"
-val flywayVersion = "11.19.0"
+val flywayVersion = "11.19.1"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -30,16 +30,15 @@ dependencies {
   implementation("org.flywaydb:flyway-database-postgresql:$flywayVersion")
   implementation("org.postgresql:postgresql:42.7.8")
 
-  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+  implementation("tools.jackson.module:jackson-module-kotlin")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.boot:spring-boot-starter-webflux-test")
   testImplementation("org.springframework.boot:spring-boot-starter-webclient-test")
 
-  testImplementation("org.testcontainers:junit-jupiter:1.21.3")
+  testImplementation("org.testcontainers:junit-jupiter:1.21.4")
   testImplementation("org.assertj:assertj-core:3.27.6")
 }
 
