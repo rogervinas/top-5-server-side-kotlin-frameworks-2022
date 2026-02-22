@@ -7,7 +7,6 @@ plugins {
   kotlin("jvm") version "2.3.0"
   kotlin("plugin.allopen") version "2.3.0"
   id("io.quarkus")
-  id("org.jlleitschuh.gradle.ktlint") version "14.0.1"
 }
 
 group = "org.rogervinas"
@@ -23,20 +22,19 @@ val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
 dependencies {
-  implementation("io.quarkiverse.vault:quarkus-vault")
-  implementation("io.quarkus:quarkus-reactive-pg-client")
-  implementation("io.quarkus:quarkus-agroal")
   implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
   implementation("io.quarkus:quarkus-kotlin")
-  implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+  implementation("io.quarkus:quarkus-rest-jackson")
   implementation("io.quarkus:quarkus-arc")
-  implementation("io.quarkus:quarkus-resteasy-reactive")
+  implementation("io.quarkus:quarkus-rest")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
   implementation("io.quarkus:quarkus-config-yaml")
 
-  implementation("io.quarkus:quarkus-flyway")
   implementation("io.quarkus:quarkus-jdbc-postgresql")
+  implementation("io.quarkus:quarkus-flyway")
+
+  implementation("io.quarkiverse.vault:quarkus-vault")
 
   testImplementation("io.quarkus:quarkus-junit5")
   testImplementation("io.quarkus:quarkus-junit5-mockito")
@@ -44,13 +42,14 @@ dependencies {
 }
 
 java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(17)
-  }
+  sourceCompatibility = JavaVersion.VERSION_21
+  targetCompatibility = JavaVersion.VERSION_21
 }
 
 kotlin {
   compilerOptions {
+    jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21
+    javaParameters = true
     freeCompilerArgs.addAll("-Xjsr305=strict")
   }
 }
@@ -67,7 +66,8 @@ tasks.withType<Test> {
 }
 
 allOpen {
-  annotation("javax.ws.rs.Path")
-  annotation("javax.enterprise.context.ApplicationScoped")
+  annotation("jakarta.ws.rs.Path")
+  annotation("jakarta.enterprise.context.ApplicationScoped")
+  annotation("jakarta.persistence.Entity")
   annotation("io.quarkus.test.junit.QuarkusTest")
 }
