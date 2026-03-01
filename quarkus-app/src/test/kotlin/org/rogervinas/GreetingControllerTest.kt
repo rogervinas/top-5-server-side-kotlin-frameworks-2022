@@ -2,7 +2,7 @@ package org.rogervinas
 
 import io.quarkus.test.common.http.TestHTTPEndpoint
 import io.quarkus.test.junit.QuarkusTest
-import io.quarkus.test.junit.mockito.InjectMock
+import io.quarkus.test.InjectMock
 import io.restassured.RestAssured.`when`
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.jupiter.api.Test

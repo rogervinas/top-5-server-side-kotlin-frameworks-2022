@@ -4,9 +4,9 @@
 ![SpringBoot](https://img.shields.io/badge/SpringBoot-4.x-blue?labelColor=black)
 
 [![Quarkus](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/quarkus.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/quarkus.yml)
-![Java](https://img.shields.io/badge/Java-17-blue?labelColor=black)
+![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.x-blue?labelColor=black)
-![Quarkus](https://img.shields.io/badge/Quarkus-2.15.3.Final-blue?labelColor=black)
+![Quarkus](https://img.shields.io/badge/Quarkus-3.31.4-blue?labelColor=black)
 
 [![Micronaut](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/micronaut.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/micronaut.yml)
 ![Java](https://img.shields.io/badge/Java-17-blue?labelColor=black)

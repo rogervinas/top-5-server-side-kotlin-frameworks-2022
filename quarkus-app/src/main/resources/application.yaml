@@ -10,6 +10,6 @@ quarkus:
   vault:
     secret-config-kv-path: "myapp"
     devservices:
-      image-name: "vault:1.12.1"
+      image-name: "hashicorp/vault:1.18"
       init-commands:
         - "kv put secret/myapp greeting.secret=watermelon"

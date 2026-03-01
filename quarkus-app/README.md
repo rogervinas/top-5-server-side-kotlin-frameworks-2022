@@ -4,10 +4,10 @@ To begin with you can follow the [Quarkus quick start](https://quarkus.io/get-st
 
 You can also check [Creating your first application](https://quarkus.io/guides/getting-started) as well as [all the other guides](https://quarkus.io/guides/).
 
-To create a simple application with a reactive REST endpoint:
+To create a simple application with a REST endpoint:
 ```shell
-sdk install quarkus
-quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --java=17 --kotlin --extension='kotlin,resteasy-reactive-jackson'
+sdk install quarkus 3.31.4
+quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --java=21 --kotlin --extension='kotlin,rest-jackson'
 ```
 
 A **Gradle** project will be created with the following:
@@ -24,7 +24,7 @@ quarkus dev
 And make a request to the endpoint:
 ```shell
 curl http://localhost:8080/hello
-Hello from RESTEasy Reactive
+Hello from Quarkus REST
 ```
 
 We can remove the `src/main/resources/META-INF` directory containing some HTML files that we will not need.
@@ -62,24 +62,30 @@ interface GreetingRepository {
 }
 
 @ApplicationScoped
-class GreetingJdbcRepository(private val client: PgPool): GreetingRepository {
-  override fun getGreeting(): String = client
-    .query("SELECT greeting FROM greetings ORDER BY random() LIMIT 1")
-    .executeAndAwait()
-    .map { r -> r.get(String::class.java, "greeting") }
-    .first()
+class GreetingJdbcRepository(
+  private val dataSource: AgroalDataSource,
+) : GreetingRepository {
+  override fun getGreeting(): String {
+    dataSource.connection.use { connection ->
+      connection.createStatement().use { statement ->
+        val rs = statement.executeQuery("SELECT greeting FROM greetings ORDER BY random() LIMIT 1")
+        rs.next()
+        return rs.getString("greeting")
+      }
+    }
+  }
 }
 ```
 
 * The `@ApplicationScoped` annotation will make **Quarkus** to create an instance at startup.
-* We inject the [Reactive SQL Client](https://quarkus.io/guides/reactive-sql-clients).
-* We use `query` and that SQL to retrieve one random `greeting` from the `greetings` table.
+* We inject an [AgroalDataSource](https://quarkus.io/guides/datasource) (the default JDBC datasource provided by Quarkus).
+* We use a plain JDBC query to retrieve one random `greeting` from the `greetings` table.
 
 For this to work, we need some extra steps ...
 
-Add the [Reactive SQL Client](https://quarkus.io/guides/reactive-sql-clients) extension:
+Add the [JDBC PostgreSQL](https://quarkus.io/guides/datasource) extension:
 ```shell
-quarkus extension add quarkus-reactive-pg-client
+quarkus extension add quarkus-jdbc-postgresql
 ```
 
 Configure it for `dev` and `test` profiles in `application.yaml`:
@@ -97,36 +103,24 @@ quarkus:
     db-kind: "postgresql"
     username: "myuser"
     password: "mypassword"
-    reactive:
-      url: "postgresql://${DB_HOST:localhost}:5432/mydb"
-      max-size: 20
-```
-
-Note that for `dev` and `test` profiles we just use something called "Dev Services", meaning it will automatically start containers and configure the application to use them. You can check the [Dev Services Overview](https://quarkus.io/guides/dev-services) and [Dev Services for Databases](https://quarkus.io/guides/databases-dev-services) documentation. 
-
-To enable [Flyway](https://quarkus.io/guides/flyway) we need to add these dependencies manually (apparently there is no extension):
-```kotlin
-implementation("io.quarkus:quarkus-flyway")
-implementation("io.quarkus:quarkus-jdbc-postgresql")
-```
-
-And, as it seems that we cannot use the same reactive datasource, we will have to configure the standard one:
-* `application.yaml`
-```yaml
-quarkus:
-  flyway:
-    migrate-at-start: true
-```
-* `application-prod.yaml`
-```yaml
-quarkus:
-  datasource:
     jdbc:
       url: "jdbc:postgresql://${DB_HOST:localhost}:5432/mydb"
       max-size: 20
 ```
 
-So `quarkus.datasource.jdbc` will be used by **Flyway** and `quarkus.datasource.reactive` by the application.
+Note that for `dev` and `test` profiles we just use something called "Dev Services", meaning it will automatically start containers and configure the application to use them. You can check the [Dev Services Overview](https://quarkus.io/guides/dev-services) and [Dev Services for Databases](https://quarkus.io/guides/databases-dev-services) documentation.
+
+To enable [Flyway](https://quarkus.io/guides/flyway) we need to add the extension:
+```shell
+quarkus extension add quarkus-flyway
+```
+
+And configure it in `application.yaml`:
+```yaml
+quarkus:
+  flyway:
+    migrate-at-start: true
+```
 
 Finally, [Flyway](https://flywaydb.org/) migrations under [src/main/resources/db/migration](src/main/resources/db/migration) to create and populate `greetings` table.
 
@@ -138,7 +132,7 @@ We will rename the generated `GreetingResource` class to `GreetingController`, s
 class GreetingController(
   private val repository: GreetingRepository,
   @ConfigProperty(name = "greeting.name") private val name: String,
-  @ConfigProperty(name = "greeting.secret", defaultValue = "unknown") private val secret: String
+  @ConfigProperty(name = "greeting.secret", defaultValue = "unknown") private val secret: String,
 ) {
   @GET
   @Produces(MediaType.TEXT_PLAIN)
@@ -148,14 +142,16 @@ class GreetingController(
 
 * We can inject dependencies via constructor and configuration properties using `@ConfigProperty` annotation.
 * We expect to get `greeting.secret` from **Vault**, that is why we configure `unknown` as its default value, so it does not fail until we configure **Vault** properly.
-* Everything is pretty similar to **Spring Boot**. Note that it uses standard JAX-RS annotations which is also possible in **Spring Boot** (but not by default).
+* Everything is pretty similar to **Spring Boot**. Note that it uses standard Jakarta RS annotations (previously JAX-RS with `javax.*` packages, now migrated to `jakarta.*` in Quarkus 3.x).
 
 ### Vault configuration
 
-Following the [Using HashiCorp Vault](https://quarkiverse.github.io/quarkiverse-docs/quarkus-vault/dev/index.html) guide we add the extension:
+Following the [Using HashiCorp Vault](https://docs.quarkiverse.io/quarkus-vault/dev/index.html) guide we add the extension:
 ```shell
 quarkus extension add vault
 ```
+
+Note that the Vault extension has moved from the core Quarkus project to the [Quarkiverse](https://github.com/quarkiverse/quarkus-vault) ecosystem in Quarkus 3.x.
 
 For `dev` and `test` profiles we configure **Vault** "Dev Service" in `application.yaml`:
 ```yaml
@@ -163,12 +159,12 @@ quarkus:
   vault:
     secret-config-kv-path: "myapp"
     devservices:
-      image-name: "vault:1.12.1"
+      image-name: "hashicorp/vault:1.18"
       init-commands:
         - "kv put secret/myapp greeting.secret=watermelon"
 ```
 
-Note that here we can use these `init-commands` to populate **Vault** 🥹
+Note that here we can use these `init-commands` to populate **Vault** and that the Vault docker image has moved from `vault` to `hashicorp/vault`.
 
 For `prod` profile we configure **Vault** in `application-prod.yaml`:
 ```yaml
@@ -186,7 +182,7 @@ We rename the original `GreetingResourceTest` to `GreetingControllerTest` and we
 @QuarkusTest
 @TestHTTPEndpoint(GreetingController::class)
 class GreetingControllerTest {
-    
+
   @InjectMock
   private lateinit var repository: GreetingRepository
 
@@ -203,10 +199,10 @@ class GreetingControllerTest {
 }
 ```
 
-* `@QuarkusTest` will start all "Dev Services", despite the database not being used 🤷
-* We mock the repository with `@InjectMock`.
+* `@QuarkusTest` will start all "Dev Services", despite the database not being used.
+* We mock the repository with `@InjectMock` (note: in Quarkus 3.x the import changed from `io.quarkus.test.junit.mockito.InjectMock` to `io.quarkus.test.InjectMock`).
 * We use [RestAssured](https://rest-assured.io/) to test the endpoint.
-* As this test uses **Vault**, the secret should be `watermelon`. 
+* As this test uses **Vault**, the secret should be `watermelon`.
 
 ## Testing the application
 
@@ -214,7 +210,7 @@ We can test the whole application this way:
 ```kotlin
 @QuarkusTest
 class GreetingApplicationTest {
-    
+
   @Test
   fun `should say hello`() {
     given()
@@ -273,7 +269,7 @@ docker compose down
 ```shell
 # Build docker image
 quarkus build
-docker build -f src/main/docker/Dockerfile.jvm -t quarkus-app . 
+docker build -f src/main/docker/Dockerfile.jvm -t quarkus-app .
 
 # Start Vault and Database
 docker compose up -d vault vault-cli db
@@ -293,14 +289,6 @@ docker compose down
 
 Following [Build a Native Executable](https://quarkus.io/guides/building-native-image):
 ```shell
-# Install GraalVM via sdkman
-sdk install java 22.3.r19-grl
-sdk default java 22.3.r19-grl
-export GRAALVM_HOME=$JAVA_HOME
-
-# Install the native-image
-gu install native-image
-
 # Build native executable
 quarkus build --native
 
