@@ -6,7 +6,7 @@ plugins {
   kotlin("jvm") version "2.3.10"
   application
   id("com.github.johnrengelman.shadow") version "8.1.1"
-  id("org.jlleitschuh.gradle.ktlint") version "14.0.1"
+  id("org.jlleitschuh.gradle.ktlint") version "14.1.0"
 }
 
 buildscript {
@@ -39,7 +39,7 @@ dependencies {
   implementation("org.http4k:http4k-cloudnative:$http4kVersion")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
 
-  implementation("org.postgresql:postgresql:42.7.9")
+  implementation("org.postgresql:postgresql:42.7.10")
 
   implementation("com.bettercloud:vault-java-driver:5.1.0")
 
