@@ -8,10 +8,10 @@ val logbackVersion: String = project.property("logback_version") as String
 val postgresVersion: String = project.property("postgres_version") as String
 
 plugins {
-  kotlin("jvm") version "2.3.10"
-  id("io.ktor.plugin") version "3.4.0"
-  id("org.jetbrains.kotlin.plugin.serialization") version "2.3.10"
-  id("org.jlleitschuh.gradle.ktlint") version "14.0.1"
+  kotlin("jvm") version "2.3.20"
+  id("io.ktor.plugin") version "3.4.1"
+  id("org.jetbrains.kotlin.plugin.serialization") version "2.3.20"
+  id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
 }
 
 group = "org.rogervinas"
