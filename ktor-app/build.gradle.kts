@@ -49,7 +49,7 @@ dependencies {
 
   implementation("ch.qos.logback:logback-classic:$logbackVersion")
 
-  testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
+  testImplementation("io.ktor:ktor-server-test-host-jvm:$ktorVersion")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlinVersion")
 
   testImplementation("io.mockk:mockk:1.14.9")
