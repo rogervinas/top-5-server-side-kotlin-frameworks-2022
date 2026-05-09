@@ -2,10 +2,10 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
-val ktorVersion: String = project.property("ktor_version") as String
-val kotlinVersion: String = project.property("kotlin_version") as String
-val logbackVersion: String = project.property("logback_version") as String
-val postgresVersion: String = project.property("postgres_version") as String
+val ktorVersion = "3.4.1"
+val kotlinVersion = "2.3.10"
+val logbackVersion = "1.4.11"
+val postgresVersion = "42.5.1"
 
 plugins {
   kotlin("jvm") version "2.3.20"
@@ -26,8 +26,8 @@ application {
 
 ktor {
   docker {
-    localImageName.set("${project.name}")
-    imageTag.set("${project.version}")
+    localImageName.set(project.name)
+    imageTag.set(project.version.toString())
     jreVersion.set(JavaVersion.VERSION_21)
   }
 }
@@ -41,7 +41,7 @@ dependencies {
   implementation("io.ktor:ktor-server-netty-jvm:$ktorVersion")
   implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktorVersion")
   implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktorVersion")
-  implementation("io.ktor:ktor-server-config-yaml")
+  implementation("io.ktor:ktor-server-config-yaml:$ktorVersion")
 
   implementation("org.postgresql:postgresql:$postgresVersion")
 
@@ -49,8 +49,12 @@ dependencies {
 
   implementation("ch.qos.logback:logback-classic:$logbackVersion")
 
-  testImplementation("io.ktor:ktor-server-test-host-jvm:$ktorVersion")
+  testImplementation("io.ktor:ktor-server-tests-jvm:2.3.13")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlinVersion")
+
+  testImplementation(platform("org.junit:junit-bom:6.0.3"))
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+  testImplementation("org.junit.jupiter:junit-jupiter")
 
   testImplementation("io.mockk:mockk:1.14.9")
   testImplementation("org.testcontainers:junit-jupiter:1.21.4")
