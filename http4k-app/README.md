@@ -233,7 +233,7 @@ class GreetingApplicationTest {
     private val container = DockerComposeContainer(File("../docker-compose.yaml"))
       .withServices("db", "vault", "vault-cli")
       .withLocalCompose(true)
-      .waitingFor("db", forLogMessage(".*database system is ready to accept connections.*", 1))
+      .waitingFor("db", forLogMessage(".*listening on IPv4 address \"0.0.0.0\", port 5432.*", 1))
       .waitingFor("vault", forLogMessage(".*Development mode.*", 1))
       .waitingFor("vault-cli", forLogMessage(".*created_time.*", 1))
   }
