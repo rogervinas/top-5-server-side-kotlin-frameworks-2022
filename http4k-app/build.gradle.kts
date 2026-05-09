@@ -5,7 +5,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 plugins {
   kotlin("jvm") version "2.3.10"
   application
-  id("com.github.johnrengelman.shadow") version "8.1.1"
+  id("com.gradleup.shadow") version "9.0.0-beta12"
   id("org.jlleitschuh.gradle.ktlint") version "14.0.1"
 }
 
@@ -45,8 +45,10 @@ dependencies {
 
   testImplementation("org.http4k:http4k-testing-approval:$http4kVersion")
   testImplementation("org.http4k:http4k-testing-hamkrest:$http4kVersion")
-  testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
-  testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+
+  testImplementation(platform("org.junit:junit-bom:$junitVersion"))
+  testImplementation("org.junit.jupiter:junit-jupiter")
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
   testImplementation("io.mockk:mockk:1.14.9")
   testImplementation("org.testcontainers:junit-jupiter:1.21.4")
