@@ -33,9 +33,10 @@ class GreetingApplicationTest {
   }
 
   private val client = OkHttp()
-  private val application = greetingApplication(
-    Environment.from(SERVER_PORT to "0"),
-  )
+  private val application =
+    greetingApplication(
+      Environment.from(SERVER_PORT to "0"),
+    )
 
   @BeforeEach
   fun start() {
