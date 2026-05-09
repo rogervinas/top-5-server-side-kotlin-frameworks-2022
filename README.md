@@ -9,9 +9,9 @@
 ![Quarkus](https://img.shields.io/badge/Quarkus-3.35.2-blue?labelColor=black)
 
 [![Micronaut](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/micronaut.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/micronaut.yml)
-![Java](https://img.shields.io/badge/Java-17-blue?labelColor=black)
-![Kotlin](https://img.shields.io/badge/Kotlin-1.6.21-blue?labelColor=black)
-![Micronaut](https://img.shields.io/badge/Micronaut-3.8.1-blue?labelColor=black)
+![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)
+![Kotlin](https://img.shields.io/badge/Kotlin-1.9.25-blue?labelColor=black)
+![Micronaut](https://img.shields.io/badge/Micronaut-4.10.13-blue?labelColor=black)
 
 [![Ktor](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml/badge.svg)](https://github.com/rogervinas/top-5-server-side-kotlin-frameworks-2022/actions/workflows/ktor.yml)
 ![Java](https://img.shields.io/badge/Java-21-blue?labelColor=black)

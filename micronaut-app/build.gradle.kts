@@ -4,12 +4,13 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
-  id("org.jetbrains.kotlin.jvm") version "1.6.21"
-  id("org.jetbrains.kotlin.kapt") version "1.6.21"
-  id("org.jetbrains.kotlin.plugin.allopen") version "1.6.21"
-  id("com.github.johnrengelman.shadow") version "7.1.2"
-  id("io.micronaut.application") version "3.7.0"
-  id("io.micronaut.test-resources") version "3.7.0"
+  id("org.jetbrains.kotlin.jvm") version "1.9.25"
+  id("org.jetbrains.kotlin.plugin.allopen") version "1.9.25"
+  id("com.google.devtools.ksp") version "1.9.25-1.0.20"
+  id("com.gradleup.shadow") version "8.3.9"
+  id("io.micronaut.application") version "4.6.2"
+  id("io.micronaut.test-resources") version "4.6.2"
+  id("io.micronaut.aot") version "4.6.2"
   id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
 }
 
@@ -23,53 +24,46 @@ repositories {
 }
 
 dependencies {
-  kapt("io.micronaut:micronaut-http-validation")
-  implementation("io.micronaut:micronaut-http-client")
-  implementation("io.micronaut:micronaut-jackson-databind")
+  ksp("io.micronaut:micronaut-http-validation")
+  ksp("io.micronaut.data:micronaut-data-processor")
+  ksp("io.micronaut.serde:micronaut-serde-processor")
+  implementation("io.micronaut.data:micronaut-data-jdbc")
+  implementation("io.micronaut.flyway:micronaut-flyway")
   implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-  implementation("jakarta.annotation:jakarta.annotation-api")
+  implementation("io.micronaut.serde:micronaut-serde-jackson")
+  implementation("io.micronaut.sql:micronaut-jdbc-hikari")
   implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
-  runtimeOnly("ch.qos.logback:logback-classic")
-  implementation("io.micronaut:micronaut-validation")
 
   implementation("io.micronaut.discovery:micronaut-discovery-client")
 
-  kapt("io.micronaut.data:micronaut-data-processor")
-  implementation("io.micronaut.data:micronaut-data-jdbc")
-  implementation("io.micronaut.flyway:micronaut-flyway")
-  implementation("io.micronaut.sql:micronaut-jdbc-hikari")
   implementation("org.postgresql:postgresql:42.5.1")
   implementation("org.jdbi:jdbi3-core:3.36.0")
 
-  runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+  implementation("io.micronaut:micronaut-http-client")
+  runtimeOnly("org.yaml:snakeyaml")
+  runtimeOnly("ch.qos.logback:logback-classic")
+  runtimeOnly("org.fusesource.jansi:jansi:2.4.1")
+  runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin") {
+    exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
+  }
+  runtimeOnly("org.flywaydb:flyway-database-postgresql")
 
+  testImplementation("io.micronaut:micronaut-http-client")
   testImplementation("io.micronaut.test:micronaut-test-rest-assured")
   testImplementation("io.mockk:mockk:1.13.3")
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 application {
-  mainClass.set("org.rogervinas.ApplicationKt")
+  mainClass = "org.rogervinas.ApplicationKt"
 }
 
 java {
-  sourceCompatibility = JavaVersion.toVersion("17")
+  sourceCompatibility = JavaVersion.toVersion("21")
 }
 
-tasks {
-  compileKotlin {
-    kotlinOptions {
-      jvmTarget = "17"
-    }
-  }
-  compileTestKotlin {
-    kotlinOptions {
-      jvmTarget = "17"
-    }
-  }
-}
-
-graalvmNative.toolchainDetection.set(false)
+graalvmNative.toolchainDetection = false
 
 micronaut {
   runtime("netty")
@@ -78,10 +72,24 @@ micronaut {
     incremental(true)
     annotations("org.rogervinas.*")
   }
+  aot {
+    optimizeServiceLoading = false
+    convertYamlToJava = false
+    precomputeOperations = true
+    cacheEnvironment = true
+    optimizeClassLoading = true
+    deduceEnvironment = true
+    optimizeNetty = true
+    replaceLogbackXml = true
+  }
 }
 
 tasks.named<io.micronaut.gradle.docker.MicronautDockerfile>("dockerfile") {
-  baseImage.set("eclipse-temurin:17-jre-alpine")
+  baseImage.set("eclipse-temurin:21-jre-alpine")
+}
+
+tasks.named<io.micronaut.gradle.docker.NativeImageDockerfile>("dockerfileNative") {
+  jdkVersion = "21"
 }
 
 tasks.withType<Test> {

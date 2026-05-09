@@ -3,7 +3,7 @@ package org.rogervinas
 import jakarta.inject.Singleton
 import org.jdbi.v3.core.Jdbi
 import javax.sql.DataSource
-import javax.transaction.Transactional
+import jakarta.transaction.Transactional
 
 interface GreetingRepository {
   fun getGreeting(): String

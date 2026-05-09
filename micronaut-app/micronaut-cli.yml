@@ -1,6 +1,6 @@
 applicationType: default
-defaultPackage: com.example
+defaultPackage: org.rogervinas
 testFramework: junit
 sourceLanguage: kotlin
 buildTool: gradle_kotlin
-features: [annotation-api, app-name, data, data-jdbc, flyway, gradle, http-client, jackson-databind, jdbc-hikari, junit, kotlin, kotlin-application, kotlin-build, logback, micronaut-build, netty-server, postgres, readme, shade, test-resources, yaml]
+features: [app-name, data, data-jdbc, flyway, gradle, http-client-test, jdbc-hikari, junit, kotlin, kotlin-application, ksp, logback, micronaut-aot, micronaut-build, micronaut-http-validation, netty-server, postgres, readme, serialization-jackson, shade, test-resources, yaml]
