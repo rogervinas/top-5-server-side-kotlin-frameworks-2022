@@ -2,16 +2,16 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
-val ktorVersion = "3.4.0"
+val ktorVersion = "3.4.1"
 val kotlinVersion = "2.3.10"
 val logbackVersion = "1.4.11"
 val postgresVersion = "42.5.1"
 
 plugins {
-  kotlin("jvm") version "2.3.10"
-  id("io.ktor.plugin") version "3.4.0"
-  id("org.jetbrains.kotlin.plugin.serialization") version "2.3.10"
-  id("org.jlleitschuh.gradle.ktlint") version "14.0.1"
+  kotlin("jvm") version "2.3.20"
+  id("io.ktor.plugin") version "3.4.1"
+  id("org.jetbrains.kotlin.plugin.serialization") version "2.3.20"
+  id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
 }
 
 group = "org.rogervinas"
