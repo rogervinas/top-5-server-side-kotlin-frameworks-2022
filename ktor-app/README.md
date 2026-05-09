@@ -3,7 +3,7 @@
 To begin with you can follow the [Creating Ktor applications](https://ktor.io/create/) guide.
 
 To create a **Ktor** project we have three alternatives:
-* Use [IntelliJ Idea plugin](https://ktor.io/docs/intellij-idea.html) 
+* Use [IntelliJ Idea plugin](https://ktor.io/docs/server-create-a-new-project.html#create_project_with_intellij) 
 * Use [start.ktor.io](https://start.ktor.io) web interface (similar to [Spring Initializr](https://start.spring.io/) for **Spring Boot**)
 * Create a project [manually](https://ktor.io/docs/server-dependencies.html)
 
@@ -169,7 +169,7 @@ fun Application.greetingController(
 
 We just name it `GreetingController` to follow the same convention as the other frameworks in this series, mainly **SpringBoot**.
 
-Complete documentation at [Routing](https://ktor.io/docs/routing-in-ktor.html) guide.
+Complete documentation at [Routing](https://ktor.io/docs/server-routing.html) guide.
 
 ### Vault configuration
 
@@ -250,7 +250,7 @@ class GreetingControllerTest {
 ```
 * We use testApplication DSL with an empty configuration to just test the controller.
 * We mock the repository with `mockk`.
-* Complete documentation at [Testing](https://ktor.io/docs/testing.htm) guide. 
+* Complete documentation at [Testing](https://ktor.io/docs/server-testing.html) guide. 
 
 ## Testing the application
 
@@ -282,7 +282,7 @@ class GreetingApplicationTest {
 * We use [Testcontainers](https://www.testcontainers.org/) to test with **Postgres** and **Vault** containers.
 * We use pattern matching to check the greeting, as it is random.
 * As this test uses **Vault**, the secret should be `watermelon`.
-* Complete documentation at [Testing](https://ktor.io/docs/testing.htm) guide.
+* Complete documentation at [Testing](https://ktor.io/docs/server-testing.html) guide.
 
 ## Test
 
@@ -336,7 +336,7 @@ curl http://localhost:8080/hello
 docker compose down
 ```
 
-More documentation at [Creating fat JARs](https://ktor.io/docs/fatjar.html) guide.
+More documentation at [Creating fat JARs](https://ktor.io/docs/server-fatjar.html) guide.
 
 ## Build a docker image and run it
 
