@@ -77,7 +77,7 @@ open class GreetingJdbcRepository(dataSource: DataSource) : GreetingRepository {
 
 For this to work, we need some extra steps ...
 
-Use a specific postresql driver version (just not do depend on [Micronaut BOM](https://central.sonatype.dev/artifact/io.micronaut/micronaut-bom/3.8.1)) and add the [JDBI](https://jdbi.org/) dependency:
+Use a specific postresql driver version (just not to depend on [Micronaut BOM](https://central.sonatype.dev/artifact/io.micronaut/micronaut-bom/4.10.13)) and add the [JDBI](https://jdbi.org/) dependency:
 ```kotlin
 implementation("org.postgresql:postgresql:42.5.1")
 implementation("org.jdbi:jdbi3-core:3.36.0")
@@ -275,7 +275,7 @@ docker compose down
 **Micronaut** configures a base docker image by default but we can customize it in `build.gradle.kts`:
 ```kotlin
 tasks.named<io.micronaut.gradle.docker.MicronautDockerfile>("dockerfile") {
-  baseImage.set("eclipse-temurin:17-jre-alpine")
+  baseImage.set("eclipse-temurin:21-jre-alpine")
 }
 ```
 
@@ -303,12 +303,8 @@ docker compose down
 Following [Generate a Micronaut Application Native Executable with GraalVM](https://guides.micronaut.io/latest/creating-your-first-micronaut-app-gradle-kotlin.html#generate-a-micronaut-application-native-executable-with-graalvm):
 ```shell
 # Install GraalVM via sdkman
-sdk install java 22.3.r19-grl
-sdk default java 22.3.r19-grl
-export GRAALVM_HOME=$JAVA_HOME
-
-# Install the native-image
-gu install native-image
+sdk install java 21-graalce
+sdk use java 21-graalce
 
 # Build native executable
 ./gradlew nativeCompile
