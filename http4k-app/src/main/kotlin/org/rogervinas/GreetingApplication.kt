@@ -2,10 +2,10 @@ package org.rogervinas
 
 import com.bettercloud.vault.Vault
 import com.bettercloud.vault.VaultConfig
-import org.http4k.cloudnative.env.Environment
-import org.http4k.cloudnative.env.Environment.Companion.ENV
-import org.http4k.cloudnative.env.EnvironmentKey
-import org.http4k.cloudnative.env.MapEnvironment
+import org.http4k.config.Environment
+import org.http4k.config.Environment.Companion.ENV
+import org.http4k.config.EnvironmentKey
+import org.http4k.config.MapEnvironment
 import org.http4k.core.HttpHandler
 import org.http4k.core.then
 import org.http4k.filter.DebuggingFilters.PrintRequest

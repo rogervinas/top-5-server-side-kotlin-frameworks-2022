@@ -13,20 +13,13 @@ For example this project has been created using [Project Wizard](https://toolbox
 * Select a server engine: **Undertow** (http4k team's default choice)
 * Select HTTP client library: **OkHttp** (http4k team's go-to HTTP Client)
 * Select JSON serialisation library: **Jackson** (http4k team's pick for JSON library, although we will not need it for this sample)
-* Select a templating library: **None**
-* Select any other messaging formats used by the app: **None** (not needed for this sample but good to know)
-* Select any integrations that catch your eye! **None** (not needed for this sample but good to know)
-* Select any testing technologies to battle harden the app: **None** (not needed for this sample but good to know)
+* Select any http4k core integrations that catch your eye!: **Typesafe Config**
+* Select any testing technologies to battle harden your app: **Approval Testing** and **Hamkrest**
 * Application identity:
   * Main class name: **GreetingApplication**
   * Base package name: **org.rogervinas**
 * Select a build tool: **Gradle**
 * Select a packaging type: **ShadowJar**
-
-Note some features missing with [Project Wizard](https://toolbox.http4k.org/project):
-* It generates Gradle Groovy (we cannot choose Gradle Kotlin DSL 😭)
-* It only configures Java 11
-* It does not generate a .gitignore file
 
 Once created you can run it to check everything is ok:
 ```shell
@@ -106,7 +99,7 @@ class GreetingJdbcRepository(private val connection: Connection) : GreetingRepos
 * As **Http4k** does not offer any specific database support:
   * We just use plain `java.sql` code (instead of any database connection library)
   * We just create the `greetings` table if it does not exist (instead of any database migration library like [flyway](https://flywaydb.org/))
-* As we plan to use **Postgres** we need to add `org.postgresql:postgresql` dependency in `build.gradle`.
+* As we plan to use **Postgres** we need to add `org.postgresql:postgresql` dependency in `build.gradle.kts`.
 
 ### GreetingController
 
@@ -240,11 +233,7 @@ class GreetingApplicationTest {
 
   private val client = OkHttp()
   private val application = greetingApplication(
-    MapEnvironment.from(
-      Properties().apply {
-        this[SERVER_PORT] = 0
-      }
-    )
+    Environment.from(SERVER_PORT to "0"),
   )
 
   @BeforeEach
@@ -266,7 +255,7 @@ class GreetingApplicationTest {
 }
 ```
 * We use [Testcontainers](https://www.testcontainers.org/) to test with **Postgres** and **Vault** containers.
-* We can override configuration values passing a `MapEnvironment` to the `greetingApplication`. In this case we only override `SERVER_PORT` value to `0` to force a random port.
+* We can override configuration values passing an `Environment` to the `greetingApplication`. In this case we only override `SERVER_PORT` value to `0` to force a random port.
 * We use pattern matching to check the greeting, as it is random.
 * As this test uses **Vault**, the secret should be `watermelon`.
 
@@ -294,9 +283,9 @@ curl http://localhost:8080/hello
 docker compose down
 ```
 
-Note that main class is specified in `build.gradle`:
-```groovy
-mainClassName = "org.rogervinas.GreetingApplicationKt"
+Note that main class is specified in `build.gradle.kts`:
+```kotlin
+mainClass = "org.rogervinas.GreetingApplicationKt"
 ```
 
 ## Build a fatjar and run it
@@ -324,13 +313,13 @@ docker compose down
 
 **Http4k** does not support creating docker images out of the box, but for example we can create this `Dockerfile`:
 ```dockerfile
-FROM registry.access.redhat.com/ubi8/openjdk-11:1.15
+FROM eclipse-temurin:21-jre-alpine
 
-COPY build/libs/http4k-app.jar /app/
+COPY build/libs/http4k-app.jar /app/http4k-app.jar
 
 EXPOSE 8080
 
-ENV JAVA_APP_JAR="/app/http4k-app.jar"
+ENTRYPOINT ["java", "-jar", "/app/http4k-app.jar"]
 ```
 
 And then:
