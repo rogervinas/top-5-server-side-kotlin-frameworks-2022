@@ -1,7 +1,7 @@
-FROM registry.access.redhat.com/ubi8/openjdk-11:1.15
+FROM eclipse-temurin:21-jre-alpine
 
-COPY build/libs/http4k-app.jar /app/
+COPY build/libs/http4k-app.jar /app/http4k-app.jar
 
 EXPOSE 8080
 
-ENV JAVA_APP_JAR="/app/http4k-app.jar"
+ENTRYPOINT ["java", "-jar", "/app/http4k-app.jar"]
