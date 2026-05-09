@@ -2,16 +2,11 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
-val ktorVersion = "3.4.1"
-val kotlinVersion = "2.3.10"
-val logbackVersion = "1.4.11"
-val postgresVersion = "42.5.1"
-
 plugins {
-  kotlin("jvm") version "2.3.20"
-  id("io.ktor.plugin") version "3.4.1"
-  id("org.jetbrains.kotlin.plugin.serialization") version "2.3.20"
-  id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
+  alias(libs.plugins.kotlin.jvm)
+  alias(ktorLibs.plugins.ktor)
+  alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.ktlint)
 }
 
 group = "org.rogervinas"
@@ -32,33 +27,25 @@ ktor {
   }
 }
 
-repositories {
-  mavenCentral()
-}
-
 dependencies {
-  implementation("io.ktor:ktor-server-core-jvm:$ktorVersion")
-  implementation("io.ktor:ktor-server-netty-jvm:$ktorVersion")
-  implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktorVersion")
-  implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktorVersion")
-  implementation("io.ktor:ktor-server-config-yaml:$ktorVersion")
+  implementation(ktorLibs.server.core)
+  implementation(ktorLibs.server.netty)
+  implementation(ktorLibs.serialization.kotlinx.json)
+  implementation(ktorLibs.server.contentNegotiation)
+  implementation(ktorLibs.server.config.yaml)
 
-  implementation("org.postgresql:postgresql:$postgresVersion")
+  implementation(libs.postgresql)
 
-  implementation("com.bettercloud:vault-java-driver:5.1.0")
+  implementation(libs.vault.java.driver)
 
-  implementation("ch.qos.logback:logback-classic:$logbackVersion")
+  implementation(libs.logback.classic)
 
-  testImplementation("io.ktor:ktor-server-tests-jvm:2.3.13")
-  testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:$kotlinVersion")
+  testImplementation(kotlin("test"))
+  testImplementation(ktorLibs.server.testHost)
 
-  testImplementation(platform("org.junit:junit-bom:6.0.3"))
-  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-  testImplementation("org.junit.jupiter:junit-jupiter")
-
-  testImplementation("io.mockk:mockk:1.14.9")
-  testImplementation("org.testcontainers:junit-jupiter:1.21.4")
-  testImplementation("org.assertj:assertj-core:3.27.7")
+  testImplementation(libs.mockk)
+  testImplementation(libs.testcontainers.junit.jupiter)
+  testImplementation(libs.assertj.core)
 }
 
 java {
