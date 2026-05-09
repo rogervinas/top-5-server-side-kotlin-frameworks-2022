@@ -1,7 +1,7 @@
 package org.rogervinas
 
-import io.vertx.mutiny.pgclient.PgPool
-import javax.enterprise.context.ApplicationScoped
+import jakarta.enterprise.context.ApplicationScoped
+import javax.sql.DataSource
 
 interface GreetingRepository {
   fun getGreeting(): String
@@ -9,12 +9,15 @@ interface GreetingRepository {
 
 @ApplicationScoped
 class GreetingJdbcRepository(
-  private val client: PgPool,
+  private val dataSource: DataSource,
 ) : GreetingRepository {
   override fun getGreeting(): String =
-    client
-      .query("SELECT greeting FROM greetings ORDER BY random() LIMIT 1")
-      .executeAndAwait()
-      .map { r -> r.get(String::class.java, "greeting") }
-      .first()
+    dataSource.connection.use { connection ->
+      connection.prepareStatement("SELECT greeting FROM greetings ORDER BY random() LIMIT 1").use { statement ->
+        statement.executeQuery().use { resultSet ->
+          resultSet.next()
+          resultSet.getString("greeting")
+        }
+      }
+    }
 }

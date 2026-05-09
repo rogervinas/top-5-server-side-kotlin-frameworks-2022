@@ -7,7 +7,7 @@ You can also check [Creating your first application](https://quarkus.io/guides/g
 To create a simple application with a reactive REST endpoint:
 ```shell
 sdk install quarkus
-quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --java=17 --kotlin --extension='kotlin,resteasy-reactive-jackson'
+quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --java=21 --kotlin
 ```
 
 A **Gradle** project will be created with the following:
@@ -24,10 +24,8 @@ quarkus dev
 And make a request to the endpoint:
 ```shell
 curl http://localhost:8080/hello
-Hello from RESTEasy Reactive
+Hello from Quarkus REST
 ```
-
-We can remove the `src/main/resources/META-INF` directory containing some HTML files that we will not need.
 
 ## Implementation
 
@@ -62,30 +60,36 @@ interface GreetingRepository {
 }
 
 @ApplicationScoped
-class GreetingJdbcRepository(private val client: PgPool): GreetingRepository {
-  override fun getGreeting(): String = client
-    .query("SELECT greeting FROM greetings ORDER BY random() LIMIT 1")
-    .executeAndAwait()
-    .map { r -> r.get(String::class.java, "greeting") }
-    .first()
+class GreetingJdbcRepository(
+  private val dataSource: DataSource,
+) : GreetingRepository {
+  override fun getGreeting(): String =
+    dataSource.connection.use { connection ->
+      connection.prepareStatement("SELECT greeting FROM greetings ORDER BY random() LIMIT 1").use { statement ->
+        statement.executeQuery().use { resultSet ->
+          resultSet.next()
+          resultSet.getString("greeting")
+        }
+      }
+    }
 }
 ```
 
-* The `@ApplicationScoped` annotation will make **Quarkus** to create an instance at startup.
-* We inject the [Reactive SQL Client](https://quarkus.io/guides/reactive-sql-clients).
-* We use `query` and that SQL to retrieve one random `greeting` from the `greetings` table.
+* The `@ApplicationScoped` annotation will make **Quarkus** create an instance at startup.
+* We inject a `DataSource` and use plain JDBC to retrieve one random `greeting` from the `greetings` table.
 
 For this to work, we need some extra steps ...
 
-Add the [Reactive SQL Client](https://quarkus.io/guides/reactive-sql-clients) extension:
+Add the JDBC PostgreSQL extension:
 ```shell
-quarkus extension add quarkus-reactive-pg-client
+quarkus extension add quarkus-jdbc-postgresql
 ```
 
-Configure it for `dev` and `test` profiles in `application.yaml`:
+Configure the datasource for `dev` and `test` profiles in `application.yaml`:
 ```yaml
 quarkus:
   datasource:
+    db-kind: "postgresql"
     devservices:
       image-name: "postgres:14.5"
 ```
@@ -97,36 +101,24 @@ quarkus:
     db-kind: "postgresql"
     username: "myuser"
     password: "mypassword"
-    reactive:
-      url: "postgresql://${DB_HOST:localhost}:5432/mydb"
-      max-size: 20
-```
-
-Note that for `dev` and `test` profiles we just use something called "Dev Services", meaning it will automatically start containers and configure the application to use them. You can check the [Dev Services Overview](https://quarkus.io/guides/dev-services) and [Dev Services for Databases](https://quarkus.io/guides/databases-dev-services) documentation. 
-
-To enable [Flyway](https://quarkus.io/guides/flyway) we need to add these dependencies manually (apparently there is no extension):
-```kotlin
-implementation("io.quarkus:quarkus-flyway")
-implementation("io.quarkus:quarkus-jdbc-postgresql")
-```
-
-And, as it seems that we cannot use the same reactive datasource, we will have to configure the standard one:
-* `application.yaml`
-```yaml
-quarkus:
-  flyway:
-    migrate-at-start: true
-```
-* `application-prod.yaml`
-```yaml
-quarkus:
-  datasource:
     jdbc:
       url: "jdbc:postgresql://${DB_HOST:localhost}:5432/mydb"
       max-size: 20
 ```
 
-So `quarkus.datasource.jdbc` will be used by **Flyway** and `quarkus.datasource.reactive` by the application.
+Note that for `dev` and `test` profiles we use "Dev Services", meaning it will automatically start containers and configure the application to use them. You can check the [Dev Services Overview](https://quarkus.io/guides/dev-services) and [Dev Services for Databases](https://quarkus.io/guides/databases-dev-services) documentation.
+
+To enable [Flyway](https://quarkus.io/guides/flyway) we add the extension:
+```shell
+quarkus extension add quarkus-flyway
+```
+
+And configure it in `application.yaml`:
+```yaml
+quarkus:
+  flyway:
+    migrate-at-start: true
+```
 
 Finally, [Flyway](https://flywaydb.org/) migrations under [src/main/resources/db/migration](src/main/resources/db/migration) to create and populate `greetings` table.
 
@@ -137,8 +129,8 @@ We will rename the generated `GreetingResource` class to `GreetingController`, s
 @Path("/hello")
 class GreetingController(
   private val repository: GreetingRepository,
-  @ConfigProperty(name = "greeting.name") private val name: String,
-  @ConfigProperty(name = "greeting.secret", defaultValue = "unknown") private val secret: String
+  @param:ConfigProperty(name = "greeting.name") private val name: String,
+  @param:ConfigProperty(name = "greeting.secret", defaultValue = "unknown") private val secret: String,
 ) {
   @GET
   @Produces(MediaType.TEXT_PLAIN)
@@ -148,11 +140,11 @@ class GreetingController(
 
 * We can inject dependencies via constructor and configuration properties using `@ConfigProperty` annotation.
 * We expect to get `greeting.secret` from **Vault**, that is why we configure `unknown` as its default value, so it does not fail until we configure **Vault** properly.
-* Everything is pretty similar to **Spring Boot**. Note that it uses standard JAX-RS annotations which is also possible in **Spring Boot** (but not by default).
+* Everything is pretty similar to **Spring Boot**. Note that it uses standard Jakarta REST annotations which is also possible in **Spring Boot** (but not by default).
 
 ### Vault configuration
 
-Following the [Using HashiCorp Vault](https://quarkiverse.github.io/quarkiverse-docs/quarkus-vault/dev/index.html) guide we add the extension:
+Following the [Using HashiCorp Vault](https://docs.quarkiverse.io/quarkus-vault/dev/index.html) guide we add the extension:
 ```shell
 quarkus extension add vault
 ```
@@ -293,13 +285,9 @@ docker compose down
 
 Following [Build a Native Executable](https://quarkus.io/guides/building-native-image):
 ```shell
-# Install GraalVM via sdkman
-sdk install java 22.3.r19-grl
-sdk default java 22.3.r19-grl
-export GRAALVM_HOME=$JAVA_HOME
-
-# Install the native-image
-gu install native-image
+# Install GraalVM for JDK 21 via sdkman
+sdk install java 21-graalce
+sdk use java 21-graalce
 
 # Build native executable
 quarkus build --native
