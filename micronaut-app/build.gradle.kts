@@ -10,7 +10,6 @@ plugins {
   id("com.gradleup.shadow") version "8.3.9"
   id("io.micronaut.application") version "4.6.2"
   id("io.micronaut.test-resources") version "4.6.2"
-  id("io.micronaut.aot") version "4.6.2"
   id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
 }
 
@@ -71,16 +70,6 @@ micronaut {
   processing {
     incremental(true)
     annotations("org.rogervinas.*")
-  }
-  aot {
-    optimizeServiceLoading = false
-    convertYamlToJava = false
-    precomputeOperations = true
-    cacheEnvironment = true
-    optimizeClassLoading = true
-    deduceEnvironment = true
-    optimizeNetty = true
-    replaceLogbackXml = true
   }
 }
 
