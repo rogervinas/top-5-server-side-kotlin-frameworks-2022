@@ -42,7 +42,6 @@ dependencies {
   implementation("io.micronaut:micronaut-http-client")
   runtimeOnly("org.yaml:snakeyaml")
   runtimeOnly("ch.qos.logback:logback-classic")
-  runtimeOnly("org.fusesource.jansi:jansi:2.4.1")
   runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin") {
     exclude(group = "org.jetbrains.kotlin", module = "kotlin-reflect")
   }
