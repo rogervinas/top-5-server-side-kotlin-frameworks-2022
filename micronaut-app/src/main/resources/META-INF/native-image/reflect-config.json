@@ -5847,6 +5847,17 @@
     ]
   },
   {
+    "name": "org.jdbi.v3.core.config.internal.ConfigCaches",
+    "methods": [
+      {
+        "name": "<init>",
+        "parameterTypes": [
+          "org.jdbi.v3.core.config.ConfigRegistry"
+        ]
+      }
+    ]
+  },
+  {
     "name": "org.jdbi.v3.core.mapper.ColumnMappers",
     "methods": [
       {
