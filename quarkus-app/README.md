@@ -7,7 +7,7 @@ You can also check [Creating your first application](https://quarkus.io/guides/g
 To create a simple application with a reactive REST endpoint:
 ```shell
 sdk install quarkus
-quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --java=17 --kotlin --extension='kotlin,resteasy-reactive-jackson'
+quarkus create app org.rogervinas:quarkus-app --gradle-kotlin-dsl --java=21 --kotlin
 ```
 
 A **Gradle** project will be created with the following:
@@ -24,7 +24,7 @@ quarkus dev
 And make a request to the endpoint:
 ```shell
 curl http://localhost:8080/hello
-Hello from RESTEasy Reactive
+Hello from Quarkus REST
 ```
 
 We can remove the `src/main/resources/META-INF` directory containing some HTML files that we will not need.
@@ -293,13 +293,9 @@ docker compose down
 
 Following [Build a Native Executable](https://quarkus.io/guides/building-native-image):
 ```shell
-# Install GraalVM via sdkman
-sdk install java 22.3.r19-grl
-sdk default java 22.3.r19-grl
-export GRAALVM_HOME=$JAVA_HOME
-
-# Install the native-image
-gu install native-image
+# Install GraalVM for JDK 21 via sdkman
+sdk install java 21-graalce
+sdk use java 21-graalce
 
 # Build native executable
 quarkus build --native

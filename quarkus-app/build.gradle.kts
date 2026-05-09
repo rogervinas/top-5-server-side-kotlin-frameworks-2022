@@ -4,8 +4,8 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
 
 plugins {
-  kotlin("jvm") version "2.3.10"
-  kotlin("plugin.allopen") version "2.3.10"
+  kotlin("jvm") version "2.3.21"
+  kotlin("plugin.allopen") version "2.3.21"
   id("io.quarkus")
   id("org.jlleitschuh.gradle.ktlint") version "14.0.1"
 }
@@ -23,18 +23,13 @@ val quarkusPlatformArtifactId: String by project
 val quarkusPlatformVersion: String by project
 
 dependencies {
-  implementation("io.quarkiverse.vault:quarkus-vault")
-  implementation("io.quarkus:quarkus-reactive-pg-client")
-  implementation("io.quarkus:quarkus-agroal")
   implementation(enforcedPlatform("$quarkusPlatformGroupId:$quarkusPlatformArtifactId:$quarkusPlatformVersion"))
   implementation("io.quarkus:quarkus-kotlin")
-  implementation("io.quarkus:quarkus-resteasy-reactive-jackson")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("io.quarkus:quarkus-arc")
-  implementation("io.quarkus:quarkus-resteasy-reactive")
-
+  implementation("io.quarkus:quarkus-rest")
   implementation("io.quarkus:quarkus-config-yaml")
-
+  implementation("io.quarkiverse.vault:quarkus-vault")
   implementation("io.quarkus:quarkus-flyway")
   implementation("io.quarkus:quarkus-jdbc-postgresql")
 
@@ -44,14 +39,14 @@ dependencies {
 }
 
 java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(17)
-  }
+  sourceCompatibility = JavaVersion.VERSION_21
+  targetCompatibility = JavaVersion.VERSION_21
 }
 
 kotlin {
   compilerOptions {
-    freeCompilerArgs.addAll("-Xjsr305=strict")
+    jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21
+    javaParameters = true
   }
 }
 
@@ -67,7 +62,8 @@ tasks.withType<Test> {
 }
 
 allOpen {
-  annotation("javax.ws.rs.Path")
-  annotation("javax.enterprise.context.ApplicationScoped")
+  annotation("jakarta.ws.rs.Path")
+  annotation("jakarta.enterprise.context.ApplicationScoped")
+  annotation("jakarta.persistence.Entity")
   annotation("io.quarkus.test.junit.QuarkusTest")
 }
