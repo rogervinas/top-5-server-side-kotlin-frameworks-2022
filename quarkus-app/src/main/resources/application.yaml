@@ -3,6 +3,7 @@ greeting:
 
 quarkus:
   datasource:
+    db-kind: "postgresql"
     devservices:
       image-name: "postgres:14.5"
   flyway:

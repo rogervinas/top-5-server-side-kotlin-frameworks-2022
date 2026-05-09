@@ -2,7 +2,7 @@ package org.rogervinas
 
 import com.natpryce.hamkrest.assertion.assertThat
 import org.http4k.client.OkHttp
-import org.http4k.cloudnative.env.MapEnvironment
+import org.http4k.config.Environment
 import org.http4k.core.Method.GET
 import org.http4k.core.Request
 import org.http4k.core.Status.Companion.OK
@@ -18,7 +18,6 @@ import org.testcontainers.containers.wait.strategy.Wait.forLogMessage
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import java.io.File
-import java.util.Properties
 
 @Testcontainers
 class GreetingApplicationTest {
@@ -36,11 +35,7 @@ class GreetingApplicationTest {
   private val client = OkHttp()
   private val application =
     greetingApplication(
-      MapEnvironment.from(
-        Properties().apply {
-          this[SERVER_PORT] = 0
-        },
-      ),
+      Environment.from(SERVER_PORT to "0"),
     )
 
   @BeforeEach
