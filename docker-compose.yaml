@@ -10,14 +10,14 @@ services:
       - "5432:5432"
 
   vault:
-    image: vault:1.12.1
+    image: vault:1.13.3
     environment:
       VAULT_DEV_ROOT_TOKEN_ID: "mytoken"
     ports:
       - "8200:8200"
 
   vault-cli:
-    image: vault:1.12.1
+    image: vault:1.13.3
     depends_on:
       - vault
     restart: "no"
