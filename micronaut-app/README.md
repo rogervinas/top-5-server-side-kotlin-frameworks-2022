@@ -77,7 +77,7 @@ open class GreetingJdbcRepository(dataSource: DataSource) : GreetingRepository {
 
 For this to work, we need some extra steps ...
 
-Use a specific postresql driver version (just not to depend on [Micronaut BOM](https://central.sonatype.dev/artifact/io.micronaut/micronaut-bom/4.10.13)) and add the [JDBI](https://jdbi.org/) dependency:
+maUse a specific postresql driver version (just not to depend on [Micronaut BOM](https://central.sonatype.com/artifact/io.micronaut/micronaut-bom/4.10.13)) and add the [JDBI](https://jdbi.org/) dependency:
 ```kotlin
 implementation("org.postgresql:postgresql:42.5.1")
 implementation("org.jdbi:jdbi3-core:3.36.0")
