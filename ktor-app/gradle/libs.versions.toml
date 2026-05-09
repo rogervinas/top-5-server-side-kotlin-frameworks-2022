@@ -1,0 +1,22 @@
+[versions]
+kotlin = "2.3.20"
+logback = "1.4.11"
+postgresql = "42.5.1"
+vault-java-driver = "5.1.0"
+ktlint = "14.2.0"
+mockk = "1.14.9"
+testcontainers = "1.21.4"
+assertj = "3.27.7"
+
+[libraries]
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
+vault-java-driver = { module = "com.bettercloud:vault-java-driver", version.ref = "vault-java-driver" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+testcontainers-junit-jupiter = { module = "org.testcontainers:junit-jupiter", version.ref = "testcontainers" }
+assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }

@@ -6,7 +6,9 @@ interface GreetingRepository {
   fun getGreeting(): String
 }
 
-class GreetingJdbcRepository(private val connection: Connection) : GreetingRepository {
+class GreetingJdbcRepository(
+  private val connection: Connection,
+) : GreetingRepository {
   init {
     createGreetingsTable()
   }
