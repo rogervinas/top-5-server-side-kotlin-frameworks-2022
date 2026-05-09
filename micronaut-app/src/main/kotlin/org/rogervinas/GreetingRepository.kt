@@ -1,9 +1,9 @@
 package org.rogervinas
 
 import jakarta.inject.Singleton
+import jakarta.transaction.Transactional
 import org.jdbi.v3.core.Jdbi
 import javax.sql.DataSource
-import javax.transaction.Transactional
 
 interface GreetingRepository {
   fun getGreeting(): String
