@@ -5848,14 +5848,7 @@
   },
   {
     "name": "org.jdbi.v3.core.config.internal.ConfigCaches",
-    "methods": [
-      {
-        "name": "<init>",
-        "parameterTypes": [
-          "org.jdbi.v3.core.config.ConfigRegistry"
-        ]
-      }
-    ]
+    "allDeclaredConstructors": true
   },
   {
     "name": "org.jdbi.v3.core.mapper.ColumnMappers",
