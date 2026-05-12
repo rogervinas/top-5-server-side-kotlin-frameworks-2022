@@ -59,7 +59,7 @@ tasks {
 }
 
 dependencies {
-  implementation(platform("org.http4k:http4k-bom:6.46.0.0"))
+  implementation(platform("org.http4k:http4k-bom:6.46.1.0"))
   implementation("org.http4k:http4k-client-okhttp")
   implementation("org.http4k:http4k-config")
   implementation("org.http4k:http4k-core")
