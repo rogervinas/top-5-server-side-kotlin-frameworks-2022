@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 plugins {
   alias(libs.plugins.kotlin.jvm)
   application
-  id("com.gradleup.shadow") version "9.4.1"
+  id("com.gradleup.shadow") version "9.4.3"
   id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
 }
 
@@ -59,23 +59,23 @@ tasks {
 }
 
 dependencies {
-  implementation(platform("org.http4k:http4k-bom:6.47.1.0"))
+  implementation(platform("org.http4k:http4k-bom:6.54.0.0"))
   implementation("org.http4k:http4k-client-okhttp")
   implementation("org.http4k:http4k-config")
   implementation("org.http4k:http4k-core")
   implementation("org.http4k:http4k-format-jackson")
   implementation("org.http4k:http4k-server-undertow")
 
-  implementation("org.postgresql:postgresql:42.7.11")
+  implementation("org.postgresql:postgresql:42.7.12")
   implementation("com.bettercloud:vault-java-driver:5.1.0")
 
   testImplementation("org.http4k:http4k-testing-approval")
   testImplementation("org.http4k:http4k-testing-hamkrest")
 
-  testImplementation(platform("org.junit:junit-bom:6.0.3"))
+  testImplementation(platform("org.junit:junit-bom:6.1.1"))
   testImplementation("org.junit.jupiter:junit-jupiter")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-  testImplementation("io.mockk:mockk:1.14.9")
+  testImplementation("io.mockk:mockk:1.14.11")
   testImplementation("org.testcontainers:junit-jupiter:1.21.4")
 }
