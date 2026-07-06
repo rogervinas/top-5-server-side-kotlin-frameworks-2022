@@ -1,10 +1,10 @@
 [versions]
-kotlin = "2.3.21"
-logback = "1.5.32"
-postgresql = "42.7.11"
+kotlin = "2.4.0"
+logback = "1.5.37"
+postgresql = "42.7.12"
 vault-java-driver = "5.1.0"
 ktlint = "14.2.0"
-mockk = "1.14.9"
+mockk = "1.14.11"
 testcontainers = "1.21.4"
 assertj = "3.27.7"
 
