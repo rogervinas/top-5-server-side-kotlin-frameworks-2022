@@ -1,7 +1,7 @@
 [versions]
-kotlin = "2.4.0"
-logback = "1.5.37"
-postgresql = "42.7.12"
+kotlin = "2.4.10"
+logback = "1.5.38"
+postgresql = "42.7.13"
 vault-java-driver = "5.1.0"
 ktlint = "14.2.0"
 mockk = "1.14.11"
