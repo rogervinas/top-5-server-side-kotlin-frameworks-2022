@@ -18,7 +18,7 @@ repositories {
 }
 
 val springCloudVersion = "2025.1.3"
-val flywayVersion = "13.3.0"
+val flywayVersion = "13.4.0"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux")
