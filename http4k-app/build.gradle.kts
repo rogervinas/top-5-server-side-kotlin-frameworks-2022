@@ -59,14 +59,14 @@ tasks {
 }
 
 dependencies {
-  implementation(platform("org.http4k:http4k-bom:6.57.1.0"))
+  implementation(platform("org.http4k:http4k-bom:6.61.0.0"))
   implementation("org.http4k:http4k-client-okhttp")
   implementation("org.http4k:http4k-config")
   implementation("org.http4k:http4k-core")
   implementation("org.http4k:http4k-format-jackson")
   implementation("org.http4k:http4k-server-undertow")
 
-  implementation("org.postgresql:postgresql:42.7.13")
+  implementation("org.postgresql:postgresql:42.7.14")
   implementation("com.bettercloud:vault-java-driver:5.1.0")
 
   testImplementation("org.http4k:http4k-testing-approval")
